@@ -1,0 +1,224 @@
+[gd_scene load_steps=29 format=3 uid="uid://c8azharibakery1"]
+
+[ext_resource type="Script" path="res://scripts/automated_bakery.gd" id="1_bak_scr"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_tile"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+
+[sub_resource type="StandardMaterial3D" id="m_wall"]
+albedo_color = Color(0.96, 0.89, 0.78, 1)
+albedo_texture = ExtResource("ta_plaster")
+roughness = 0.85
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_trim"]
+albedo_color = Color(0.76, 0.34, 0.18, 1)
+roughness = 0.72
+
+[sub_resource type="StandardMaterial3D" id="m_floor"]
+albedo_color = Color(0.90, 0.88, 0.82, 1)
+albedo_texture = ExtResource("ta_tile")
+roughness = 0.55
+uv1_scale = Vector3(5, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.64, 0.44, 0.24, 1)
+albedo_texture = ExtResource("ta_wood")
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="m_oven_metal"]
+albedo_color = Color(0.24, 0.26, 0.28, 1)
+metallic = 0.45
+roughness = 0.48
+
+[sub_resource type="StandardMaterial3D" id="m_oven_glow"]
+albedo_color = Color(1.0, 0.52, 0.14, 1)
+emission_enabled = true
+emission = Color(1.0, 0.44, 0.08, 1)
+emission_energy_multiplier = 3.2
+
+[sub_resource type="StandardMaterial3D" id="m_bread"]
+albedo_color = Color(0.88, 0.64, 0.28, 1)
+roughness = 0.82
+
+[sub_resource type="BoxMesh" id="BM_floor"]
+material = SubResource("m_floor")
+size = Vector3(12.0, 0.16, 10.0)
+
+[sub_resource type="BoxShape3D" id="BS_floor"]
+size = Vector3(12.0, 0.16, 10.0)
+
+[sub_resource type="BoxMesh" id="BM_back"]
+material = SubResource("m_wall")
+size = Vector3(12.0, 4.4, 0.36)
+
+[sub_resource type="BoxShape3D" id="BS_back"]
+size = Vector3(12.0, 4.4, 0.36)
+
+[sub_resource type="BoxMesh" id="BM_side"]
+material = SubResource("m_wall")
+size = Vector3(0.36, 4.4, 9.6)
+
+[sub_resource type="BoxShape3D" id="BS_side"]
+size = Vector3(0.36, 4.4, 9.6)
+
+[sub_resource type="BoxMesh" id="BM_roof"]
+material = SubResource("m_trim")
+size = Vector3(12.6, 0.35, 10.6)
+
+[sub_resource type="BoxShape3D" id="BS_roof"]
+size = Vector3(12.6, 0.35, 10.6)
+
+[sub_resource type="BoxMesh" id="BM_counter"]
+material = SubResource("m_wood")
+size = Vector3(6.8, 1.05, 0.85)
+
+[sub_resource type="BoxShape3D" id="BS_counter"]
+size = Vector3(6.8, 1.05, 0.85)
+
+[sub_resource type="BoxMesh" id="BM_oven"]
+material = SubResource("m_oven_metal")
+size = Vector3(3.4, 2.3, 1.6)
+
+[sub_resource type="BoxShape3D" id="BS_oven"]
+size = Vector3(3.4, 2.3, 1.6)
+
+[sub_resource type="BoxMesh" id="BM_glow"]
+material = SubResource("m_oven_glow")
+size = Vector3(2.2, 0.72, 0.12)
+
+[sub_resource type="BoxMesh" id="BM_rack"]
+material = SubResource("m_wood")
+size = Vector3(2.8, 1.9, 0.55)
+
+[sub_resource type="BoxMesh" id="BM_loaf"]
+material = SubResource("m_bread")
+size = Vector3(0.45, 0.16, 0.28)
+
+[node name="AutomatedBakery" type="Node3D"]
+script = ExtResource("1_bak_scr")
+
+[node name="FloorSlab" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+
+[node name="M" type="MeshInstance3D" parent="FloorSlab"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_floor")
+
+[node name="C" type="CollisionShape3D" parent="FloorSlab"]
+shape = SubResource("BS_floor")
+
+[node name="BackWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -4.82)
+
+[node name="M" type="MeshInstance3D" parent="BackWall"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_back")
+
+[node name="C" type="CollisionShape3D" parent="BackWall"]
+shape = SubResource("BS_back")
+
+[node name="LeftWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.82, 2.2, 0)
+
+[node name="M" type="MeshInstance3D" parent="LeftWall"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_side")
+
+[node name="C" type="CollisionShape3D" parent="LeftWall"]
+shape = SubResource("BS_side")
+
+[node name="RightWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.82, 2.2, 0)
+
+[node name="M" type="MeshInstance3D" parent="RightWall"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_side")
+
+[node name="C" type="CollisionShape3D" parent="RightWall"]
+shape = SubResource("BS_side")
+
+[node name="Roof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.55, 0)
+
+[node name="M" type="MeshInstance3D" parent="Roof"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_roof")
+
+[node name="C" type="CollisionShape3D" parent="Roof"]
+shape = SubResource("BS_roof")
+
+[node name="BakeryCounter" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 2.2)
+metadata/interact_message = "مخبز آلي — [E] شراء عيش سخن (+سرعة جري 45 ثانية)"
+
+[node name="M" type="MeshInstance3D" parent="BakeryCounter"]
+visibility_range_end = 280.0
+mesh = SubResource("BM_counter")
+
+[node name="C" type="CollisionShape3D" parent="BakeryCounter"]
+shape = SubResource("BS_counter")
+
+[node name="OvenUnit" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.25, -3.2)
+
+[node name="M" type="MeshInstance3D" parent="OvenUnit"]
+visibility_range_end = 280.0
+mesh = SubResource("BM_oven")
+
+[node name="C" type="CollisionShape3D" parent="OvenUnit"]
+shape = SubResource("BS_oven")
+
+[node name="OvenFirebox" type="MeshInstance3D" parent="OvenUnit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.82)
+visibility_range_end = 280.0
+mesh = SubResource("BM_glow")
+
+[node name="OvenGlowLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.6, -1.8)
+light_color = Color(1, 0.58, 0.22, 1)
+light_energy = 1.8
+omni_range = 8.5
+
+[node name="BreadRack1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 1.05, -3.5)
+visibility_range_end = 280.0
+mesh = SubResource("BM_rack")
+
+[node name="Loaf0" type="MeshInstance3D" parent="BreadRack1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.35, 0.15)
+visibility_range_end = 280.0
+mesh = SubResource("BM_loaf")
+
+[node name="Loaf1" type="MeshInstance3D" parent="BreadRack1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.35, 0.15)
+visibility_range_end = 280.0
+mesh = SubResource("BM_loaf")
+
+[node name="Loaf2" type="MeshInstance3D" parent="BreadRack1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.35, 0.15)
+visibility_range_end = 280.0
+mesh = SubResource("BM_loaf")
+
+[node name="CounterLoaf0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 1.15, 2.2)
+visibility_range_end = 280.0
+mesh = SubResource("BM_loaf")
+
+[node name="CounterLoaf1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.15, 2.2)
+visibility_range_end = 280.0
+mesh = SubResource("BM_loaf")
+
+[node name="SignText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.15, 5.35)
+visibility_range_end = 280.0
+modulate = Color(1, 0.92, 0.65, 1)
+text = "مخبز الأزهري الآلي"
+font_size = 56
+outline_size = 10

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azharimouse001"]
+
+[ext_resource type="Script" path="res://scripts/mouse_ai.gd" id="1_mouse"]
+
+[node name="MouseNPC" type="Node3D"]
+script = ExtResource("1_mouse")

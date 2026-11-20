@@ -1,0 +1,486 @@
+[gd_scene load_steps=50 format=3 uid="uid://c8azharinile001"]
+
+[ext_resource type="Shader" path="res://shaders/nile_water.gdshader" id="nile_shd"]
+[ext_resource type="PackedScene" path="res://scenes/foliage/date_palm.tscn" id="date_palm_scene"]
+[ext_resource type="PackedScene" path="res://scenes/foliage/acacia_tree.tscn" id="acacia_tree_scene"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/albedo.jpg" id="ta_sand_dirt"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/normal.jpg" id="tn_sand_dirt"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/roughness.jpg" id="tr_sand_dirt"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Script" path="res://scripts/sudanese_staircase.gd" id="stair_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_corniche"]
+albedo_color = Color(0.88, 0.84, 0.76, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.65
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(8, 80, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_stone"]
+albedo_color = Color(0.82, 0.76, 0.66, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.85
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(4, 40, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_sand_bank"]
+albedo_color = Color(0.86, 0.70, 0.50, 1)
+albedo_texture = ExtResource("ta_sand_dirt")
+metallic = 0.0
+roughness = 0.95
+roughness_texture = ExtResource("tr_sand_dirt")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_sand_dirt")
+uv1_scale = Vector3(6, 60, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.56, 0.38, 0.22, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.82
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_boat_blue"]
+albedo_color = Color(0.18, 0.48, 0.74, 1)
+metallic = 0.0
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="m_foliage"]
+albedo_color = Color(0.22, 0.52, 0.26, 1)
+metallic = 0.0
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="m_iron"]
+albedo_color = Color(0.16, 0.18, 0.20, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="ShaderMaterial" id="SM_nile_water"]
+render_priority = 0
+shader = ExtResource("nile_shd")
+
+[sub_resource type="BoxMesh" id="BM_nile_water"]
+material = SubResource("SM_nile_water")
+size = Vector3(90.0, 0.22, 500.0)
+subdivide_width = 16
+subdivide_depth = 64
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_sand_bank")
+size = Vector3(90.000, 0.200, 500.000)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(90.000, 0.200, 500.000)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_sand_bank")
+size = Vector3(4.500, 0.240, 500.000)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(4.500, 0.240, 500.000)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_corniche")
+size = Vector3(10.500, 0.240, 480.000)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(10.500, 0.240, 480.000)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_stone")
+size = Vector3(0.450, 0.850, 220.000)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(0.450, 0.850, 220.000)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_stone")
+size = Vector3(0.450, 0.850, 26.000)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(0.450, 0.850, 26.000)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_stone")
+size = Vector3(0.600, 0.120, 4.200)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+size = Vector3(2.400, 0.120, 4.200)
+
+[sub_resource type="BoxShape3D" id="BS_6"]
+size = Vector3(2.400, 0.120, 4.200)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wood")
+size = Vector3(0.700, 0.550, 2.200)
+
+[sub_resource type="BoxShape3D" id="BS_7"]
+size = Vector3(0.700, 0.550, 2.200)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_wood")
+size = Vector3(0.380, 4.400, 0.380)
+
+[sub_resource type="BoxShape3D" id="BS_8"]
+size = Vector3(0.380, 4.400, 0.380)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_foliage")
+size = Vector3(3.800, 1.600, 3.800)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_wood")
+size = Vector3(2.100, 0.450, 5.600)
+
+[sub_resource type="BoxShape3D" id="BS_10"]
+size = Vector3(2.100, 0.450, 5.600)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_boat_blue")
+size = Vector3(2.180, 0.140, 5.680)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_wood")
+size = Vector3(1.900, 0.100, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_wood")
+size = Vector3(0.240, 1.100, 0.240)
+
+[sub_resource type="BoxShape3D" id="BS_13"]
+size = Vector3(0.240, 1.100, 0.240)
+
+[node name="NileRiver" type="Node3D"]
+
+[node name="WaterSurface" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.000, 0.140, 0.000)
+mesh = SubResource("BM_nile_water")
+
+[node name="RiverBedCollider" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.000, -4.300, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="RiverBedCollider"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="RiverBedCollider"]
+shape = SubResource("BS_0")
+
+[node name="SandyShoreBank" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.500, 0.120, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="SandyShoreBank"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="SandyShoreBank"]
+shape = SubResource("BS_1")
+
+[node name="CornichePromenade" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.120, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="CornichePromenade"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="CornichePromenade"]
+shape = SubResource("BS_2")
+
+[node name="BalustradeN" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.800, 0.650, -130.000)
+
+[node name="M" type="MeshInstance3D" parent="BalustradeN"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="BalustradeN"]
+shape = SubResource("BS_3")
+
+[node name="BalustradeMid" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.800, 0.650, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="BalustradeMid"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="BalustradeMid"]
+shape = SubResource("BS_4")
+
+[node name="BalustradeS" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.800, 0.650, 130.000)
+
+[node name="M" type="MeshInstance3D" parent="BalustradeS"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="BalustradeS"]
+shape = SubResource("BS_3")
+
+[node name="CornicheSign" type="Label3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, 2.500, 3.400, -18.000)
+text = "كورنيش نهر النيل - شارع النيل"
+font_size = 72
+outline_size = 10
+
+[node name="CornicheBench_0" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, -85.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_0"]
+shape = SubResource("BS_7")
+
+[node name="CornicheDatePalm_0" parent="." instance=ExtResource("date_palm_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, -80.0)
+variant_seed = 0
+height_scale = 1.05
+
+[node name="CornicheBench_1" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, -50.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_1"]
+shape = SubResource("BS_7")
+
+[node name="CornicheAcacia_1" parent="." instance=ExtResource("acacia_tree_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, -45.0)
+variant_seed = 1
+height_scale = 0.96
+
+[node name="CornicheBench_2" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, -25.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_2"]
+shape = SubResource("BS_7")
+
+[node name="CornicheDatePalm_2" parent="." instance=ExtResource("date_palm_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, -20.0)
+variant_seed = 2
+height_scale = 1.10
+
+[node name="CornicheBench_3" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, -30.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_3"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_3"]
+shape = SubResource("BS_7")
+
+[node name="CornicheDatePalm_3" parent="." instance=ExtResource("date_palm_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, -34.0)
+variant_seed = 3
+height_scale = 0.98
+
+[node name="CornicheBench_4" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, 12.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_4"]
+shape = SubResource("BS_7")
+
+[node name="CornicheAcacia_4" parent="." instance=ExtResource("acacia_tree_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, 17.0)
+variant_seed = 4
+height_scale = 1.02
+
+[node name="CornicheBench_5" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, 35.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_5"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_5"]
+shape = SubResource("BS_7")
+
+[node name="CornicheDatePalm_5" parent="." instance=ExtResource("date_palm_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, 40.0)
+variant_seed = 5
+height_scale = 1.08
+
+[node name="CornicheBench_6" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, 65.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_6"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_6"]
+shape = SubResource("BS_7")
+
+[node name="CornicheAcacia_6" parent="." instance=ExtResource("acacia_tree_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, 70.0)
+variant_seed = 6
+height_scale = 0.94
+
+[node name="CornicheBench_7" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.200, 0.480, 95.000)
+metadata/interact_message = "مقعد كورنيش النيل - منظر النيل الجميل"
+
+[node name="M" type="MeshInstance3D" parent="CornicheBench_7"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="CornicheBench_7"]
+shape = SubResource("BS_7")
+
+[node name="CornicheDatePalm_7" parent="." instance=ExtResource("date_palm_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.14, 100.0)
+variant_seed = 7
+height_scale = 1.04
+
+[node name="FishingBoat_0" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.320, -22.000)
+metadata/interact_message = "مركب صيد على نهر النيل"
+
+[node name="M" type="MeshInstance3D" parent="FishingBoat_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="FishingBoat_0"]
+shape = SubResource("BS_10")
+
+[node name="BoatTrim_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.580, -22.000)
+visibility_range_end = 160.0
+mesh = SubResource("BM_11")
+
+[node name="BoatSeat_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.550, -22.800)
+visibility_range_end = 160.0
+mesh = SubResource("BM_12")
+
+[node name="MooringPost_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.800, 0.650, -22.000)
+
+[node name="M" type="MeshInstance3D" parent="MooringPost_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="MooringPost_0"]
+shape = SubResource("BS_13")
+
+[node name="FishingBoat_1" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.320, 0.000)
+metadata/interact_message = "مركب صيد على نهر النيل"
+
+[node name="M" type="MeshInstance3D" parent="FishingBoat_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="FishingBoat_1"]
+shape = SubResource("BS_10")
+
+[node name="BoatTrim_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.580, 0.000)
+visibility_range_end = 160.0
+mesh = SubResource("BM_11")
+
+[node name="BoatSeat_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.550, -0.800)
+visibility_range_end = 160.0
+mesh = SubResource("BM_12")
+
+[node name="MooringPost_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.800, 0.650, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="MooringPost_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="MooringPost_1"]
+shape = SubResource("BS_13")
+
+[node name="FishingBoat_2" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.320, 24.000)
+metadata/interact_message = "مركب صيد على نهر النيل"
+
+[node name="M" type="MeshInstance3D" parent="FishingBoat_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="FishingBoat_2"]
+shape = SubResource("BS_10")
+
+[node name="BoatTrim_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.580, 24.000)
+visibility_range_end = 160.0
+mesh = SubResource("BM_11")
+
+[node name="BoatSeat_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.500, 0.550, 23.200)
+visibility_range_end = 160.0
+mesh = SubResource("BM_12")
+
+[node name="MooringPost_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.800, 0.650, 24.000)
+
+[node name="M" type="MeshInstance3D" parent="MooringPost_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="MooringPost_2"]
+shape = SubResource("BS_13")
+[node name="CornicheStairs_0" type="Node3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -7.050, 0.000, -16.500)
+script = ExtResource("stair_scr")
+stair_style = 2
+stair_width = 4.2
+total_rise = 0.24
+climb_dir_z = -1.0
+low_step_count = 4
+low_step_run = 1.8
+vis_range_end = 130.0
+
+[node name="CornicheStairs_1" type="Node3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -7.050, 0.000, 16.500)
+script = ExtResource("stair_scr")
+stair_style = 2
+stair_width = 4.2
+total_rise = 0.24
+climb_dir_z = -1.0
+low_step_count = 4
+low_step_run = 1.8
+vis_range_end = 130.0

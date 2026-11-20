@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/sudanese_tree_builder.gd" id="1_tree"]
+
+[node name="AcaciaTree" type="Node3D"]
+script = ExtResource("1_tree")
+species = 1
+height_scale = 1.0
+add_trunk_collider = true
+vis_range_end = 150.0

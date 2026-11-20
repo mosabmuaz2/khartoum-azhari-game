@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azharidog0001"]
+
+[ext_resource type="Script" path="res://scripts/animal_ai.gd" id="1_anim"]
+
+[node name="Dog" type="Node3D"]
+script = ExtResource("1_anim")
+kind = "dog"
+coat_color = Color(0.62, 0.44, 0.26, 1)
+wander_radius = 3.6
+move_speed = 1.3

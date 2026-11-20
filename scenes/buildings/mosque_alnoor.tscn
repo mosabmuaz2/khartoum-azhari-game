@@ -1,0 +1,303 @@
+[gd_scene load_steps=35 format=3 uid="uid://c8azharimosqan3"]
+
+[ext_resource type="Script" path="res://scripts/mosque_adhan.gd" id="1_adhan"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_tile"]
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Script" path="res://scripts/mosque_interior_builder.gd" id="mq_int_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_chalk_white"]
+albedo_color = Color(0.98, 0.99, 1.0, 1)
+albedo_texture = ExtResource("ta_plaster")
+roughness = 0.80
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_sky_blue"]
+albedo_color = Color(0.24, 0.64, 0.92, 1)
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_court"]
+albedo_color = Color(0.93, 0.95, 0.97, 1)
+albedo_texture = ExtResource("ta_tile")
+roughness = 0.55
+uv1_scale = Vector3(6, 6, 1)
+
+[sub_resource type="BoxMesh" id="BM_court"]
+material = SubResource("m_court")
+size = Vector3(15.0, 0.24, 17.0)
+
+[sub_resource type="BoxShape3D" id="BS_court"]
+size = Vector3(15.0, 0.24, 17.0)
+
+[sub_resource type="BoxMesh" id="BM_hall"]
+material = SubResource("m_chalk_white")
+size = Vector3(12.0, 5.2, 10.5)
+
+[sub_resource type="BoxShape3D" id="BS_hall"]
+size = Vector3(12.0, 5.2, 10.5)
+
+[sub_resource type="BoxMesh" id="BM_trim"]
+material = SubResource("m_sky_blue")
+size = Vector3(12.3, 0.48, 10.8)
+
+[sub_resource type="BoxMesh" id="BM_fence"]
+material = SubResource("m_chalk_white")
+size = Vector3(0.32, 1.35, 6.2)
+
+[sub_resource type="BoxShape3D" id="BS_fence"]
+size = Vector3(0.32, 1.35, 6.2)
+
+[sub_resource type="SphereMesh" id="SM_dome"]
+material = SubResource("m_chalk_white")
+radius = 3.1
+height = 4.6
+radial_segments = 14
+rings = 7
+
+[sub_resource type="CylinderMesh" id="CM_rib_ring"]
+material = SubResource("m_sky_blue")
+top_radius = 3.25
+bottom_radius = 3.25
+height = 0.35
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="CM_slender_minaret"]
+material = SubResource("m_chalk_white")
+top_radius = 0.52
+bottom_radius = 0.72
+height = 14.5
+radial_segments = 12
+
+[sub_resource type="CylinderShape3D" id="CS_slender_minaret"]
+radius = 0.72
+height = 14.5
+
+[sub_resource type="CylinderMesh" id="CM_minaret_cap"]
+material = SubResource("m_sky_blue")
+top_radius = 0.04
+bottom_radius = 0.65
+height = 2.2
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="BM_HallWallN"]
+material = SubResource("m_chalk_white")
+size = Vector3(12.000, 5.200, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallN"]
+size = Vector3(12.000, 5.200, 0.400)
+
+
+[sub_resource type="BoxMesh" id="BM_HallWallW"]
+material = SubResource("m_chalk_white")
+size = Vector3(0.400, 5.200, 10.500)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallW"]
+size = Vector3(0.400, 5.200, 10.500)
+
+
+[sub_resource type="BoxMesh" id="BM_HallWallE"]
+material = SubResource("m_chalk_white")
+size = Vector3(0.400, 5.200, 10.500)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallE"]
+size = Vector3(0.400, 5.200, 10.500)
+
+
+[sub_resource type="BoxMesh" id="BM_HallWallS_L"]
+material = SubResource("m_chalk_white")
+size = Vector3(4.600, 5.200, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallS_L"]
+size = Vector3(4.600, 5.200, 0.400)
+
+
+[sub_resource type="BoxMesh" id="BM_HallWallS_R"]
+material = SubResource("m_chalk_white")
+size = Vector3(4.600, 5.200, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallS_R"]
+size = Vector3(4.600, 5.200, 0.400)
+
+
+[sub_resource type="BoxMesh" id="BM_HallWallS_Top"]
+material = SubResource("m_chalk_white")
+size = Vector3(2.800, 2.400, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_HallWallS_Top"]
+size = Vector3(2.800, 2.400, 0.400)
+
+
+[sub_resource type="BoxMesh" id="BM_HallRoof"]
+material = SubResource("m_chalk_white")
+size = Vector3(12.000, 0.280, 10.500)
+
+[sub_resource type="BoxShape3D" id="BS_HallRoof"]
+size = Vector3(12.000, 0.280, 10.500)
+
+[node name="MosqueAlNoor" type="Node3D" groups=["mosques"]]
+
+[node name="OpenCourtyard" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+metadata/interact_message = "مسجد النور — المسجد المحلي الأبيض المزود بساحة مفتوحة"
+
+[node name="M" type="MeshInstance3D" parent="OpenCourtyard"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_court")
+
+[node name="C" type="CollisionShape3D" parent="OpenCourtyard"]
+shape = SubResource("BS_court")
+
+[node name="BlueRoofTrim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.42, -2.5)
+visibility_range_end = 650.0
+mesh = SubResource("BM_trim")
+
+[node name="RibbedDomeRing" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8, -2.5)
+visibility_range_end = 650.0
+mesh = SubResource("CM_rib_ring")
+
+[node name="WhiteRibbedDome" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.2, -2.5)
+visibility_range_end = 650.0
+mesh = SubResource("SM_dome")
+
+[node name="CourtyardWallL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 0.85, 5.2)
+
+[node name="M" type="MeshInstance3D" parent="CourtyardWallL"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_fence")
+
+[node name="C" type="CollisionShape3D" parent="CourtyardWallL"]
+shape = SubResource("BS_fence")
+
+[node name="CourtyardWallR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0.85, 5.2)
+
+[node name="M" type="MeshInstance3D" parent="CourtyardWallR"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_fence")
+
+[node name="C" type="CollisionShape3D" parent="CourtyardWallR"]
+shape = SubResource("BS_fence")
+
+[node name="ModernMinaret" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 7.3, 2.8)
+
+[node name="Shaft" type="MeshInstance3D" parent="ModernMinaret"]
+visibility_range_end = 650.0
+mesh = SubResource("CM_slender_minaret")
+
+[node name="C" type="CollisionShape3D" parent="ModernMinaret"]
+shape = SubResource("CS_slender_minaret")
+
+[node name="Cap" type="MeshInstance3D" parent="ModernMinaret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2, 0)
+visibility_range_end = 650.0
+mesh = SubResource("CM_minaret_cap")
+
+[node name="AdhanPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 14.5, 2.8)
+script = ExtResource("1_adhan")
+
+[node name="SignLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 3.0)
+visibility_range_end = 280.0
+modulate = Color(0.45, 0.84, 1.0, 1)
+text = "مسجد النور"
+font_size = 52
+outline_size = 10
+
+[node name="HallWallN" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.840, -7.550)
+
+[node name="M" type="MeshInstance3D" parent="HallWallN"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallN")
+
+[node name="C" type="CollisionShape3D" parent="HallWallN"]
+shape = SubResource("BS_HallWallN")
+
+[node name="HallWallW" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 2.840, -2.500)
+
+[node name="M" type="MeshInstance3D" parent="HallWallW"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallW")
+
+[node name="C" type="CollisionShape3D" parent="HallWallW"]
+shape = SubResource("BS_HallWallW")
+
+[node name="HallWallE" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 2.840, -2.500)
+
+[node name="M" type="MeshInstance3D" parent="HallWallE"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallE")
+
+[node name="C" type="CollisionShape3D" parent="HallWallE"]
+shape = SubResource("BS_HallWallE")
+
+[node name="HallWallS_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 2.840, 2.550)
+
+[node name="M" type="MeshInstance3D" parent="HallWallS_L"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallS_L")
+
+[node name="C" type="CollisionShape3D" parent="HallWallS_L"]
+shape = SubResource("BS_HallWallS_L")
+
+[node name="HallWallS_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 2.840, 2.550)
+
+[node name="M" type="MeshInstance3D" parent="HallWallS_R"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallS_R")
+
+[node name="C" type="CollisionShape3D" parent="HallWallS_R"]
+shape = SubResource("BS_HallWallS_R")
+
+[node name="HallWallS_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.240, 2.550)
+
+[node name="M" type="MeshInstance3D" parent="HallWallS_Top"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallWallS_Top")
+
+[node name="C" type="CollisionShape3D" parent="HallWallS_Top"]
+shape = SubResource("BS_HallWallS_Top")
+
+[node name="HallRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.300, -2.500)
+
+[node name="M" type="MeshInstance3D" parent="HallRoof"]
+visibility_range_end = 650.0
+mesh = SubResource("BM_HallRoof")
+
+[node name="C" type="CollisionShape3D" parent="HallRoof"]
+shape = SubResource("BS_HallRoof")
+
+[node name="MosqueEntranceDoor" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.240, 2.550)
+script = ExtResource("door_scr")
+door_label = "باب مسجد النور"
+door_style = 3
+opening_width = 2.80
+opening_height = 2.80
+wall_thickness = 0.40
+open_angle_deg = 86.0
+is_open = false
+build_recessed_frame = true
+
+[node name="MosqueInterior" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, -2.500)
+script = ExtResource("mq_int_scr")
+hall_width = 11.20
+hall_depth = 9.70
+hall_height = 4.92
+floor_y = 0.24
+mosque_title = "مسجد النور"
+add_internal_pillars = false
+vis_range_end = 95.0

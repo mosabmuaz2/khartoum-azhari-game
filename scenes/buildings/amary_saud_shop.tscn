@@ -1,0 +1,314 @@
+[gd_scene load_steps=43 format=3 uid="uid://c8azhariamary01"]
+
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Script" path="res://scripts/market_interior_builder.gd" id="mkt_int_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_wall"]
+albedo_color = Color(0.95, 0.88, 0.74, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.88
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_tile"]
+albedo_color = Color(0.92, 0.90, 0.84, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.55
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(4, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.58, 0.38, 0.22, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.8
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_green"]
+albedo_color = Color(0.10, 0.44, 0.22, 1)
+metallic = 0.0
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="m_gold"]
+albedo_color = Color(0.88, 0.68, 0.18, 1)
+metallic = 0.65
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="m_jar_brown"]
+albedo_color = Color(0.38, 0.24, 0.14, 1)
+metallic = 0.0
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_packet"]
+albedo_color = Color(0.84, 0.76, 0.58, 1)
+metallic = 0.0
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CM_jar"]
+material = SubResource("m_jar_brown")
+top_radius = 0.13
+bottom_radius = 0.15
+height = 0.34
+radial_segments = 10
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_tile")
+size = Vector3(8.600, 0.120, 6.800)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(8.600, 0.120, 6.800)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_wall")
+size = Vector3(8.600, 3.800, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(8.600, 3.800, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_wall")
+size = Vector3(0.320, 3.800, 6.400)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(0.320, 3.800, 6.400)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_wall")
+size = Vector3(2.450, 3.800, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(2.450, 3.800, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_wall")
+size = Vector3(3.400, 1.050, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(3.400, 1.050, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.750, 0.380)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_wood")
+size = Vector3(3.400, 0.080, 0.380)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wall")
+size = Vector3(9.000, 0.260, 7.800)
+
+[sub_resource type="BoxShape3D" id="BS_7"]
+size = Vector3(9.000, 0.260, 7.800)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_green")
+size = Vector3(8.600, 0.120, 2.200)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_green")
+size = Vector3(7.400, 0.950, 0.160)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_gold")
+size = Vector3(7.600, 1.050, 0.120)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_wood")
+size = Vector3(4.800, 1.080, 0.780)
+
+[sub_resource type="BoxShape3D" id="BS_11"]
+size = Vector3(4.800, 1.080, 0.780)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_gold")
+size = Vector3(0.440, 0.320, 0.260)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_packet")
+size = Vector3(0.200, 0.120, 0.240)
+
+[sub_resource type="BoxMesh" id="BM_14"]
+material = SubResource("m_wood")
+size = Vector3(6.400, 2.300, 0.520)
+
+[sub_resource type="BoxShape3D" id="BS_14"]
+size = Vector3(6.400, 2.300, 0.520)
+
+[node name="AmarySaudShop" type="Node3D"]
+
+[node name="ShopFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.060, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="ShopFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="ShopFloor"]
+shape = SubResource("BS_0")
+
+[node name="BackWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.900, -3.200)
+
+[node name="M" type="MeshInstance3D" parent="BackWall"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="BackWall"]
+shape = SubResource("BS_1")
+
+[node name="LeftWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.150, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="LeftWall"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="LeftWall"]
+shape = SubResource("BS_2")
+
+[node name="RightWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.150, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="RightWall"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="RightWall"]
+shape = SubResource("BS_2")
+
+[node name="FrontWall_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.925, 1.900, 3.200)
+
+[node name="M" type="MeshInstance3D" parent="FrontWall_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="FrontWall_L"]
+shape = SubResource("BS_3")
+
+[node name="FrontWall_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.925, 1.900, 3.200)
+
+[node name="M" type="MeshInstance3D" parent="FrontWall_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="FrontWall_R"]
+shape = SubResource("BS_3")
+
+[node name="FrontWall_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.275, 3.200)
+
+[node name="M" type="MeshInstance3D" parent="FrontWall_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWall_Top"]
+shape = SubResource("BS_4")
+
+[node name="FrontWall_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.660, 1.375, 3.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_5")
+
+[node name="FrontWall_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.660, 1.375, 3.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_5")
+
+[node name="FrontWall_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.710, 3.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="ShopRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.920, 0.500)
+
+[node name="M" type="MeshInstance3D" parent="ShopRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="ShopRoof"]
+shape = SubResource("BS_7")
+
+[node name="AwningCanopy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.050, 4.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="SignBoard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.550, 3.480)
+visibility_range_end = 95.0
+mesh = SubResource("BM_9")
+
+[node name="SignGoldFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.550, 3.450)
+visibility_range_end = 95.0
+mesh = SubResource("BM_10")
+
+[node name="SignTitle" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.580, 3.590)
+text = "محل عماري وصعوط وتمباك الأصيل"
+font_size = 54
+outline_size = 9
+
+[node name="MainCounter" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.540, 0.900)
+metadata/interact_message = "محل عماري وصعوط وتمباك الأصيل - عماري الفاشر وصعوط ممتاز"
+
+[node name="M" type="MeshInstance3D" parent="MainCounter"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_11")
+
+[node name="C" type="CollisionShape3D" parent="MainCounter"]
+shape = SubResource("BS_11")
+
+[node name="BackShelf" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.250, -2.700)
+
+[node name="M" type="MeshInstance3D" parent="BackShelf"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_14")
+
+[node name="C" type="CollisionShape3D" parent="BackShelf"]
+shape = SubResource("BS_14")
+
+[node name="Shutter_AmaryShop" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 3.250)
+script = ExtResource("door_scr")
+door_label = "شتر دكان العماري"
+door_style = 4
+gate_paint = 1
+opening_width = 3.22
+opening_height = 2.64
+is_shutter = true
+slide_height = 2.40
+is_open = true
+
+[node name="MarketInterior" type="Node3D" parent="."]
+script = ExtResource("mkt_int_scr")
+market_mode = 1
+floor_y = 0.12
+vis_range_end = 85.0

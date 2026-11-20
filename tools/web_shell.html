@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>$GODOT_PROJECT_NAME</title>
+	<style>
+		html, body, #canvas {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background-color: #101218;
+			touch-action: none;
+			-webkit-user-select: none;
+			user-select: none;
+		}
+		#canvas {
+			display: block;
+		}
+		#canvas:focus {
+			outline: none;
+		}
+		#status {
+			position: fixed;
+			inset: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background: radial-gradient(circle at center, #1c202b 0%, #0d0f14 100%);
+			color: #f4efe6;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+			padding: 24px;
+			box-sizing: border-box;
+			z-index: 10;
+		}
+		#status.hidden {
+			display: none;
+		}
+		#status-title {
+			font-size: 1.45rem;
+			font-weight: 700;
+			color: #f6c873;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+		#status-message {
+			font-size: 0.98rem;
+			color: #9be8b8;
+			margin-bottom: 14px;
+			text-align: center;
+			direction: ltr;
+		}
+		#status-progress {
+			width: min(360px, 82vw);
+			height: 12px;
+			border-radius: 6px;
+			overflow: hidden;
+			appearance: none;
+			-webkit-appearance: none;
+			background-color: #242a38;
+			border: 1px solid #3c475c;
+		}
+		#status-progress::-webkit-progress-bar {
+			background-color: #242a38;
+		}
+		#status-progress::-webkit-progress-value {
+			background-color: #2da665;
+		}
+		#status-notice {
+			margin-top: 16px;
+			max-width: 560px;
+			padding: 12px 16px;
+			border-radius: 10px;
+			background: rgba(140, 28, 28, 0.28);
+			border: 1px solid #e05a5a;
+			color: #ffd4d4;
+			font-size: 0.9rem;
+			line-height: 1.5;
+			direction: ltr;
+			white-space: pre-wrap;
+			word-break: break-word;
+			display: none;
+		}
+	</style>
+	$GODOT_HEAD_INCLUDE
+</head>
+<body>
+	<canvas id="canvas">
+		Your browser does not support HTML5 canvas.
+	</canvas>
+	<div id="status">
+		<div id="status-title">الخرطوم — حي الأزهري</div>
+		<div id="status-message">Loading Engine...</div>
+		<progress id="status-progress" value="0" max="100"></progress>
+		<div id="status-notice"></div>
+	</div>
+	<script src="$GODOT_URL"></script>
+	<script>
+		const GODOT_CONFIG = $GODOT_CONFIG;
+		const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+		const statusOverlay = document.getElementById('status');
+		const statusMessage = document.getElementById('status-message');
+		const statusProgress = document.getElementById('status-progress');
+		const statusNotice = document.getElementById('status-notice');
+
+		window.setBootStatus = function (msg) {
+			if (statusMessage) {
+				statusMessage.textContent = String(msg || '');
+			}
+		};
+		window.hideBootOverlay = function () {
+			if (statusOverlay) {
+				statusOverlay.classList.add('hidden');
+			}
+		};
+
+		function showError(text) {
+			const msg = String(text || 'Unknown error');
+			if (statusOverlay) {
+				statusOverlay.classList.remove('hidden');
+			}
+			if (statusMessage) {
+				statusMessage.textContent = 'Startup Error';
+				statusMessage.style.color = '#ff8a8a';
+			}
+			if (statusProgress) {
+				statusProgress.style.display = 'none';
+			}
+			if (statusNotice) {
+				statusNotice.style.display = 'block';
+				statusNotice.textContent = msg;
+			}
+		}
+
+		window.addEventListener('error', function (ev) {
+			if (ev && ev.message) {
+				showError('JS Error: ' + ev.message);
+			}
+		});
+		window.addEventListener('unhandledrejection', function (ev) {
+			const reason = ev && ev.reason ? (ev.reason.message || String(ev.reason)) : 'Promise rejected';
+			showError('Async Error: ' + reason);
+		});
+
+		(function bootGodot() {
+			const missing = Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
+			if (missing.length !== 0) {
+				showError('WebGL2 / Browser features missing:\n' + missing.join('\n'));
+				return;
+			}
+
+			window.setBootStatus('Loading Engine...');
+			const engine = new Engine(GODOT_CONFIG);
+
+			engine.startGame({
+				'onProgress': function (current, total) {
+					if (current > 0 && total > 0) {
+						const pct = Math.min(100, Math.round((current / total) * 100));
+						const curMb = (current / (1024 * 1024)).toFixed(1);
+						const totMb = (total / (1024 * 1024)).toFixed(1);
+						statusProgress.value = pct;
+						if (current >= total) {
+							window.setBootStatus('Starting Scene...');
+						} else {
+							window.setBootStatus('Loading Assets... ' + pct + '% (' + curMb + ' / ' + totMb + ' MB)');
+						}
+					} else {
+						statusProgress.removeAttribute('value');
+						window.setBootStatus('Loading Engine...');
+					}
+				},
+			}).then(function () {
+				window.setBootStatus('Starting Scene...');
+				window.hideBootOverlay();
+			}, function (err) {
+				showError(err && err.message ? err.message : String(err));
+			});
+		})();
+	</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+[gd_scene load_steps=39 format=3 uid="uid://c8azharigas0001"]
+
+[ext_resource type="Script" path="res://scripts/gas_station.gd" id="gas_scr"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/albedo.jpg" id="ta_asphalt"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/normal.jpg" id="tn_asphalt"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/roughness.jpg" id="tr_asphalt"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+
+[sub_resource type="StandardMaterial3D" id="m_pad"]
+albedo_color = Color(0.78, 0.76, 0.72, 1)
+albedo_texture = ExtResource("ta_asphalt")
+metallic = 0.0
+roughness = 0.85
+roughness_texture = ExtResource("tr_asphalt")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_asphalt")
+uv1_scale = Vector3(6, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wall"]
+albedo_color = Color(0.95, 0.92, 0.86, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.85
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_red"]
+albedo_color = Color(0.84, 0.18, 0.16, 1)
+metallic = 0.2
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="m_yellow"]
+albedo_color = Color(0.96, 0.76, 0.14, 1)
+metallic = 0.2
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="m_green"]
+albedo_color = Color(0.14, 0.56, 0.32, 1)
+metallic = 0.2
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_steel"]
+albedo_color = Color(0.78, 0.80, 0.82, 1)
+metallic = 0.65
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="m_dark"]
+albedo_color = Color(0.16, 0.18, 0.20, 1)
+metallic = 0.4
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="m_glass"]
+albedo_color = Color(0.38, 0.58, 0.68, 0.48)
+metallic = 0.0
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_pad")
+size = Vector3(26.000, 0.080, 18.000)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(26.000, 0.080, 18.000)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_wall")
+size = Vector3(18.000, 0.550, 10.500)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(18.000, 0.550, 10.500)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_red")
+size = Vector3(18.300, 0.650, 10.800)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_yellow")
+size = Vector3(18.350, 0.160, 10.850)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_wall")
+size = Vector3(0.520, 5.200, 0.520)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(0.520, 5.200, 0.520)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_wall")
+size = Vector3(1.600, 0.220, 6.800)
+
+[sub_resource type="BoxShape3D" id="BS_5"]
+size = Vector3(1.600, 0.220, 6.800)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_red")
+size = Vector3(0.880, 1.900, 0.620)
+
+[sub_resource type="BoxShape3D" id="BS_6"]
+size = Vector3(0.880, 1.900, 0.620)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wall")
+size = Vector3(0.920, 0.420, 0.440)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_dark")
+size = Vector3(0.080, 0.950, 0.120)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_green")
+size = Vector3(0.880, 1.900, 0.620)
+
+[sub_resource type="BoxShape3D" id="BS_9"]
+size = Vector3(0.880, 1.900, 0.620)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_red")
+size = Vector3(1.600, 5.600, 0.450)
+
+[sub_resource type="BoxShape3D" id="BS_10"]
+size = Vector3(1.600, 5.600, 0.450)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_wall")
+size = Vector3(14.000, 3.500, 4.200)
+
+[sub_resource type="BoxShape3D" id="BS_11"]
+size = Vector3(14.000, 3.500, 4.200)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_glass")
+size = Vector3(4.200, 1.500, 0.060)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_yellow")
+size = Vector3(1.400, 1.100, 1.400)
+
+[sub_resource type="BoxShape3D" id="BS_13"]
+size = Vector3(1.400, 1.100, 1.400)
+
+[node name="GasStation" type="Node3D"]
+script = ExtResource("gas_scr")
+
+[node name="ForecourtPad" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.040, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="ForecourtPad"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="ForecourtPad"]
+shape = SubResource("BS_0")
+
+[node name="CanopyRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.200, 1.500)
+
+[node name="M" type="MeshInstance3D" parent="CanopyRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="CanopyRoof"]
+shape = SubResource("BS_1")
+
+[node name="CanopyFasciaRed" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.250, 1.500)
+visibility_range_end = 95.0
+mesh = SubResource("BM_2")
+
+[node name="CanopyStripeYellow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.000, 1.500)
+visibility_range_end = 95.0
+mesh = SubResource("BM_3")
+
+[node name="CanopyCol_-6.8_-2.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.800, 2.600, -2.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyCol_-6.8_-2.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="CanopyCol_-6.8_-2.4"]
+shape = SubResource("BS_4")
+
+[node name="CanopyCol_-6.8_5.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.800, 2.600, 5.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyCol_-6.8_5.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="CanopyCol_-6.8_5.4"]
+shape = SubResource("BS_4")
+
+[node name="CanopyCol_6.8_-2.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.800, 2.600, -2.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyCol_6.8_-2.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="CanopyCol_6.8_-2.4"]
+shape = SubResource("BS_4")
+
+[node name="CanopyCol_6.8_5.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.800, 2.600, 5.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyCol_6.8_5.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="CanopyCol_6.8_5.4"]
+shape = SubResource("BS_4")
+
+[node name="CanopySignFront" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.250, 6.960)
+text = "محطة وقود النيل والأزهري - بنزين وجازولين"
+font_size = 58
+outline_size = 10
+
+[node name="CanopySignBack" type="Label3D" parent="."]
+transform = Transform3D(-1.00000, 0, 0.00000, 0, 1, 0, -0.00000, 0, -1.00000, 0.000, 5.250, -3.960)
+text = "محطة وقود النيل والأزهري - بنزين وجازولين"
+font_size = 58
+outline_size = 10
+
+[node name="PumpIsland_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 0.140, 1.500)
+
+[node name="M" type="MeshInstance3D" parent="PumpIsland_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="PumpIsland_0"]
+shape = SubResource("BS_5")
+
+[node name="FuelPump_0" type="StaticBody3D" parent="." groups=["fuel_pumps", "interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 1.150, -0.600)
+metadata/interact_message = "طلمبة وقود - اقترب بالعربية واضغط [E] أو [B] لتعبئة التنك"
+
+[node name="M" type="MeshInstance3D" parent="FuelPump_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="FuelPump_0"]
+shape = SubResource("BS_6")
+
+[node name="PumpScreen_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 1.450, -0.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="PumpHose_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.940, 1.050, -0.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="FuelPump_1" type="StaticBody3D" parent="." groups=["fuel_pumps", "interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 1.150, 3.600)
+metadata/interact_message = "طلمبة وقود - اقترب بالعربية واضغط [E] أو [B] لتعبئة التنك"
+
+[node name="M" type="MeshInstance3D" parent="FuelPump_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="FuelPump_1"]
+shape = SubResource("BS_9")
+
+[node name="PumpScreen_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 1.450, 3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="PumpHose_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.940, 1.050, 3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="PumpIsland_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 0.140, 1.500)
+
+[node name="M" type="MeshInstance3D" parent="PumpIsland_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="PumpIsland_1"]
+shape = SubResource("BS_5")
+
+[node name="FuelPump_2" type="StaticBody3D" parent="." groups=["fuel_pumps", "interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 1.150, -0.600)
+metadata/interact_message = "طلمبة وقود - اقترب بالعربية واضغط [E] أو [B] لتعبئة التنك"
+
+[node name="M" type="MeshInstance3D" parent="FuelPump_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="FuelPump_2"]
+shape = SubResource("BS_6")
+
+[node name="PumpScreen_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 1.450, -0.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="PumpHose_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.860, 1.050, -0.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="FuelPump_3" type="StaticBody3D" parent="." groups=["fuel_pumps", "interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 1.150, 3.600)
+metadata/interact_message = "طلمبة وقود - اقترب بالعربية واضغط [E] أو [B] لتعبئة التنك"
+
+[node name="M" type="MeshInstance3D" parent="FuelPump_3"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="FuelPump_3"]
+shape = SubResource("BS_9")
+
+[node name="PumpScreen_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 1.450, 3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="PumpHose_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.860, 1.050, 3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="PriceTotem" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.800, 2.800, 6.800)
+metadata/interact_message = "أسعار الوقود اليوم: بنزين ١٢٠٠ ج/لتر - جازولين ١١٠٠ ج/لتر"
+
+[node name="M" type="MeshInstance3D" parent="PriceTotem"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="PriceTotem"]
+shape = SubResource("BS_10")
+
+[node name="TotemText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.800, 3.600, 7.060)
+text = "طلمبة الأزهري\nبنزين: ١٢٠٠\nجازولين: ١١٠٠"
+font_size = 38
+outline_size = 8
+
+[node name="ServiceOffice" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.750, -6.200)
+
+[node name="M" type="MeshInstance3D" parent="ServiceOffice"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_11")
+
+[node name="C" type="CollisionShape3D" parent="ServiceOffice"]
+shape = SubResource("BS_11")
+
+[node name="OfficeGlass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.200, 1.650, -4.080)
+visibility_range_end = 95.0
+mesh = SubResource("BM_12")
+
+[node name="OilDrumStack_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.500, 0.550, -5.200)
+
+[node name="M" type="MeshInstance3D" parent="OilDrumStack_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="OilDrumStack_0"]
+shape = SubResource("BS_13")

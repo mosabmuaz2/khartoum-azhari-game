@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azhariairaksh"]
+
+[ext_resource type="PackedScene" uid="uid://c8azhariraksha1" path="res://scenes/raksha.tscn" id="1_base"]
+
+[node name="AIRaksha" instance=ExtResource("1_base")]

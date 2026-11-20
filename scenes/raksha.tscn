@@ -1,0 +1,256 @@
+[gd_scene load_steps=24 format=3 uid="uid://c8azhariraksha1"]
+
+[ext_resource type="Script" path="res://scripts/vehicle_controller.gd" id="1_veh_ctrl"]
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_seat_manager.gd" id="seat_mgr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_raksha"]
+size = Vector3(1.38, 1.55, 2.55)
+
+[sub_resource type="StandardMaterial3D" id="mat_yellow"]
+albedo_color = Color(0.95, 0.74, 0.12, 1)
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="mat_green"]
+albedo_color = Color(0.11, 0.48, 0.24, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="mat_canopy"]
+albedo_color = Color(0.14, 0.16, 0.17, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_glass"]
+albedo_color = Color(0.62, 0.78, 0.88, 0.45)
+roughness = 0.2
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="mat_tire"]
+albedo_color = Color(0.12, 0.12, 0.12, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_rim"]
+albedo_color = Color(0.75, 0.76, 0.78, 1)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="mat_headlight"]
+albedo_color = Color(1, 0.96, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 0.92, 0.65, 1)
+emission_energy_multiplier = 1.4
+
+[sub_resource type="StandardMaterial3D" id="mat_seat"]
+albedo_color = Color(0.24, 0.18, 0.14, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+material = SubResource("mat_yellow")
+size = Vector3(1.32, 0.42, 2.35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_front_nose"]
+material = SubResource("mat_yellow")
+size = Vector3(0.95, 0.68, 0.62)
+
+[sub_resource type="BoxMesh" id="BoxMesh_green_stripe"]
+material = SubResource("mat_green")
+size = Vector3(1.36, 0.18, 1.85)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rear_back"]
+material = SubResource("mat_yellow")
+size = Vector3(1.3, 0.75, 0.48)
+
+[sub_resource type="BoxMesh" id="BoxMesh_roof"]
+material = SubResource("mat_canopy")
+size = Vector3(1.34, 0.14, 2.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pillar"]
+material = SubResource("mat_canopy")
+size = Vector3(0.07, 1.15, 0.07)
+
+[sub_resource type="BoxMesh" id="BoxMesh_windshield"]
+material = SubResource("mat_glass")
+size = Vector3(0.94, 0.56, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_seat"]
+material = SubResource("mat_seat")
+size = Vector3(1.02, 0.22, 0.55)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tire"]
+material = SubResource("mat_tire")
+top_radius = 0.28
+bottom_radius = 0.28
+height = 0.18
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rim"]
+material = SubResource("mat_rim")
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.19
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_headlight"]
+material = SubResource("mat_headlight")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.08
+radial_segments = 12
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_raksha"]
+properties/0/path = NodePath(".:driver_peer_id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:sync_position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:sync_yaw")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:sync_speed")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:sync_steer")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="Raksha" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_veh_ctrl")
+vehicle_name = "Raksha"
+max_speed = 16.0
+reverse_speed = 6.5
+acceleration = 16.5
+deceleration = 11.0
+turn_speed = 3.2
+is_three_wheeler = true
+driver_seat_offset = Vector3(0, 0.72, -0.18)
+passenger_seat_offset = Vector3(0, 0.74, 0.56)
+exit_offset = Vector3(-1.55, 0.2, 0)
+camera_distance = 5.6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("BoxShape3D_raksha")
+
+[node name="BodyVisuals" type="Node3D" parent="."]
+
+[node name="Chassis" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0.05)
+mesh = SubResource("BoxMesh_chassis")
+
+[node name="FrontNose" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, -0.88)
+mesh = SubResource("BoxMesh_front_nose")
+
+[node name="GreenStripe" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0.18)
+mesh = SubResource("BoxMesh_green_stripe")
+
+[node name="RearBack" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94, 0.96)
+mesh = SubResource("BoxMesh_rear_back")
+
+[node name="CanopyRoof" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72, 0.08)
+mesh = SubResource("BoxMesh_roof")
+
+[node name="PillarFL" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48, 1.18, -0.82)
+mesh = SubResource("BoxMesh_pillar")
+
+[node name="PillarFR" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48, 1.18, -0.82)
+mesh = SubResource("BoxMesh_pillar")
+
+[node name="PillarRL" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58, 1.24, 1.02)
+mesh = SubResource("BoxMesh_pillar")
+
+[node name="PillarRR" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58, 1.24, 1.02)
+mesh = SubResource("BoxMesh_pillar")
+
+[node name="Windshield" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.32, -0.92)
+mesh = SubResource("BoxMesh_windshield")
+
+[node name="DriverSeat" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, -0.15)
+mesh = SubResource("BoxMesh_seat")
+
+[node name="PassengerSeat" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0.52)
+mesh = SubResource("BoxMesh_seat")
+
+[node name="Headlight" type="MeshInstance3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.74, -1.21)
+mesh = SubResource("CylinderMesh_headlight")
+
+[node name="LicensePlateRear" type="Label3D" parent="BodyVisuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 1.24)
+text = "خ - 4182"
+font_size = 24
+outline_size = 6
+
+[node name="FrontSteer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, -0.95)
+
+[node name="FrontWheel" type="Node3D" parent="FrontSteer"]
+
+[node name="Tire" type="MeshInstance3D" parent="FrontSteer/FrontWheel"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="FrontSteer/FrontWheel"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rim")
+
+[node name="RearWheelL" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66, 0.28, 0.76)
+
+[node name="Tire" type="MeshInstance3D" parent="RearWheelL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="RearWheelL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rim")
+
+[node name="RearWheelR" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, 0.28, 0.76)
+
+[node name="Tire" type="MeshInstance3D" parent="RearWheelR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="RearWheelR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rim")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_raksha")
+
+[node name="VehicleSeatManager" type="Node" parent="."]
+script = ExtResource("seat_mgr")
+sit_height_offset = -0.48
+sit_back_offset = 0.14
+seated_character_scale = 0.82
+
+[node name="Seats" type="Node3D" parent="."]
+
+[node name="Seat_1_RearLeft" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.68, 0.56)
+
+[node name="Seat_2_RearRight" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.68, 0.56)
+
+[node name="Seat_3_RearCenter" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00, 0.68, 0.56)
+
+[node name="ExitPoints" type="Node3D" parent="."]
+
+[node name="Exit_Left" type="Marker3D" parent="ExitPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65, 0.05, 0.30)
+
+[node name="Exit_Right" type="Marker3D" parent="ExitPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65, 0.05, 0.30)

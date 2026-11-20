@@ -1,0 +1,33 @@
+========================================================================================
+AL-AZHARI VEHICLE ARCHIVE EXTRACTION & 3D MODEL AUDIT
+Source: C:\Users\Mosab\Downloads\05_Archives
+========================================================================================
+
+[IMPORTED -> pack/Ambulance.fbx] FBX-20261118T164139Z-1-001\FBX\Ambulance.fbx | verts=834 tris=1646 | nodes=['BackWheels', 'FrontWheels', 'Ambulance'] | mats=['Material', 'White', 'Red', 'Windows', 'Bumper', 'Lights', 'Grey']
+[IMPORTED -> pack/Bicycle.fbx] FBX-20261118T164139Z-1-001\FBX\Bicycle.fbx | verts=1492 tris=2976 | nodes=['Handle', 'FrontWheel', 'Saddle', 'Frame', 'BackWheel'] | mats=['Bike', 'Handle', 'Wheel', 'Material.003']
+[IMPORTED -> pack/Bus.fbx] FBX-20261118T164139Z-1-001\FBX\Bus.fbx | verts=775 tris=1530 | nodes=['BackWheels', 'Bus', 'FrontWheels'] | mats=['Material', 'Bottom', 'Windows', 'Details', 'Bumper', 'Lights', 'Top']
+[IMPORTED -> pack/SchoolBus.fbx] FBX-20261118T164139Z-1-001\FBX\SchoolBus.fbx | verts=901 tris=1782 | nodes=['BackWheels', 'SchoolBus', 'FrontWheels'] | mats=['Wheel', 'Yellow', 'Windows', 'Details', 'Bumper', 'Lights']
+[IMPORTED -> pack/SquareFrameBicycle.fbx] FBX-20261118T164139Z-1-001\FBX\SquareFrameBicycle.fbx | verts=658 tris=1308 | nodes=['Handle', 'FrontWheel', 'Saddle', 'Frame', 'BackWheel'] | mats=['Material.001', 'Material.005', 'Material.002', 'Material.003']
+[IMPORTED -> pack/ClassicTaxi.fbx] FBX-20261118T164139Z-1-001\FBX\Taxi.fbx | verts=820 tris=1614 | nodes=['BackWheels', 'Front Wheels', 'Taxi'] | mats=['Material.002', 'Material.003']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\TrafficCone.fbx | verts=72 tris=140 | nodes=['Cone'] | mats=['Orange', 'White']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\TrafficLight.fbx | verts=423 tris=842 | nodes=['TrafficLight'] | mats=['TrafficLight', 'Green', 'Yellow', 'Red']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\TrafficSign1.fbx | verts=54 tris=104 | nodes=['TrafficSign'] | mats=['Border', 'Sign', 'Pole']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\TrafficSign2.fbx | verts=46 tris=88 | nodes=['TrafficSign'] | mats=['Border', 'Sign', 'Pole']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\TrafficSign3.fbx | verts=55 tris=106 | nodes=['TrafficSign'] | mats=['Sign', 'Border', 'Pole']
+[DISCOVERED] FBX-20261118T164139Z-1-001\FBX\Train.fbx | verts=358 tris=712 | nodes=['Train'] | mats=['Outside', 'Top', 'Windows', 'Black']
+[IMPORTED -> pack/Cop.fbx] FBX-20261118T164215Z-1-001\FBX\Cop.fbx | verts=1630 tris=3232 | nodes=['Cop', 'Cop_BackWheels', 'Cop_FrontLeftWheel', 'Cop_FrontRightWheel'] | mats=['White', 'Windows', 'Grey', 'Headlights', 'Black', 'TailLights', 'WhiteLights', 'BlueLights']
+[IMPORTED -> pack/NormalCar1.fbx] FBX-20261118T164215Z-1-001\FBX\NormalCar1.fbx | verts=1491 tris=2954 | nodes=['NormalCar1', 'NormalCar1_BackWheels', 'NormalCar1_FrontLeftWheel', 'NormalCar1_FrontRightWheel'] | mats=['Blue', 'Windows', 'Black', 'Grey', 'Headlights', 'TailLights', 'Yellow', 'DarkOrange']
+[IMPORTED -> pack/NormalCar2.fbx] FBX-20261118T164215Z-1-001\FBX\NormalCar2.fbx | verts=1574 tris=3124 | nodes=['NormalCar2', 'NormalCar2_BackWheels', 'NormalCar2_FrontLeftWheel', 'NormalCar2_FrontRightWheel'] | mats=['LightBlue', 'Windows', 'Black', 'Grey', 'Headlights', 'Material.007', 'TailLights']
+[IMPORTED -> pack/SportsCar.fbx] FBX-20261118T164215Z-1-001\FBX\SportsCar.fbx | verts=1551 tris=3078 | nodes=['SportsCar', 'SportsCar_BackWheels', 'SportsCar_FrontLeftWheel', 'SportsCar_FrontRightWheel'] | mats=['Orange', 'DarkOrange', 'Windows', 'Black', 'Grey', 'Headlights', 'TailLights']
+[IMPORTED -> pack/SportsCar2.fbx] FBX-20261118T164215Z-1-001\FBX\SportsCar2.fbx | verts=1588 tris=3148 | nodes=['SportsCar2', 'SportsCar2_BackWheels', 'SportsCar2_FrontLeftWheel', 'SportsCar2_FrontRightWheel'] | mats=['White', 'Windows', 'Black', 'Grey', 'Headlights', 'TailLights']
+[IMPORTED -> pack/SUV.fbx] FBX-20261118T164215Z-1-001\FBX\SUV.fbx | verts=1663 tris=3294 | nodes=['SUV', 'SUV_BackWheels', 'SUV_FrontLeftWheel', 'SUV_FrontRightWheel'] | mats=['White', 'Windows', 'Black', 'Grey', 'Headlights', 'TailLights']
+[IMPORTED -> pack/Taxi.fbx] FBX-20261118T164215Z-1-001\FBX\Taxi.fbx | verts=1665 tris=3278 | nodes=['Taxi', 'Taxi_BackWheels', 'Taxi_FrontLeftWheel', 'Taxi_FrontRightWheel'] | mats=['Yellow', 'Windows', 'Black', 'Grey', 'Headlights', 'TailLights', 'DarkOrange']
+[IMPORTED -> pack/Boat.fbx] FBX-20261118T164231Z-1-001\FBX\Boat.fbx | verts=88 tris=172 | nodes=['Boat'] | mats=['DarkWood', 'Wood']
+[DISCOVERED] FBX-20261118T164231Z-1-001\FBX\BoatWSail.fbx | verts=510 tris=1020 | nodes=['Sail', 'Boat'] | mats=['DarkWood', 'Sail', 'LightWood', 'Steel']
+[DISCOVERED] FBX-20261118T164231Z-1-001\FBX\CruiseShip.fbx | verts=432 tris=858 | nodes=['CruiseShip'] | mats=['F2F2F2', 'Texture', 'Red', 'Black']
+[DISCOVERED] FBX-20261118T164231Z-1-001\FBX\Lifeboat.fbx | verts=322 tris=626 | nodes=['Lifeboat'] | mats=['Red', 'White', 'DarkRed', 'Black']
+[DISCOVERED] FBX-20261118T164231Z-1-001\FBX\Sail ship.fbx | verts=1821 tris=3938 | nodes=['BackSail', 'Front Sail', 'MidleSail', 'BigShip', 'Rudder'] | mats=['Wood', 'Fabric', 'DarkWood', 'LightWood', 'C5B99A', 'DarkRed']
+[DISCOVERED] FBX-20261118T164231Z-1-001\FBX\Viking boat.fbx | verts=852 tris=1640 | nodes=['Sail', 'Viking Ship'] | mats=['White', 'Red', 'DarkWood', 'Wood', 'LightWood']
+
+TOTAL VEHICLE & WHEEL PACK MODELS IMPORTED INTO pack/: 14
+FILES: Ambulance.fbx, Bicycle.fbx, Bus.fbx, SchoolBus.fbx, SquareFrameBicycle.fbx, ClassicTaxi.fbx, Cop.fbx, NormalCar1.fbx, NormalCar2.fbx, SportsCar.fbx, SportsCar2.fbx, SUV.fbx, Taxi.fbx, Boat.fbx

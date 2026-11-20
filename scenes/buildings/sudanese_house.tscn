@@ -1,0 +1,864 @@
+[gd_scene load_steps=128 format=3 uid="uid://c8azharihouse01"]
+
+[ext_resource type="Script" path="res://scripts/ceiling_fan.gd" id="fan_scr"]
+[ext_resource type="PackedScene" path="res://scenes/foliage/neem_tree.tscn" id="neem_tree_scene"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/albedo.jpg" id="ta_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/normal.jpg" id="tn_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/roughness.jpg" id="tr_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/painted_wood/albedo.jpg" id="ta_painted_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/painted_wood/normal.jpg" id="tn_painted_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/painted_wood/roughness.jpg" id="tr_painted_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/albedo.jpg" id="ta_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/normal.jpg" id="tn_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/roughness.jpg" id="tr_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/albedo.jpg" id="ta_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/normal.jpg" id="tn_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/roughness.jpg" id="tr_fabric"]
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Script" path="res://scripts/sudanese_staircase.gd" id="stair_scr"]
+[ext_resource type="Script" path="res://scripts/sudanese_house_interior.gd" id="house_int_scr"]
+[ext_resource type="Script" path="res://scripts/sudanese_rooftop_builder.gd" id="rooftop_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_wall"]
+albedo_color = Color(0.94, 0.84, 0.68, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.9
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_house"]
+albedo_color = Color(0.96, 0.88, 0.74, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.88
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_brick"]
+albedo_color = Color(0.88, 0.72, 0.56, 1)
+albedo_texture = ExtResource("ta_brick")
+metallic = 0.0
+roughness = 0.92
+roughness_texture = ExtResource("tr_brick")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_brick")
+uv1_scale = Vector3(0.45, 0.45, 0.45)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_tile"]
+albedo_color = Color(0.95, 0.92, 0.86, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.55
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(4, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.68, 0.48, 0.30, 1)
+albedo_texture = ExtResource("ta_painted_wood")
+metallic = 0.0
+roughness = 0.82
+roughness_texture = ExtResource("tr_painted_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_painted_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_gate"]
+albedo_color = Color(0.24, 0.56, 0.38, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.35
+roughness = 0.62
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_shutter_grn"]
+albedo_color = Color(0.36, 0.54, 0.44, 1)
+metallic = 0.0
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="m_thatch"]
+albedo_color = Color(0.86, 0.72, 0.46, 1)
+albedo_texture = ExtResource("ta_fabric")
+metallic = 0.0
+roughness = 0.95
+roughness_texture = ExtResource("tr_fabric")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_fabric")
+uv1_scale = Vector3(4, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_rug"]
+albedo_color = Color(0.84, 0.28, 0.22, 1)
+albedo_texture = ExtResource("ta_fabric")
+metallic = 0.0
+roughness = 0.92
+roughness_texture = ExtResource("tr_fabric")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_fabric")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_iron"]
+albedo_color = Color(0.16, 0.18, 0.19, 1)
+metallic = 0.65
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="m_glass"]
+albedo_color = Color(0.45, 0.68, 0.78, 0.42)
+metallic = 0.0
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="m_rope"]
+albedo_color = Color(0.86, 0.78, 0.60, 1)
+metallic = 0.0
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="m_tank"]
+albedo_color = Color(0.18, 0.52, 0.86, 1)
+metallic = 0.0
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="m_dish"]
+albedo_color = Color(0.88, 0.90, 0.92, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="m_zeer"]
+albedo_color = Color(0.74, 0.42, 0.26, 1)
+metallic = 0.0
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="m_plastic"]
+albedo_color = Color(0.56, 0.58, 0.56, 1)
+metallic = 0.0
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CM_tank"]
+material = SubResource("m_tank")
+top_radius = 0.82
+bottom_radius = 0.82
+height = 1.5
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="CM_dish"]
+material = SubResource("m_dish")
+top_radius = 0.55
+bottom_radius = 0.08
+height = 0.22
+radial_segments = 14
+
+[sub_resource type="SphereMesh" id="SM_zeer"]
+material = SubResource("m_zeer")
+radius = 0.42
+height = 0.95
+radial_segments = 14
+rings = 8
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_wall")
+size = Vector3(24.000, 2.600, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(24.000, 2.600, 0.400)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_wall")
+size = Vector3(0.400, 2.600, 22.000)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(0.400, 2.600, 22.000)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_wall")
+size = Vector3(10.200, 2.600, 0.400)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(10.200, 2.600, 0.400)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_house")
+size = Vector3(0.550, 3.000, 0.550)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(0.550, 3.000, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_gate")
+size = Vector3(1.750, 2.350, 0.080)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(1.750, 2.350, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_tile")
+size = Vector3(10.200, 0.100, 8.200)
+
+[sub_resource type="BoxShape3D" id="BS_5"]
+size = Vector3(10.200, 0.100, 8.200)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_house")
+size = Vector3(10.000, 3.500, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_6"]
+size = Vector3(10.000, 3.500, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_house")
+size = Vector3(4.250, 3.500, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_7"]
+size = Vector3(4.250, 3.500, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_house")
+size = Vector3(1.500, 1.150, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_8"]
+size = Vector3(1.500, 1.150, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.350, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_wood")
+size = Vector3(1.500, 0.080, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_wood")
+size = Vector3(1.275, 2.290, 0.070)
+
+[sub_resource type="BoxShape3D" id="BS_11"]
+size = Vector3(1.275, 2.290, 0.070)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_house")
+size = Vector3(0.350, 3.500, 3.100)
+
+[sub_resource type="BoxShape3D" id="BS_12"]
+size = Vector3(0.350, 3.500, 3.100)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_house")
+size = Vector3(0.350, 1.000, 1.800)
+
+[sub_resource type="BoxShape3D" id="BS_13"]
+size = Vector3(0.350, 1.000, 1.800)
+
+[sub_resource type="BoxMesh" id="BM_14"]
+material = SubResource("m_house")
+size = Vector3(0.350, 1.200, 1.800)
+
+[sub_resource type="BoxShape3D" id="BS_14"]
+size = Vector3(0.350, 1.200, 1.800)
+
+[sub_resource type="BoxMesh" id="BM_15"]
+material = SubResource("m_glass")
+size = Vector3(1.680, 1.180, 0.040)
+
+[sub_resource type="BoxMesh" id="BM_16"]
+material = SubResource("m_wood")
+size = Vector3(1.800, 0.080, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_17"]
+material = SubResource("m_wood")
+size = Vector3(1.800, 0.080, 0.180)
+
+[sub_resource type="BoxMesh" id="BM_18"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 1.300, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_19"]
+material = SubResource("m_iron")
+size = Vector3(0.030, 1.200, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_20"]
+material = SubResource("m_iron")
+size = Vector3(1.700, 0.030, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_21"]
+material = SubResource("m_shutter_grn")
+size = Vector3(0.648, 1.240, 0.040)
+
+[sub_resource type="BoxMesh" id="BM_22"]
+material = SubResource("m_brick")
+size = Vector3(0.080, 0.320, 1.200)
+
+[sub_resource type="BoxMesh" id="BM_23"]
+material = SubResource("m_brick")
+size = Vector3(1.200, 0.320, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_24"]
+material = SubResource("m_house")
+size = Vector3(10.400, 0.300, 8.400)
+
+[sub_resource type="BoxShape3D" id="BS_24"]
+size = Vector3(10.400, 0.300, 8.400)
+
+[sub_resource type="BoxMesh" id="BM_25"]
+material = SubResource("m_wall")
+size = Vector3(10.400, 0.550, 0.250)
+
+[sub_resource type="BoxMesh" id="BM_26"]
+material = SubResource("m_wall")
+size = Vector3(0.250, 0.550, 8.400)
+
+[sub_resource type="BoxMesh" id="BM_27"]
+material = SubResource("m_thatch")
+size = Vector3(9.600, 0.140, 2.800)
+
+[sub_resource type="BoxShape3D" id="BS_27"]
+size = Vector3(9.600, 0.140, 2.800)
+
+[sub_resource type="BoxMesh" id="BM_28"]
+material = SubResource("m_wood")
+size = Vector3(0.160, 2.800, 0.160)
+
+[sub_resource type="BoxShape3D" id="BS_28"]
+size = Vector3(0.160, 2.800, 0.160)
+
+[sub_resource type="BoxMesh" id="BM_29"]
+material = SubResource("m_iron")
+size = Vector3(0.550, 0.500, 0.550)
+
+[sub_resource type="BoxShape3D" id="BS_29"]
+size = Vector3(0.550, 0.500, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_30"]
+material = SubResource("m_plastic")
+size = Vector3(0.560, 0.820, 0.560)
+
+[sub_resource type="BoxShape3D" id="BS_30"]
+size = Vector3(0.560, 0.820, 0.560)
+
+[sub_resource type="BoxMesh" id="BM_31"]
+material = SubResource("m_brick")
+size = Vector3(1.200, 0.380, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_32"]
+size = Vector3(1.280, 0.160, 6.100)
+
+[sub_resource type="BoxShape3D" id="BS_32"]
+size = Vector3(1.280, 0.160, 6.100)
+
+[sub_resource type="BoxMesh" id="BM_33"]
+material = SubResource("m_brick")
+size = Vector3(1.500, 0.220, 1.400)
+
+[sub_resource type="BoxShape3D" id="BS_33"]
+size = Vector3(1.500, 0.220, 1.400)
+
+[sub_resource type="BoxMesh" id="BM_34"]
+material = SubResource("m_house")
+size = Vector3(1.800, 0.700, 1.800)
+
+[sub_resource type="BoxShape3D" id="BS_34"]
+size = Vector3(1.800, 0.700, 1.800)
+
+[sub_resource type="BoxMesh" id="BM_35"]
+material = SubResource("m_wood")
+size = Vector3(0.360, 2.800, 0.360)
+
+[sub_resource type="BoxShape3D" id="BS_35"]
+size = Vector3(0.360, 2.800, 0.360)
+
+[sub_resource type="BoxMesh" id="BM_36"]
+material = SubResource("m_shutter_grn")
+size = Vector3(3.600, 2.100, 3.600)
+
+[sub_resource type="BoxMesh" id="BM_37"]
+material = SubResource("m_house")
+size = Vector3(0.180, 3.200, 3.400)
+
+[sub_resource type="BoxShape3D" id="BS_37"]
+size = Vector3(0.180, 3.200, 3.400)
+
+[sub_resource type="BoxMesh" id="BM_38"]
+material = SubResource("m_wood")
+size = Vector3(1.350, 0.320, 2.000)
+
+[sub_resource type="BoxShape3D" id="BS_38"]
+size = Vector3(1.350, 0.320, 2.000)
+
+[sub_resource type="BoxMesh" id="BM_39"]
+material = SubResource("m_rug")
+size = Vector3(1.280, 0.140, 1.900)
+
+[sub_resource type="BoxMesh" id="BM_40"]
+material = SubResource("m_wood")
+size = Vector3(0.650, 2.000, 1.200)
+
+[sub_resource type="BoxShape3D" id="BS_40"]
+size = Vector3(0.650, 2.000, 1.200)
+
+[sub_resource type="BoxMesh" id="BM_41"]
+material = SubResource("m_rug")
+size = Vector3(4.200, 0.020, 3.200)
+
+[sub_resource type="BoxMesh" id="BM_42"]
+material = SubResource("m_wood")
+size = Vector3(1.150, 0.160, 2.000)
+
+[sub_resource type="BoxShape3D" id="BS_42"]
+size = Vector3(1.150, 0.160, 2.000)
+
+[sub_resource type="BoxMesh" id="BM_43"]
+material = SubResource("m_rope")
+size = Vector3(1.050, 0.050, 1.900)
+
+[sub_resource type="BoxMesh" id="BM_44"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 0.300, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_45"]
+material = SubResource("m_wood")
+size = Vector3(1.200, 0.450, 0.800)
+
+[sub_resource type="BoxShape3D" id="BS_45"]
+size = Vector3(1.200, 0.450, 0.800)
+
+[sub_resource type="BoxMesh" id="BM_46"]
+material = SubResource("m_wood")
+size = Vector3(0.520, 0.450, 0.520)
+
+[sub_resource type="BoxShape3D" id="BS_46"]
+size = Vector3(0.520, 0.450, 0.520)
+
+[sub_resource type="BoxMesh" id="BM_47"]
+material = SubResource("m_wood")
+size = Vector3(0.520, 0.450, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_48"]
+material = SubResource("m_wood")
+size = Vector3(1.400, 0.900, 0.060)
+
+[sub_resource type="BoxMesh" id="BM_49"]
+material = SubResource("m_wood")
+size = Vector3(0.060, 0.400, 0.060)
+
+[sub_resource type="BoxMesh" id="BM_50"]
+material = SubResource("m_wood")
+size = Vector3(1.450, 0.030, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_51"]
+material = SubResource("m_wood")
+size = Vector3(0.140, 0.030, 1.450)
+
+[sub_resource type="BoxMesh" id="BM_wallE_solid"]
+material = SubResource("m_house")
+size = Vector3(0.350, 3.500, 8.000)
+
+[sub_resource type="BoxShape3D" id="BS_wallE_solid"]
+size = Vector3(0.350, 3.500, 8.000)
+
+[sub_resource type="BoxMesh" id="BM_parapetE_S"]
+material = SubResource("m_house")
+size = Vector3(0.250, 0.550, 6.400)
+
+[sub_resource type="BoxMesh" id="BM_parapetE_N"]
+material = SubResource("m_house")
+size = Vector3(0.250, 0.550, 0.750)
+
+[node name="SudaneseHouse" type="Node3D"]
+
+[node name="HoshWallN" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.300, -11.000)
+
+[node name="M" type="MeshInstance3D" parent="HoshWallN"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="HoshWallN"]
+shape = SubResource("BS_0")
+
+[node name="HoshWallW" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.000, 1.300, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="HoshWallW"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="HoshWallW"]
+shape = SubResource("BS_1")
+
+[node name="HoshWallE" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.000, 1.300, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="HoshWallE"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="HoshWallE"]
+shape = SubResource("BS_1")
+
+[node name="HoshWallSL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.900, 1.300, 11.000)
+
+[node name="M" type="MeshInstance3D" parent="HoshWallSL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="HoshWallSL"]
+shape = SubResource("BS_2")
+
+[node name="HoshWallSR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.900, 1.300, 11.000)
+
+[node name="M" type="MeshInstance3D" parent="HoshWallSR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="HoshWallSR"]
+shape = SubResource("BS_2")
+
+[node name="GatePillarL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.900, 1.500, 11.000)
+
+[node name="M" type="MeshInstance3D" parent="GatePillarL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="GatePillarL"]
+shape = SubResource("BS_3")
+
+[node name="GatePillarR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.900, 1.500, 11.000)
+
+[node name="M" type="MeshInstance3D" parent="GatePillarR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="GatePillarR"]
+shape = SubResource("BS_3")
+
+[node name="CourtyardGate" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 10.950)
+script = ExtResource("door_scr")
+door_label = "بوابة الحوش"
+door_style = 0
+opening_width = 3.22
+opening_height = 2.48
+wall_thickness = 0.45
+open_angle_deg = 86.0
+is_open = true
+has_lintel_beam = true
+
+[node name="HouseFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.050, -4.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="HouseFloor"]
+shape = SubResource("BS_5")
+
+[node name="HouseWallN" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.750, -8.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallN"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallN"]
+shape = SubResource("BS_6")
+
+[node name="HouseWallS_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.875, 1.750, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallS_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallS_L"]
+shape = SubResource("BS_7")
+
+[node name="HouseWallS_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.875, 1.750, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallS_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallS_R"]
+shape = SubResource("BS_7")
+
+[node name="HouseWallS_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.925, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallS_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallS_Top"]
+shape = SubResource("BS_8")
+
+[node name="HouseWallS_DoorLeaf" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+script = ExtResource("door_scr")
+door_label = "باب الديوان"
+door_style = 2
+opening_width = 1.32
+opening_height = 2.27
+wall_thickness = 0.35
+open_angle_deg = 86.0
+is_open = true
+build_recessed_frame = true
+
+[node name="HouseWallW_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.000, 1.750, -6.450)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallW_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallW_L"]
+shape = SubResource("BS_12")
+
+[node name="HouseWallW_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.000, 1.750, -1.550)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallW_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallW_R"]
+shape = SubResource("BS_12")
+
+[node name="HouseWallW_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.000, 0.500, -4.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallW_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallW_Sill"]
+shape = SubResource("BS_13")
+
+[node name="HouseWallW_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.000, 2.900, -4.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallW_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_14")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallW_Top"]
+shape = SubResource("BS_14")
+
+[node name="HouseWallW_Win" type="Node3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, -5.000, 1.650, -4.000)
+
+[node name="Glass" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="FrameT" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.610, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_16")
+
+[node name="FrameB" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.610, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_17")
+
+[node name="FrameL" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.860, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="FrameR" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.860, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="BarV_1" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.540, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="BarV_2" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.180, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="BarV_3" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="BarV_4" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.540, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="BarH" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_20")
+
+[node name="ShutterL" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.224, 0.000, 0.080)
+visibility_range_end = 95.0
+mesh = SubResource("BM_21")
+
+[node name="ShutterR" type="MeshInstance3D" parent="HouseWallW_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.224, 0.000, 0.080)
+visibility_range_end = 95.0
+mesh = SubResource("BM_21")
+
+[node name="AirVentW" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.180, 2.850, -4.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_22")
+
+[node name="AirVentS1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.200, 2.850, 0.180)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="AirVentS2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.200, 2.850, 0.180)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="HouseRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.650, -4.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_24")
+
+[node name="C" type="CollisionShape3D" parent="HouseRoof"]
+shape = SubResource("BS_24")
+
+[node name="VerandaRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.800, 1.400)
+
+[node name="M" type="MeshInstance3D" parent="VerandaRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_27")
+
+[node name="C" type="CollisionShape3D" parent="VerandaRoof"]
+shape = SubResource("BS_27")
+
+[node name="VerandaPostL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.400, 1.400, 2.600)
+
+[node name="M" type="MeshInstance3D" parent="VerandaPostL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_28")
+
+[node name="C" type="CollisionShape3D" parent="VerandaPostL"]
+shape = SubResource("BS_28")
+
+[node name="VerandaPostR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.400, 1.400, 2.600)
+
+[node name="M" type="MeshInstance3D" parent="VerandaPostR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_28")
+
+[node name="C" type="CollisionShape3D" parent="VerandaPostR"]
+shape = SubResource("BS_28")
+
+[node name="CourtyardNeemTree" parent="." instance=ExtResource("neem_tree_scene")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2, 0.0, 5.2)
+height_scale = 0.92
+vis_range_end = 185.0
+
+[node name="Fan" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.100, -4.000)
+script = ExtResource("fan_scr")
+
+[node name="Rod" type="MeshInstance3D" parent="Fan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.200, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_49")
+
+[node name="BladeA" type="MeshInstance3D" parent="Fan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_50")
+
+[node name="BladeB" type="MeshInstance3D" parent="Fan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_51")
+
+[node name="RoomLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.000, -4.000)
+light_color = Color(1, 0.88, 0.68, 1)
+light_energy = 1.6
+distance_fade_enabled = true
+distance_fade_begin = 28.0
+distance_fade_length = 8.0
+omni_range = 8.5
+[node name="HouseWallE" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.000, 1.750, -4.000)
+
+[node name="M" type="MeshInstance3D" parent="HouseWallE"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_wallE_solid")
+
+[node name="C" type="CollisionShape3D" parent="HouseWallE"]
+shape = SubResource("BS_wallE_solid")
+
+[node name="ExteriorRoofStaircase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.175, 0.000, -0.320)
+script = ExtResource("stair_scr")
+stair_style = 0
+stair_width = 1.15
+riser_target = 0.175
+tread_depth = 0.28
+total_rise = 3.8
+climb_dir_z = -1.0
+landing_depth = 1.25
+brick_masonry_style = true
+vis_range_end = 135.0
+
+[node name="HouseInterior" type="Node3D" parent="."]
+script = ExtResource("house_int_scr")
+floor_y = 0.1
+vis_range_end = 82.0
+[node name="SudaneseRooftop" type="Node3D" parent="."]
+script = ExtResource("rooftop_scr")
+roof_preset = 0
+roof_width = 10.4
+roof_depth = 8.4
+roof_y = 3.8
+roof_center = Vector3(0, 0, -4)
+parapet_height = 1.05
+has_stair_entry = true
+entry_gap_z = -6.825
+entry_gap_width = 1.4
+has_penthouse_hood = false
+wall_tint = Color(0.96, 0.88, 0.74, 1)
+vis_range_props = 110.0
+vis_range_structure = 240.0

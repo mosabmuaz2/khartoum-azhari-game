@@ -1,0 +1,1337 @@
+[gd_scene load_steps=95 format=3 uid="uid://c8azharisouq001"]
+
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/albedo.jpg" id="ta_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/normal.jpg" id="tn_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/brick/roughness.jpg" id="tr_brick"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/albedo.jpg" id="ta_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/normal.jpg" id="tn_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/roughness.jpg" id="tr_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/albedo.jpg" id="ta_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/normal.jpg" id="tn_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/roughness.jpg" id="tr_fabric"]
+[ext_resource type="Script" path="res://scripts/market_interior_builder.gd" id="mkt_int_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_wall_a"]
+albedo_color = Color(0.94, 0.88, 0.76, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.88
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_wall_b"]
+albedo_color = Color(0.92, 0.78, 0.58, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.9
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_brick"]
+albedo_color = Color(0.90, 0.74, 0.60, 1)
+albedo_texture = ExtResource("ta_brick")
+metallic = 0.0
+roughness = 0.92
+roughness_texture = ExtResource("tr_brick")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_brick")
+uv1_scale = Vector3(0.45, 0.45, 0.45)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="m_tile"]
+albedo_color = Color(0.92, 0.90, 0.86, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.55
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(10, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.68, 0.48, 0.30, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.8
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_rust_tin"]
+albedo_color = Color(0.76, 0.48, 0.34, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.45
+roughness = 0.68
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_awn_teal"]
+albedo_color = Color(0.18, 0.56, 0.52, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.35
+roughness = 0.65
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_awn_org"]
+albedo_color = Color(0.88, 0.44, 0.20, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.35
+roughness = 0.65
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_awn_zinc"]
+albedo_color = Color(0.72, 0.74, 0.76, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.45
+roughness = 0.55
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_burlap"]
+albedo_color = Color(0.78, 0.64, 0.46, 1)
+albedo_texture = ExtResource("ta_fabric")
+metallic = 0.0
+roughness = 0.95
+roughness_texture = ExtResource("tr_fabric")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_fabric")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_green"]
+albedo_color = Color(0.12, 0.48, 0.26, 1)
+metallic = 0.0
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="m_shelf"]
+albedo_color = Color(0.58, 0.40, 0.24, 1)
+metallic = 0.0
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="m_tomato"]
+albedo_color = Color(0.86, 0.20, 0.16, 1)
+metallic = 0.0
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="m_greens"]
+albedo_color = Color(0.24, 0.62, 0.24, 1)
+metallic = 0.0
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="m_potato"]
+albedo_color = Color(0.78, 0.62, 0.38, 1)
+metallic = 0.0
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="m_fridge"]
+albedo_color = Color(0.82, 0.88, 0.92, 1)
+metallic = 0.3
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="m_glass"]
+albedo_color = Color(0.45, 0.68, 0.78, 0.45)
+metallic = 0.0
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="m_dish"]
+albedo_color = Color(0.88, 0.90, 0.92, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CM_sack"]
+material = SubResource("m_burlap")
+top_radius = 0.28
+bottom_radius = 0.32
+height = 0.68
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="CM_dish"]
+material = SubResource("m_dish")
+top_radius = 0.52
+bottom_radius = 0.08
+height = 0.2
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_tile")
+size = Vector3(45.000, 0.100, 7.200)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(45.000, 0.100, 7.200)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_brick")
+size = Vector3(44.600, 3.800, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(44.600, 3.800, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_wall_a")
+size = Vector3(45.000, 0.300, 7.400)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(45.000, 0.300, 7.400)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_wall_b")
+size = Vector3(45.000, 0.550, 0.220)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_wall_a")
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_wall_a")
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_5"]
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_wall_a")
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_6"]
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.700, 0.380)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_wood")
+size = Vector3(2.800, 0.080, 0.380)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_rust_tin")
+size = Vector3(7.200, 0.100, 2.500)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_wood")
+size = Vector3(0.100, 2.900, 0.100)
+
+[sub_resource type="BoxShape3D" id="BS_10"]
+size = Vector3(0.100, 2.900, 0.100)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_green")
+size = Vector3(5.400, 0.850, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_wood")
+size = Vector3(3.800, 1.040, 0.700)
+
+[sub_resource type="BoxShape3D" id="BS_12"]
+size = Vector3(3.800, 1.040, 0.700)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_shelf")
+size = Vector3(5.400, 2.000, 0.500)
+
+[sub_resource type="BoxShape3D" id="BS_13"]
+size = Vector3(5.400, 2.000, 0.500)
+
+[sub_resource type="BoxMesh" id="BM_14"]
+material = SubResource("m_tomato")
+size = Vector3(1.400, 0.350, 0.400)
+
+[sub_resource type="BoxMesh" id="BM_15"]
+material = SubResource("m_awn_org")
+size = Vector3(1.400, 0.350, 0.400)
+
+[sub_resource type="BoxMesh" id="BM_16"]
+material = SubResource("m_wood")
+size = Vector3(1.600, 0.750, 1.100)
+
+[sub_resource type="BoxShape3D" id="BS_16"]
+size = Vector3(1.600, 0.750, 1.100)
+
+[sub_resource type="BoxMesh" id="BM_17"]
+material = SubResource("m_tomato")
+size = Vector3(0.650, 0.220, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_18"]
+material = SubResource("m_greens")
+size = Vector3(0.650, 0.220, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_19"]
+material = SubResource("m_potato")
+size = Vector3(1.350, 0.220, 0.500)
+
+[sub_resource type="BoxMesh" id="BM_20"]
+material = SubResource("m_fridge")
+size = Vector3(0.850, 2.050, 0.780)
+
+[sub_resource type="BoxShape3D" id="BS_20"]
+size = Vector3(0.850, 2.050, 0.780)
+
+[sub_resource type="BoxMesh" id="BM_21"]
+material = SubResource("m_glass")
+size = Vector3(0.720, 1.650, 0.040)
+
+[sub_resource type="BoxMesh" id="BM_22"]
+material = SubResource("m_wall_b")
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxShape3D" id="BS_22"]
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxMesh" id="BM_23"]
+material = SubResource("m_wall_b")
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_23"]
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_24"]
+material = SubResource("m_wall_b")
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_24"]
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_25"]
+material = SubResource("m_awn_org")
+size = Vector3(7.200, 0.100, 2.500)
+
+[sub_resource type="BoxMesh" id="BM_26"]
+material = SubResource("m_awn_teal")
+size = Vector3(7.200, 0.100, 2.500)
+
+[sub_resource type="BoxMesh" id="BM_27"]
+material = SubResource("m_awn_zinc")
+size = Vector3(7.200, 0.100, 2.500)
+
+[sub_resource type="BoxMesh" id="BM_28"]
+material = SubResource("m_brick")
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxShape3D" id="BS_28"]
+size = Vector3(0.300, 3.800, 6.800)
+
+[sub_resource type="BoxMesh" id="BM_29"]
+material = SubResource("m_brick")
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_29"]
+size = Vector3(2.150, 3.800, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_30"]
+material = SubResource("m_brick")
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxShape3D" id="BS_30"]
+size = Vector3(2.800, 1.100, 0.320)
+
+[sub_resource type="BoxMesh" id="BM_DivPassBack"]
+material = SubResource("m_wall_b")
+size = Vector3(0.300, 3.800, 3.500)
+
+[sub_resource type="BoxShape3D" id="BS_DivPassBack"]
+size = Vector3(0.300, 3.800, 3.500)
+
+[sub_resource type="BoxMesh" id="BM_DivPassFront"]
+material = SubResource("m_wall_b")
+size = Vector3(0.300, 3.800, 0.700)
+
+[sub_resource type="BoxShape3D" id="BS_DivPassFront"]
+size = Vector3(0.300, 3.800, 0.700)
+
+[sub_resource type="BoxMesh" id="BM_DivPassTop"]
+material = SubResource("m_wall_b")
+size = Vector3(0.300, 1.000, 2.600)
+
+[sub_resource type="BoxShape3D" id="BS_DivPassTop"]
+size = Vector3(0.300, 1.000, 2.600)
+
+[node name="CommercialStrip" type="Node3D"]
+
+[node name="StripFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.050, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="StripFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="StripFloor"]
+shape = SubResource("BS_0")
+
+[node name="StripBackWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.900, -3.400)
+
+[node name="M" type="MeshInstance3D" parent="StripBackWall"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="StripBackWall"]
+shape = SubResource("BS_1")
+
+[node name="StripRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.950, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="StripRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="StripRoof"]
+shape = SubResource("BS_2")
+
+[node name="RoofParapetFront" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.350, 3.550)
+visibility_range_end = 95.0
+mesh = SubResource("BM_3")
+
+[node name="DukkanSatDish" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, -18.5, 4.45, 0.0)
+mesh = SubResource("CM_dish")
+
+[node name="DivWall_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.200, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_0"]
+shape = SubResource("BS_4")
+
+[node name="Front_Dukkan_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.975, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Dukkan_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Dukkan_L"]
+shape = SubResource("BS_5")
+
+[node name="Front_Dukkan_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.025, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Dukkan_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Dukkan_R"]
+shape = SubResource("BS_5")
+
+[node name="Front_Dukkan_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Dukkan_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="Front_Dukkan_Top"]
+shape = SubResource("BS_6")
+
+[node name="Front_Dukkan_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.860, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Dukkan_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.140, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Dukkan_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Dukkan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_9")
+
+[node name="AwnPoleL_Dukkan" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.700, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Dukkan"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Dukkan"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Dukkan" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.300, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Dukkan"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Dukkan"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Dukkan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Dukkan" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 3.450, 3.740)
+text = "دكان الأزهري"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Dukkan" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 0.520, 0.800)
+metadata/interact_message = "دكان الأزهري - بقالة وخضار ومشروبات باردة"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Dukkan"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Dukkan"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Dukkan" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Dukkan"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Dukkan"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Dukkan" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="VegRack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.600, 0.480, 4.400)
+
+[node name="M" type="MeshInstance3D" parent="VegRack"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_16")
+
+[node name="C" type="CollisionShape3D" parent="VegRack"]
+shape = SubResource("BS_16")
+
+[node name="VegTomato" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.000, 0.920, 4.300)
+visibility_range_end = 95.0
+mesh = SubResource("BM_17")
+
+[node name="VegGreens" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.200, 0.920, 4.300)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="VegPotato" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.600, 0.720, 4.850)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="GrainSack_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.800, 0.340, 4.600)
+mesh = SubResource("CM_sack")
+
+[node name="GrainSack_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.150, 0.340, 4.600)
+mesh = SubResource("CM_sack")
+
+[node name="GrainSack_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.600, 0.340, 5.250)
+mesh = SubResource("CM_sack")
+
+[node name="GrainSack_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.000, 0.340, 5.200)
+mesh = SubResource("CM_sack")
+
+[node name="BeverageCooler" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.700, 1.050, 3.850)
+
+[node name="M" type="MeshInstance3D" parent="BeverageCooler"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_20")
+
+[node name="C" type="CollisionShape3D" parent="BeverageCooler"]
+shape = SubResource("BS_20")
+
+[node name="BeverageGlass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.700, 1.120, 4.260)
+visibility_range_end = 95.0
+mesh = SubResource("BM_21")
+
+[node name="Front_Bakery_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.575, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Bakery_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_23")
+
+[node name="C" type="CollisionShape3D" parent="Front_Bakery_L"]
+shape = SubResource("BS_23")
+
+[node name="Front_Bakery_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.625, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Bakery_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_23")
+
+[node name="C" type="CollisionShape3D" parent="Front_Bakery_R"]
+shape = SubResource("BS_23")
+
+[node name="Front_Bakery_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Bakery_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_24")
+
+[node name="C" type="CollisionShape3D" parent="Front_Bakery_Top"]
+shape = SubResource("BS_24")
+
+[node name="Front_Bakery_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.460, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Bakery_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.740, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Bakery_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Bakery" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="AwnPoleL_Bakery" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.300, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Bakery"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Bakery"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Bakery" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.900, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Bakery"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Bakery"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Bakery" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Bakery" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 3.450, 3.740)
+text = "مخبز الخرطوم"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Bakery" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 0.520, 0.800)
+metadata/interact_message = "مخبز الخرطوم - عيش بلدي سخن"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Bakery"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Bakery"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Bakery" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Bakery"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Bakery"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Bakery" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="Front_Restaurant_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.175, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Restaurant_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Restaurant_L"]
+shape = SubResource("BS_5")
+
+[node name="Front_Restaurant_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.225, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Restaurant_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Restaurant_R"]
+shape = SubResource("BS_5")
+
+[node name="Front_Restaurant_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Restaurant_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="Front_Restaurant_Top"]
+shape = SubResource("BS_6")
+
+[node name="Front_Restaurant_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.060, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Restaurant_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.340, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Restaurant_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Restaurant" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_9")
+
+[node name="AwnPoleL_Restaurant" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.900, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Restaurant"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Restaurant"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Restaurant" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Restaurant"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Restaurant"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Restaurant" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Restaurant" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 3.450, 3.740)
+text = "مطعم فول وطعمية"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Restaurant" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 0.520, 0.800)
+metadata/interact_message = "مطعم فول وطعمية - فطور سوداني"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Restaurant"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Restaurant"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Restaurant" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Restaurant"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Restaurant"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Restaurant" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="DivWall_3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_3"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_3"]
+shape = SubResource("BS_4")
+
+[node name="Front_Pharmacy_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.225, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Pharmacy_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Pharmacy_L"]
+shape = SubResource("BS_5")
+
+[node name="Front_Pharmacy_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.175, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Pharmacy_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="Front_Pharmacy_R"]
+shape = SubResource("BS_5")
+
+[node name="Front_Pharmacy_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Pharmacy_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_6")
+
+[node name="C" type="CollisionShape3D" parent="Front_Pharmacy_Top"]
+shape = SubResource("BS_6")
+
+[node name="Front_Pharmacy_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.340, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Pharmacy_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.060, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Pharmacy_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Pharmacy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="AwnPoleL_Pharmacy" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Pharmacy"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Pharmacy"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Pharmacy" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.900, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Pharmacy"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Pharmacy"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Pharmacy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Pharmacy" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 3.450, 3.740)
+text = "صيدلية الأزهري"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Pharmacy" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 0.520, 0.800)
+metadata/interact_message = "صيدلية الأزهري - خدمة ٢٤ ساعة"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Pharmacy"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Pharmacy"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Pharmacy" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Pharmacy"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Pharmacy"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Pharmacy" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="DivWall_4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.400, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_22")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_4"]
+shape = SubResource("BS_22")
+
+[node name="Front_Barber_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.625, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Barber_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_23")
+
+[node name="C" type="CollisionShape3D" parent="Front_Barber_L"]
+shape = SubResource("BS_23")
+
+[node name="Front_Barber_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.575, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Barber_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_23")
+
+[node name="C" type="CollisionShape3D" parent="Front_Barber_R"]
+shape = SubResource("BS_23")
+
+[node name="Front_Barber_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Barber_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_24")
+
+[node name="C" type="CollisionShape3D" parent="Front_Barber_Top"]
+shape = SubResource("BS_24")
+
+[node name="Front_Barber_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.740, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Barber_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.460, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Barber_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Barber" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="AwnPoleL_Barber" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.900, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Barber"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Barber"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Barber" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.300, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Barber"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Barber"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Barber" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Barber" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 3.450, 3.740)
+text = "صالون حلاقة"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Barber" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 0.520, 0.800)
+metadata/interact_message = "صالون حلاقة الأزهري"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Barber"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Barber"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Barber" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Barber"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Barber"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Barber" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="DivWall_5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.800, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_5"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_28")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_5"]
+shape = SubResource("BS_28")
+
+[node name="Front_Banshar_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.025, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Banshar_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="Front_Banshar_L"]
+shape = SubResource("BS_29")
+
+[node name="Front_Banshar_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.975, 1.900, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Banshar_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="Front_Banshar_R"]
+shape = SubResource("BS_29")
+
+[node name="Front_Banshar_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 3.250, 3.400)
+
+[node name="M" type="MeshInstance3D" parent="Front_Banshar_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_30")
+
+[node name="C" type="CollisionShape3D" parent="Front_Banshar_Top"]
+shape = SubResource("BS_30")
+
+[node name="Front_Banshar_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.140, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Banshar_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.860, 1.350, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="Front_Banshar_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 2.660, 3.400)
+visibility_range_end = 95.0
+mesh = SubResource("BM_8")
+
+[node name="Awning_Banshar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 2.950, 4.700)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="AwnPoleL_Banshar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.300, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleL_Banshar"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleL_Banshar"]
+shape = SubResource("BS_10")
+
+[node name="AwnPoleR_Banshar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.700, 1.450, 5.750)
+
+[node name="M" type="MeshInstance3D" parent="AwnPoleR_Banshar"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="AwnPoleR_Banshar"]
+shape = SubResource("BS_10")
+
+[node name="SignBoard_Banshar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 3.450, 3.650)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="SignText_Banshar" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 3.450, 3.740)
+text = "بنشر ولحام لساتك"
+font_size = 54
+outline_size = 8
+
+[node name="Counter_Banshar" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 0.520, 0.800)
+metadata/interact_message = "بنشر ولحام لساتك الأزهري"
+
+[node name="M" type="MeshInstance3D" parent="Counter_Banshar"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_12")
+
+[node name="C" type="CollisionShape3D" parent="Counter_Banshar"]
+shape = SubResource("BS_12")
+
+[node name="Shelf_Banshar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 1.100, -2.800)
+
+[node name="M" type="MeshInstance3D" parent="Shelf_Banshar"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_13")
+
+[node name="C" type="CollisionShape3D" parent="Shelf_Banshar"]
+shape = SubResource("BS_13")
+
+[node name="ShopLight_Banshar" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 3.200, 0.000)
+light_color = Color(1, 0.92, 0.78, 1)
+light_energy = 1.2
+distance_fade_enabled = true
+distance_fade_begin = 24.0
+distance_fade_length = 8.0
+omni_range = 7.0
+
+[node name="EndWallRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.200, 1.900, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="EndWallRight"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="EndWallRight"]
+shape = SubResource("BS_4")
+
+[node name="Shutter_Dukkan" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.500, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر دكان الأزهري"
+door_style = 4
+gate_paint = 1
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="Shutter_Bakery" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر المخبز"
+door_style = 4
+gate_paint = 4
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="Shutter_Restaurant" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر مطعم الفول"
+door_style = 4
+gate_paint = 3
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="Shutter_Pharmacy" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر الصيدلية"
+door_style = 4
+gate_paint = 2
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="Shutter_Barber" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.100, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر صالون الحلاقة"
+door_style = 4
+gate_paint = 4
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="Shutter_Banshar" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.500, 0.000, 3.450)
+script = ExtResource("door_scr")
+door_label = "شتر ورشة البنشر"
+door_style = 4
+gate_paint = 2
+opening_width = 2.62
+opening_height = 2.60
+is_shutter = true
+slide_height = 2.38
+is_open = true
+
+[node name="DivWall_1_Back" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.800, 1.900, -1.650)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_1_Back"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassBack")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_1_Back"]
+shape = SubResource("BS_DivPassBack")
+
+[node name="DivWall_1_Front" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.800, 1.900, 3.050)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_1_Front"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassFront")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_1_Front"]
+shape = SubResource("BS_DivPassFront")
+
+[node name="DivWall_1_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.800, 3.300, 1.400)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_1_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassTop")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_1_Top"]
+shape = SubResource("BS_DivPassTop")
+
+[node name="DivWall_2_Back" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 1.900, -1.650)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_2_Back"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassBack")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_2_Back"]
+shape = SubResource("BS_DivPassBack")
+
+[node name="DivWall_2_Front" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 1.900, 3.050)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_2_Front"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassFront")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_2_Front"]
+shape = SubResource("BS_DivPassFront")
+
+[node name="DivWall_2_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 3.300, 1.400)
+
+[node name="M" type="MeshInstance3D" parent="DivWall_2_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_DivPassTop")
+
+[node name="C" type="CollisionShape3D" parent="DivWall_2_Top"]
+shape = SubResource("BS_DivPassTop")
+
+[node name="MarketInterior" type="Node3D" parent="."]
+script = ExtResource("mkt_int_scr")
+market_mode = 0
+floor_y = 0.1
+vis_range_end = 85.0

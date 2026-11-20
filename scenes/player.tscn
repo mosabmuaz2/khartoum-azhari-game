@@ -1,0 +1,186 @@
+[gd_scene load_steps=20 format=3 uid="uid://c8azhariplayer1"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player_script"]
+[ext_resource type="PackedScene" uid="uid://c8azharimobile1" path="res://scenes/mobile_controls.tscn" id="2_mobile_controls"]
+[ext_resource type="Script" path="res://scripts/characters/character_animation_auto_binder.gd" id="3_anim_binder"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.38
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="mat_skin"]
+albedo_color = Color(0.46, 0.29, 0.19, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="mat_pants"]
+albedo_color = Color(0.18, 0.20, 0.24, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_sash"]
+albedo_color = Color(0.14, 0.46, 0.36, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="mat_cap"]
+albedo_color = Color(0.96, 0.94, 0.88, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="mat_eyes"]
+albedo_color = Color(0.10, 0.10, 0.12, 1)
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="mat_shoes"]
+albedo_color = Color(0.26, 0.17, 0.11, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_torso"]
+size = Vector3(0.44, 0.56, 0.24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sash"]
+material = SubResource("mat_sash")
+size = Vector3(0.46, 0.12, 0.26)
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("mat_skin")
+radius = 0.17
+height = 0.34
+radial_segments = 14
+rings = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_eyes"]
+material = SubResource("mat_eyes")
+size = Vector3(0.2, 0.05, 0.06)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cap"]
+material = SubResource("mat_cap")
+top_radius = 0.165
+bottom_radius = 0.175
+height = 0.11
+radial_segments = 14
+
+[sub_resource type="BoxMesh" id="BoxMesh_arm"]
+size = Vector3(0.14, 0.44, 0.14)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hand"]
+material = SubResource("mat_skin")
+radius = 0.065
+height = 0.13
+radial_segments = 10
+rings = 6
+
+[sub_resource type="BoxMesh" id="BoxMesh_leg"]
+material = SubResource("mat_pants")
+size = Vector3(0.16, 0.72, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_foot"]
+material = SubResource("mat_shoes")
+size = Vector3(0.16, 0.12, 0.24)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_player_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Hips" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88, 0)
+
+[node name="TorsoMesh" type="MeshInstance3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("BoxMesh_torso")
+
+[node name="WaistSash" type="MeshInstance3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+mesh = SubResource("BoxMesh_sash")
+
+[node name="HeadPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0)
+mesh = SubResource("SphereMesh_head")
+
+[node name="Eyes" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, -0.15)
+mesh = SubResource("BoxMesh_eyes")
+
+[node name="Taqiyya" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("CylinderMesh_cap")
+
+[node name="LeftArmPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.5, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="HandMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+mesh = SubResource("SphereMesh_hand")
+
+[node name="RightArmPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.5, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="Visuals/Hips/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="HandMesh" type="MeshInstance3D" parent="Visuals/Hips/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+mesh = SubResource("SphereMesh_hand")
+
+[node name="LeftLegPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0, 0)
+
+[node name="LegMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36, 0)
+mesh = SubResource("BoxMesh_leg")
+
+[node name="FootMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.78, -0.04)
+mesh = SubResource("BoxMesh_foot")
+
+[node name="RightLegPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0, 0)
+
+[node name="LegMesh" type="MeshInstance3D" parent="Visuals/Hips/RightLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36, 0)
+mesh = SubResource("BoxMesh_leg")
+
+[node name="FootMesh" type="MeshInstance3D" parent="Visuals/Hips/RightLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.78, -0.04)
+mesh = SubResource("BoxMesh_foot")
+
+[node name="NameLabel" type="Label3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
+billboard = 1
+text = "Player"
+font_size = 34
+outline_size = 8
+
+[node name="InteractRay" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+target_position = Vector3(0, 0, -3.2)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+collision_mask = 1
+spring_length = 4.6
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+fov = 70.0
+far = 250.0
+
+[node name="MobileControls" parent="." instance=ExtResource("2_mobile_controls")]
+
+[node name="CharacterAnimationAutoBinder" type="Node" parent="."]
+script = ExtResource("3_anim_binder")

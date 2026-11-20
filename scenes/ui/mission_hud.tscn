@@ -1,0 +1,322 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/mission_hud.gd" id="1_mission_hud"]
+
+[sub_resource type="StyleBoxFlat" id="SB_panel_dark"]
+bg_color = Color(0.09, 0.08, 0.07, 0.84)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.70, 0.34, 0.72)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="SB_objective"]
+bg_color = Color(0.10, 0.09, 0.07, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98, 0.78, 0.24, 0.88)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="SB_board"]
+bg_color = Color(0.07, 0.07, 0.08, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.96, 0.74, 0.30, 0.9)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="SB_giver"]
+bg_color = Color(0.08, 0.14, 0.10, 0.90)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.32, 0.92, 0.56, 0.92)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MissionHUD" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_mission_hud")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WalletPanel" type="PanelContainer" parent="Root"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 66.0
+offset_right = 410.0
+offset_bottom = 108.0
+theme_override_styles/panel = SubResource("SB_panel_dark")
+
+[node name="Margin" type="MarginContainer" parent="Root/WalletPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="Root/WalletPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="WalletLabel" type="Label" parent="Root/WalletPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.93, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "💰 5000 SDG   |   ⭐ Lv.1 (0 XP)"
+
+[node name="OpenBoardButton" type="Button" parent="Root/WalletPanel/Margin/HBox"]
+layout_mode = 2
+text = "[M] المهام"
+
+[node name="ObjectivePanel" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_top = 66.0
+offset_right = 270.0
+offset_bottom = 156.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("SB_objective")
+
+[node name="Margin" type="MarginContainer" parent="Root/ObjectivePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Root/ObjectivePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="Root/ObjectivePanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="ObjTitle" type="Label" parent="Root/ObjectivePanel/Margin/VBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88, 0.42, 1)
+theme_override_font_sizes/font_size = 16
+text = "🎯 مهمة نشطة"
+
+[node name="ObjStep" type="Label" parent="Root/ObjectivePanel/Margin/VBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76, 0.94, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "الخطوة 1 / 5"
+
+[node name="ObjDesc" type="Label" parent="Root/ObjectivePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.95, 0.92, 1)
+theme_override_font_sizes/font_size = 14
+text = "توجه إلى النقطة المحددة"
+autowrap_mode = 2
+
+[node name="FooterRow" type="HBoxContainer" parent="Root/ObjectivePanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="ObjMeta" type="Label" parent="Root/ObjectivePanel/Margin/VBox/FooterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.84, 0.96, 0.72, 1)
+theme_override_font_sizes/font_size = 13
+text = "المسافة: 0 م   |   الوقت المتبقي: 02:00"
+
+[node name="CancelBtn" type="Button" parent="Root/ObjectivePanel/Margin/VBox/FooterRow"]
+layout_mode = 2
+text = "إلغاء"
+
+[node name="ToastPanel" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_top = 166.0
+offset_right = 310.0
+offset_bottom = 208.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_panel_dark")
+
+[node name="Margin" type="MarginContainer" parent="Root/ToastPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="ToastLabel" type="Label" parent="Root/ToastPanel/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.45, 0.98, 0.58, 1)
+theme_override_font_sizes/font_size = 15
+text = "اكتملت المهمة!"
+horizontal_alignment = 1
+
+[node name="GiverPromptPanel" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -196.0
+offset_right = 300.0
+offset_bottom = -154.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_giver")
+
+[node name="Margin" type="MarginContainer" parent="Root/GiverPromptPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="GiverLabel" type="Label" parent="Root/GiverPromptPanel/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.92, 1, 0.94, 1)
+theme_override_font_sizes/font_size = 15
+text = "[E] قبول مهمة"
+horizontal_alignment = 1
+
+[node name="MissionBoardOverlay" type="ColorRect" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.02, 0.03, 0.62)
+
+[node name="BoardPanel" type="PanelContainer" parent="Root/MissionBoardOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -280.0
+offset_right = 460.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_board")
+
+[node name="Margin" type="MarginContainer" parent="Root/MissionBoardOverlay/BoardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TopRow" type="HBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BoardTitle" type="Label" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.86, 0.42, 1)
+theme_override_font_sizes/font_size = 20
+text = "📋 لوحة مهام ووظائف الخرطوم الأزهري (12 مهمة)"
+
+[node name="BoardWallet" type="Label" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/TopRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.96, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "💰 5000 SDG"
+
+[node name="CloseBtn" type="Button" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/TopRow"]
+layout_mode = 2
+text = "إغلاق [M]"
+
+[node name="Columns" type="HBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="SmallCol" type="VBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="SmallHeader" type="Label" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/SmallCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.90, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "⚡ مهام صغيرة سريعة (7 وظائف متكررة)"
+
+[node name="SmallScroll" type="ScrollContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/SmallCol"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SmallList" type="VBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/SmallCol/SmallScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="LargeCol" type="VBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="LargeHeader" type="Label" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/LargeCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.36, 1)
+theme_override_font_sizes/font_size = 16
+text = "🏆 مهام كبيرة متسلسلة (5 مهام كبرى)"
+
+[node name="LargeScroll" type="ScrollContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/LargeCol"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LargeList" type="VBoxContainer" parent="Root/MissionBoardOverlay/BoardPanel/Margin/VBox/Columns/LargeCol/LargeScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8

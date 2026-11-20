@@ -1,0 +1,1281 @@
+[gd_scene load_steps=108 format=3 uid="uid://c8azharimosque1"]
+
+[ext_resource type="Script" path="res://scripts/mosque_adhan.gd" id="adhan_scr"]
+[ext_resource type="Script" path="res://scripts/ceiling_fan.gd" id="fan_scr"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/albedo.jpg" id="ta_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/normal.jpg" id="tn_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/roughness.jpg" id="tr_fabric"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Script" path="res://scripts/mosque_interior_builder.gd" id="mq_int_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_white"]
+albedo_color = Color(0.98, 0.98, 0.96, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.85
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(4, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_tile"]
+albedo_color = Color(0.94, 0.95, 0.94, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.5
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(8, 8, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_carpet"]
+albedo_color = Color(0.76, 0.18, 0.20, 1)
+albedo_texture = ExtResource("ta_fabric")
+metallic = 0.0
+roughness = 0.92
+roughness_texture = ExtResource("tr_fabric")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_fabric")
+uv1_scale = Vector3(8, 6, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_carpet_green"]
+albedo_color = Color(0.14, 0.54, 0.30, 1)
+albedo_texture = ExtResource("ta_fabric")
+metallic = 0.0
+roughness = 0.92
+roughness_texture = ExtResource("tr_fabric")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_fabric")
+uv1_scale = Vector3(8, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.55, 0.38, 0.24, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.8
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_green"]
+albedo_color = Color(0.16, 0.58, 0.36, 1)
+metallic = 0.0
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="m_silver"]
+albedo_color = Color(0.84, 0.86, 0.88, 1)
+metallic = 0.8
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="m_iron"]
+albedo_color = Color(0.16, 0.18, 0.18, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="m_glass"]
+albedo_color = Color(0.32, 0.52, 0.44, 0.50)
+metallic = 0.0
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="m_brass"]
+albedo_color = Color(0.82, 0.66, 0.28, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="m_cooler_blue"]
+albedo_color = Color(0.22, 0.58, 0.88, 1)
+metallic = 0.1
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SM_dome"]
+material = SubResource("m_green")
+radius = 3.6
+height = 4.8
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CylinderMesh" id="CM_finial"]
+material = SubResource("m_silver")
+top_radius = 0.05
+bottom_radius = 0.14
+height = 1.6
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="CM_min_top"]
+material = SubResource("m_white")
+top_radius = 0.95
+bottom_radius = 1.05
+height = 3.6
+radial_segments = 8
+
+[sub_resource type="SphereMesh" id="SM_min_cap"]
+material = SubResource("m_green")
+radius = 1.0
+height = 1.8
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_tile")
+size = Vector3(18.200, 0.100, 16.200)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(18.200, 0.100, 16.200)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_tile")
+size = Vector3(12.000, 0.080, 4.400)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(12.000, 0.080, 4.400)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_white")
+size = Vector3(18.000, 5.400, 0.450)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(18.000, 5.400, 0.450)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_white")
+size = Vector3(7.400, 5.400, 0.450)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(7.400, 5.400, 0.450)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_white")
+size = Vector3(3.200, 2.200, 0.450)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(3.200, 2.200, 0.450)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_green")
+size = Vector3(0.080, 3.200, 0.510)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_green")
+size = Vector3(3.200, 0.080, 0.510)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wood")
+size = Vector3(2.720, 3.140, 0.070)
+
+[sub_resource type="BoxShape3D" id="BS_7"]
+size = Vector3(2.720, 3.140, 0.070)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_white")
+size = Vector3(0.450, 5.400, 2.900)
+
+[sub_resource type="BoxShape3D" id="BS_8"]
+size = Vector3(0.450, 5.400, 2.900)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_white")
+size = Vector3(0.450, 1.300, 2.200)
+
+[sub_resource type="BoxShape3D" id="BS_9"]
+size = Vector3(0.450, 1.300, 2.200)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_white")
+size = Vector3(0.450, 2.100, 2.200)
+
+[sub_resource type="BoxShape3D" id="BS_10"]
+size = Vector3(0.450, 2.100, 2.200)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_glass")
+size = Vector3(2.080, 1.880, 0.040)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_green")
+size = Vector3(2.200, 0.080, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_green")
+size = Vector3(2.200, 0.080, 0.180)
+
+[sub_resource type="BoxMesh" id="BM_14"]
+material = SubResource("m_green")
+size = Vector3(0.080, 2.000, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_15"]
+material = SubResource("m_iron")
+size = Vector3(0.030, 1.900, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_16"]
+material = SubResource("m_iron")
+size = Vector3(2.100, 0.030, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_17"]
+material = SubResource("m_green")
+size = Vector3(18.300, 0.350, 16.300)
+
+[sub_resource type="BoxMesh" id="BM_18"]
+material = SubResource("m_green")
+size = Vector3(18.350, 0.220, 16.350)
+
+[sub_resource type="BoxMesh" id="BM_19"]
+material = SubResource("m_white")
+size = Vector3(18.600, 0.300, 16.600)
+
+[sub_resource type="BoxShape3D" id="BS_19"]
+size = Vector3(18.600, 0.300, 16.600)
+
+[sub_resource type="BoxMesh" id="BM_20"]
+material = SubResource("m_green")
+size = Vector3(18.700, 0.450, 16.700)
+
+[sub_resource type="BoxMesh" id="BM_21"]
+material = SubResource("m_white")
+size = Vector3(7.600, 1.100, 7.600)
+
+[sub_resource type="BoxShape3D" id="BS_21"]
+size = Vector3(7.600, 1.100, 7.600)
+
+[sub_resource type="BoxMesh" id="BM_22"]
+material = SubResource("m_green")
+size = Vector3(7.800, 0.180, 7.800)
+
+[sub_resource type="BoxMesh" id="BM_23"]
+material = SubResource("m_white")
+size = Vector3(2.500, 10.400, 2.500)
+
+[sub_resource type="BoxShape3D" id="BS_23"]
+size = Vector3(2.500, 10.400, 2.500)
+
+[sub_resource type="BoxMesh" id="BM_24"]
+material = SubResource("m_green")
+size = Vector3(2.600, 0.300, 2.600)
+
+[sub_resource type="BoxMesh" id="BM_25"]
+material = SubResource("m_green")
+size = Vector3(3.300, 0.450, 3.300)
+
+[sub_resource type="BoxMesh" id="BM_26"]
+material = SubResource("m_white")
+size = Vector3(3.200, 0.550, 3.200)
+
+[sub_resource type="BoxMesh" id="BM_27"]
+material = SubResource("m_white")
+size = Vector3(9.600, 0.450, 3.800)
+
+[sub_resource type="BoxShape3D" id="BS_27"]
+size = Vector3(9.600, 0.450, 3.800)
+
+[sub_resource type="BoxMesh" id="BM_28"]
+material = SubResource("m_green")
+size = Vector3(9.800, 0.220, 4.000)
+
+[sub_resource type="BoxMesh" id="BM_29"]
+material = SubResource("m_white")
+size = Vector3(0.420, 4.000, 0.420)
+
+[sub_resource type="BoxShape3D" id="BS_29"]
+size = Vector3(0.420, 4.000, 0.420)
+
+[sub_resource type="BoxMesh" id="BM_30"]
+material = SubResource("m_green")
+size = Vector3(0.460, 3.800, 0.460)
+
+[sub_resource type="BoxMesh" id="BM_31"]
+material = SubResource("m_wood")
+size = Vector3(1.600, 0.960, 0.450)
+
+[sub_resource type="BoxShape3D" id="BS_31"]
+size = Vector3(1.600, 0.960, 0.450)
+
+[sub_resource type="BoxMesh" id="BM_32"]
+material = SubResource("m_carpet")
+size = Vector3(2.400, 0.020, 1.400)
+
+[sub_resource type="BoxMesh" id="BM_33"]
+material = SubResource("m_carpet_green")
+size = Vector3(2.200, 0.020, 1.200)
+
+[sub_resource type="BoxMesh" id="BM_34"]
+material = SubResource("m_tile")
+size = Vector3(6.200, 0.100, 14.000)
+
+[sub_resource type="BoxShape3D" id="BS_34"]
+size = Vector3(6.200, 0.100, 14.000)
+
+[sub_resource type="BoxMesh" id="BM_35"]
+material = SubResource("m_white")
+size = Vector3(6.200, 2.200, 0.300)
+
+[sub_resource type="BoxShape3D" id="BS_35"]
+size = Vector3(6.200, 2.200, 0.300)
+
+[sub_resource type="BoxMesh" id="BM_36"]
+material = SubResource("m_white")
+size = Vector3(0.300, 2.200, 14.000)
+
+[sub_resource type="BoxShape3D" id="BS_36"]
+size = Vector3(0.300, 2.200, 14.000)
+
+[sub_resource type="BoxMesh" id="BM_37"]
+material = SubResource("m_tile")
+size = Vector3(0.700, 0.900, 10.500)
+
+[sub_resource type="BoxShape3D" id="BS_37"]
+size = Vector3(0.700, 0.900, 10.500)
+
+[sub_resource type="BoxMesh" id="BM_38"]
+material = SubResource("m_brass")
+size = Vector3(0.350, 0.080, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_39"]
+material = SubResource("m_white")
+size = Vector3(0.460, 0.500, 0.460)
+
+[sub_resource type="BoxShape3D" id="BS_39"]
+size = Vector3(0.460, 0.500, 0.460)
+
+[sub_resource type="BoxMesh" id="BM_40"]
+material = SubResource("m_white")
+size = Vector3(0.550, 1.200, 0.550)
+
+[sub_resource type="BoxShape3D" id="BS_40"]
+size = Vector3(0.550, 1.200, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_41"]
+material = SubResource("m_cooler_blue")
+size = Vector3(0.420, 0.550, 0.420)
+
+[sub_resource type="BoxMesh" id="BM_42"]
+material = SubResource("m_white")
+size = Vector3(0.550, 5.400, 0.550)
+
+[sub_resource type="BoxShape3D" id="BS_42"]
+size = Vector3(0.550, 5.400, 0.550)
+
+[sub_resource type="BoxMesh" id="BM_43"]
+material = SubResource("m_carpet")
+size = Vector3(16.000, 0.020, 13.000)
+
+[sub_resource type="BoxMesh" id="BM_44"]
+material = SubResource("m_carpet_green")
+size = Vector3(15.800, 0.010, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_45"]
+material = SubResource("m_green")
+size = Vector3(0.450, 4.000, 0.650)
+
+[sub_resource type="BoxShape3D" id="BS_45"]
+size = Vector3(0.450, 4.000, 0.650)
+
+[sub_resource type="BoxMesh" id="BM_46"]
+material = SubResource("m_green")
+size = Vector3(3.200, 0.600, 0.650)
+
+[sub_resource type="BoxShape3D" id="BS_46"]
+size = Vector3(3.200, 0.600, 0.650)
+
+[sub_resource type="BoxMesh" id="BM_47"]
+material = SubResource("m_wood")
+size = Vector3(1.200, 1.800, 2.000)
+
+[sub_resource type="BoxShape3D" id="BS_47"]
+size = Vector3(1.200, 1.800, 2.000)
+
+[sub_resource type="BoxMesh" id="BM_48"]
+material = SubResource("m_wood")
+size = Vector3(0.060, 0.400, 0.060)
+
+[sub_resource type="BoxMesh" id="BM_49"]
+material = SubResource("m_wood")
+size = Vector3(1.450, 0.030, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_50"]
+material = SubResource("m_wood")
+size = Vector3(0.140, 0.030, 1.450)
+
+[node name="MosqueAzhari" type="Node3D"]
+
+[node name="PrayerFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.050, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="PrayerFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="PrayerFloor"]
+shape = SubResource("BS_0")
+
+[node name="PorchFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.040, 10.200)
+
+[node name="M" type="MeshInstance3D" parent="PorchFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="PorchFloor"]
+shape = SubResource("BS_1")
+
+[node name="WallNorth" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.700, -8.000)
+metadata/interact_message = "مسجد الأزهري - مرحب بكم في بيت الله"
+
+[node name="M" type="MeshInstance3D" parent="WallNorth"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="WallNorth"]
+shape = SubResource("BS_2")
+
+[node name="WallSouth_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.300, 2.700, 8.000)
+
+[node name="M" type="MeshInstance3D" parent="WallSouth_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="WallSouth_L"]
+shape = SubResource("BS_3")
+
+[node name="WallSouth_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.300, 2.700, 8.000)
+
+[node name="M" type="MeshInstance3D" parent="WallSouth_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="WallSouth_R"]
+shape = SubResource("BS_3")
+
+[node name="WallSouth_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.300, 8.000)
+
+[node name="M" type="MeshInstance3D" parent="WallSouth_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="WallSouth_Top"]
+shape = SubResource("BS_4")
+
+[node name="WallSouth_DoorLeaf" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 8.000)
+script = ExtResource("door_scr")
+door_label = "باب المسجد"
+door_style = 3
+opening_width = 3.00
+opening_height = 3.10
+wall_thickness = 0.45
+open_angle_deg = 86.0
+is_open = true
+build_recessed_frame = true
+
+[node name="WallWestA_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 2.700, -6.350)
+
+[node name="M" type="MeshInstance3D" parent="WallWestA_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallWestA_L"]
+shape = SubResource("BS_8")
+
+[node name="WallWestA_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 2.700, -1.250)
+
+[node name="M" type="MeshInstance3D" parent="WallWestA_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallWestA_R"]
+shape = SubResource("BS_8")
+
+[node name="WallWestA_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 0.650, -3.800)
+
+[node name="M" type="MeshInstance3D" parent="WallWestA_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="WallWestA_Sill"]
+shape = SubResource("BS_9")
+
+[node name="WallWestA_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 4.350, -3.800)
+
+[node name="M" type="MeshInstance3D" parent="WallWestA_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="WallWestA_Top"]
+shape = SubResource("BS_10")
+
+[node name="WallWestA_Win" type="Node3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, -9.000, 2.300, -3.800)
+
+[node name="Glass" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="FrameT" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_12")
+
+[node name="FrameB" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_13")
+
+[node name="FrameL" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="FrameR" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="BarV_1" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_2" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_3" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_4" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_5" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarH" type="MeshInstance3D" parent="WallWestA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_16")
+
+[node name="WallWestB_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 2.700, 1.650)
+
+[node name="M" type="MeshInstance3D" parent="WallWestB_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallWestB_L"]
+shape = SubResource("BS_8")
+
+[node name="WallWestB_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 2.700, 6.750)
+
+[node name="M" type="MeshInstance3D" parent="WallWestB_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallWestB_R"]
+shape = SubResource("BS_8")
+
+[node name="WallWestB_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 0.650, 4.200)
+
+[node name="M" type="MeshInstance3D" parent="WallWestB_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="WallWestB_Sill"]
+shape = SubResource("BS_9")
+
+[node name="WallWestB_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 4.350, 4.200)
+
+[node name="M" type="MeshInstance3D" parent="WallWestB_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="WallWestB_Top"]
+shape = SubResource("BS_10")
+
+[node name="WallWestB_Win" type="Node3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, -9.000, 2.300, 4.200)
+
+[node name="Glass" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="FrameT" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_12")
+
+[node name="FrameB" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_13")
+
+[node name="FrameL" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="FrameR" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="BarV_1" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_2" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_3" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_4" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_5" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarH" type="MeshInstance3D" parent="WallWestB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_16")
+
+[node name="WallEastA_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 2.700, -6.350)
+
+[node name="M" type="MeshInstance3D" parent="WallEastA_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallEastA_L"]
+shape = SubResource("BS_8")
+
+[node name="WallEastA_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 2.700, -1.250)
+
+[node name="M" type="MeshInstance3D" parent="WallEastA_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallEastA_R"]
+shape = SubResource("BS_8")
+
+[node name="WallEastA_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 0.650, -3.800)
+
+[node name="M" type="MeshInstance3D" parent="WallEastA_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="WallEastA_Sill"]
+shape = SubResource("BS_9")
+
+[node name="WallEastA_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 4.350, -3.800)
+
+[node name="M" type="MeshInstance3D" parent="WallEastA_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="WallEastA_Top"]
+shape = SubResource("BS_10")
+
+[node name="WallEastA_Win" type="Node3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, 9.000, 2.300, -3.800)
+
+[node name="Glass" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="FrameT" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_12")
+
+[node name="FrameB" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_13")
+
+[node name="FrameL" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="FrameR" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="BarV_1" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_2" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_3" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_4" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_5" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarH" type="MeshInstance3D" parent="WallEastA_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_16")
+
+[node name="WallEastB_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 2.700, 1.650)
+
+[node name="M" type="MeshInstance3D" parent="WallEastB_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallEastB_L"]
+shape = SubResource("BS_8")
+
+[node name="WallEastB_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 2.700, 6.750)
+
+[node name="M" type="MeshInstance3D" parent="WallEastB_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="WallEastB_R"]
+shape = SubResource("BS_8")
+
+[node name="WallEastB_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 0.650, 4.200)
+
+[node name="M" type="MeshInstance3D" parent="WallEastB_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="WallEastB_Sill"]
+shape = SubResource("BS_9")
+
+[node name="WallEastB_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 4.350, 4.200)
+
+[node name="M" type="MeshInstance3D" parent="WallEastB_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_10")
+
+[node name="C" type="CollisionShape3D" parent="WallEastB_Top"]
+shape = SubResource("BS_10")
+
+[node name="WallEastB_Win" type="Node3D" parent="."]
+transform = Transform3D(-0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, -0.00000, 9.000, 2.300, 4.200)
+
+[node name="Glass" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="FrameT" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_12")
+
+[node name="FrameB" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.960, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_13")
+
+[node name="FrameL" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="FrameR" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.060, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_14")
+
+[node name="BarV_1" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_2" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_3" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_4" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarV_5" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.733, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_15")
+
+[node name="BarH" type="MeshInstance3D" parent="WallEastB_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_16")
+
+[node name="GreenBaseTrim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.250, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_17")
+
+[node name="GreenMidTrim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.850, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="RoofSlab" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.550, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="RoofSlab"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_19")
+
+[node name="C" type="CollisionShape3D" parent="RoofSlab"]
+shape = SubResource("BS_19")
+
+[node name="ParapetBand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.950, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_20")
+
+[node name="DomeSquareBase" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.200, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="DomeSquareBase"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_21")
+
+[node name="C" type="CollisionShape3D" parent="DomeSquareBase"]
+shape = SubResource("BS_21")
+
+[node name="DomeBaseTrim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.800, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_22")
+
+[node name="Dome" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 7.200, 0.000)
+mesh = SubResource("SM_dome")
+
+[node name="DomeFinial" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 10.100, 0.000)
+mesh = SubResource("CM_finial")
+
+[node name="MinaretBase" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 5.200, 6.800)
+
+[node name="M" type="MeshInstance3D" parent="MinaretBase"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_23")
+
+[node name="C" type="CollisionShape3D" parent="MinaretBase"]
+shape = SubResource("BS_23")
+
+[node name="MinaretGreenStripe1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 6.200, 6.800)
+visibility_range_end = 95.0
+mesh = SubResource("BM_24")
+
+[node name="MinaretBalcony" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 10.500, 6.800)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="MinaretBalconyRail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 11.000, 6.800)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="MinaretShaft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 12.400, 6.800)
+mesh = SubResource("CM_min_top")
+
+[node name="MinaretCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 14.300, 6.800)
+mesh = SubResource("SM_min_cap")
+
+[node name="MinaretFinial" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 15.800, 6.800)
+mesh = SubResource("CM_finial")
+
+[node name="AdhanPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.400, 13.000, 6.800)
+max_distance = 360.0
+script = ExtResource("adhan_scr")
+
+[node name="PorchRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.150, 10.000)
+
+[node name="M" type="MeshInstance3D" parent="PorchRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_27")
+
+[node name="C" type="CollisionShape3D" parent="PorchRoof"]
+shape = SubResource("BS_27")
+
+[node name="PorchGreenTrim" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.420, 10.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_28")
+
+[node name="PorchCol_-4.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.400, 2.000, 11.600)
+
+[node name="M" type="MeshInstance3D" parent="PorchCol_-4.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="PorchCol_-4.4"]
+shape = SubResource("BS_29")
+
+[node name="PorchColTrim_-4.4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.400, 2.000, 11.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_30")
+
+[node name="PorchCol_-1.5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.500, 2.000, 11.600)
+
+[node name="M" type="MeshInstance3D" parent="PorchCol_-1.5"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="PorchCol_-1.5"]
+shape = SubResource("BS_29")
+
+[node name="PorchColTrim_-1.5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.500, 2.000, 11.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_30")
+
+[node name="PorchCol_1.5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.500, 2.000, 11.600)
+
+[node name="M" type="MeshInstance3D" parent="PorchCol_1.5"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="PorchCol_1.5"]
+shape = SubResource("BS_29")
+
+[node name="PorchColTrim_1.5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.500, 2.000, 11.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_30")
+
+[node name="PorchCol_4.4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.400, 2.000, 11.600)
+
+[node name="M" type="MeshInstance3D" parent="PorchCol_4.4"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="PorchCol_4.4"]
+shape = SubResource("BS_29")
+
+[node name="PorchColTrim_4.4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.400, 2.000, 11.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_30")
+
+[node name="Sign" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 4.950, 8.350)
+text = "مسجد الأزهري"
+font_size = 78
+outline_size = 10
+
+[node name="ShoeRackL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.400, 0.480, 9.400)
+
+[node name="M" type="MeshInstance3D" parent="ShoeRackL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_31")
+
+[node name="C" type="CollisionShape3D" parent="ShoeRackL"]
+shape = SubResource("BS_31")
+
+[node name="ShoeRackR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.400, 0.480, 9.400)
+
+[node name="M" type="MeshInstance3D" parent="ShoeRackR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_31")
+
+[node name="C" type="CollisionShape3D" parent="ShoeRackR"]
+shape = SubResource("BS_31")
+
+[node name="PorchMat1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.090, 9.800)
+visibility_range_end = 95.0
+mesh = SubResource("BM_32")
+
+[node name="PorchMat2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.200, 0.090, 10.800)
+visibility_range_end = 95.0
+mesh = SubResource("BM_33")
+
+[node name="WuduFloor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.200, 0.050, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WuduFloor"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_34")
+
+[node name="C" type="CollisionShape3D" parent="WuduFloor"]
+shape = SubResource("BS_34")
+
+[node name="WuduWallBack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.200, 1.100, -6.800)
+
+[node name="M" type="MeshInstance3D" parent="WuduWallBack"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_35")
+
+[node name="C" type="CollisionShape3D" parent="WuduWallBack"]
+shape = SubResource("BS_35")
+
+[node name="WuduWallSide" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.100, 1.100, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WuduWallSide"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_36")
+
+[node name="C" type="CollisionShape3D" parent="WuduWallSide"]
+shape = SubResource("BS_36")
+
+[node name="WuduTrough" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.600, 0.450, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WuduTrough"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="WuduTrough"]
+shape = SubResource("BS_37")
+
+[node name="Tap_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.600, 0.950, -3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="WuduStool_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.600, 0.250, -3.600)
+
+[node name="M" type="MeshInstance3D" parent="WuduStool_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_39")
+
+[node name="C" type="CollisionShape3D" parent="WuduStool_0"]
+shape = SubResource("BS_39")
+
+[node name="Tap_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.600, 0.950, -1.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="WuduStool_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.600, 0.250, -1.200)
+
+[node name="M" type="MeshInstance3D" parent="WuduStool_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_39")
+
+[node name="C" type="CollisionShape3D" parent="WuduStool_1"]
+shape = SubResource("BS_39")
+
+[node name="Tap_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.600, 0.950, 1.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="WuduStool_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.600, 0.250, 1.200)
+
+[node name="M" type="MeshInstance3D" parent="WuduStool_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_39")
+
+[node name="C" type="CollisionShape3D" parent="WuduStool_2"]
+shape = SubResource("BS_39")
+
+[node name="Tap_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.600, 0.950, 3.600)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="WuduStool_3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.600, 0.250, 3.600)
+
+[node name="M" type="MeshInstance3D" parent="WuduStool_3"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_39")
+
+[node name="C" type="CollisionShape3D" parent="WuduStool_3"]
+shape = SubResource("BS_39")
+
+[node name="WaterCoolerBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.700, 0.600, 6.200)
+
+[node name="M" type="MeshInstance3D" parent="WaterCoolerBody"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_40")
+
+[node name="C" type="CollisionShape3D" parent="WaterCoolerBody"]
+shape = SubResource("BS_40")
+
+[node name="WaterCoolerBottle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.700, 1.450, 6.200)
+visibility_range_end = 95.0
+mesh = SubResource("BM_41")
+
+[node name="Pillar_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.200, 2.700, -2.500)
+
+[node name="M" type="MeshInstance3D" parent="Pillar_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_42")
+
+[node name="C" type="CollisionShape3D" parent="Pillar_0"]
+shape = SubResource("BS_42")
+
+[node name="Pillar_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.200, 2.700, -2.500)
+
+[node name="M" type="MeshInstance3D" parent="Pillar_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_42")
+
+[node name="C" type="CollisionShape3D" parent="Pillar_1"]
+shape = SubResource("BS_42")
+
+[node name="Pillar_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.200, 2.700, 2.800)
+
+[node name="M" type="MeshInstance3D" parent="Pillar_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_42")
+
+[node name="C" type="CollisionShape3D" parent="Pillar_2"]
+shape = SubResource("BS_42")
+
+[node name="Pillar_3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.200, 2.700, 2.800)
+
+[node name="M" type="MeshInstance3D" parent="Pillar_3"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_42")
+
+[node name="C" type="CollisionShape3D" parent="Pillar_3"]
+shape = SubResource("BS_42")
+
+[node name="Fan1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.200, 4.850, 0.200)
+script = ExtResource("fan_scr")
+
+[node name="Rod" type="MeshInstance3D" parent="Fan1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.200, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_48")
+
+[node name="BladeA" type="MeshInstance3D" parent="Fan1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_49")
+
+[node name="BladeB" type="MeshInstance3D" parent="Fan1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_50")
+
+[node name="Fan2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.200, 4.850, 0.200)
+script = ExtResource("fan_scr")
+
+[node name="Rod" type="MeshInstance3D" parent="Fan2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.200, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_48")
+
+[node name="BladeA" type="MeshInstance3D" parent="Fan2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_49")
+
+[node name="BladeB" type="MeshInstance3D" parent="Fan2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_50")
+[node name="MosqueInterior" type="Node3D" parent="."]
+script = ExtResource("mq_int_scr")
+hall_width = 17.4
+hall_depth = 15.4
+hall_height = 5.3
+floor_y = 0.1
+mosque_title = "مسجد الأزهري"
+add_internal_pillars = false
+vis_range_end = 95.0

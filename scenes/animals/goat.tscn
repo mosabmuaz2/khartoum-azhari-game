@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azharigoat001"]
+
+[ext_resource type="Script" path="res://scripts/animal_ai.gd" id="1_anim"]
+
+[node name="Goat" type="Node3D"]
+script = ExtResource("1_anim")
+kind = "goat"
+coat_color = Color(0.88, 0.84, 0.76, 1)
+wander_radius = 3.4
+move_speed = 1.05

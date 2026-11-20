@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azhariaiboks1"]
+
+[ext_resource type="PackedScene" uid="uid://c8azhariboks001" path="res://scenes/boks.tscn" id="1_base"]
+
+[node name="AIBoks" instance=ExtResource("1_base")]

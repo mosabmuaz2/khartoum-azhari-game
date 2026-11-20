@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnx4hja0l7hof"
+path="res://.godot/imported/عقد اللولي فيصل صلاح🖤✨.mp3-0a527b9585a4fc2911cd122b70b706df.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/radio/عقد اللولي فيصل صلاح🖤✨.mp3"
+dest_files=["res://.godot/imported/عقد اللولي فيصل صلاح🖤✨.mp3-0a527b9585a4fc2911cd122b70b706df.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

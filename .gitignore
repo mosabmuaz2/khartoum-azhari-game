@@ -1,0 +1,21 @@
+.godot/
+builds/
+tools/vehicle_pack_staging/
+mixamo_upload_zips/
+*.log
+*.tmp
+audit_*.txt
+
+# Ignore large archives and local build folders for GitHub
+.godot/
+builds/
+05_Archives/
+tools/3D Models/
+tools/vehicle_pack_staging/
+*.blend.zip
+*.zip
+*.rar
+*.blend
+*.psd
+desktop.ini
+

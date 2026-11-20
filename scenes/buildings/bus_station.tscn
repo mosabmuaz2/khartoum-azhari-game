@@ -1,0 +1,178 @@
+[gd_scene load_steps=24 format=3 uid="uid://c8azharibusst01"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Script" path="res://scripts/sudanese_staircase.gd" id="stair_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_plat"]
+albedo_color = Color(0.84, 0.80, 0.74, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.65
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(6, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_canopy"]
+albedo_color = Color(0.14, 0.52, 0.32, 1)
+metallic = 0.3
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_post"]
+albedo_color = Color(0.22, 0.24, 0.26, 1)
+metallic = 0.7
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="m_bench"]
+albedo_color = Color(0.66, 0.46, 0.28, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.8
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_gold"]
+albedo_color = Color(0.92, 0.74, 0.20, 1)
+metallic = 0.0
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_plat")
+size = Vector3(11.500, 0.280, 3.800)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(11.500, 0.280, 3.800)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+size = Vector3(4.500, 0.120, 1.200)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(4.500, 0.120, 1.200)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_post")
+size = Vector3(0.180, 3.100, 0.180)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(0.180, 3.100, 0.180)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_canopy")
+size = Vector3(12.000, 0.160, 4.000)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(12.000, 0.160, 4.000)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_gold")
+size = Vector3(12.050, 0.140, 0.120)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_bench")
+size = Vector3(3.200, 0.480, 0.650)
+
+[sub_resource type="BoxShape3D" id="BS_5"]
+size = Vector3(3.200, 0.480, 0.650)
+
+[node name="BusStation" type="Node3D"]
+
+[node name="BoardingPlatform" type="StaticBody3D" parent="." groups=["bus_stations"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.140, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="BoardingPlatform"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="BoardingPlatform"]
+shape = SubResource("BS_0")
+
+[node name="CanopyPost_-4.8" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.800, 1.650, -1.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyPost_-4.8"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="CanopyPost_-4.8"]
+shape = SubResource("BS_2")
+
+[node name="CanopyPost_0.0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.650, -1.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyPost_0.0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="CanopyPost_0.0"]
+shape = SubResource("BS_2")
+
+[node name="CanopyPost_4.8" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.800, 1.650, -1.400)
+
+[node name="M" type="MeshInstance3D" parent="CanopyPost_4.8"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="CanopyPost_4.8"]
+shape = SubResource("BS_2")
+
+[node name="CanopyRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.250, -0.200)
+
+[node name="M" type="MeshInstance3D" parent="CanopyRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="CanopyRoof"]
+shape = SubResource("BS_3")
+
+[node name="CanopyGoldStripe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.350, 1.780)
+visibility_range_end = 95.0
+mesh = SubResource("BM_4")
+
+[node name="WaitingBenchL" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.600, 0.520, -0.800)
+metadata/interact_message = "موقف بصات الأزهري - انتظر البص واضغط [E] للركوب أو [G] للقيادة"
+
+[node name="M" type="MeshInstance3D" parent="WaitingBenchL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="WaitingBenchL"]
+shape = SubResource("BS_5")
+
+[node name="WaitingBenchR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.600, 0.520, -0.800)
+
+[node name="M" type="MeshInstance3D" parent="WaitingBenchR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="WaitingBenchR"]
+shape = SubResource("BS_5")
+
+[node name="StationSign" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.650, 1.860)
+text = "موقف بصات الأزهري - السوق العربي - شارع النيل"
+font_size = 48
+outline_size = 9
+[node name="PlatformSteps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 2.750)
+script = ExtResource("stair_scr")
+stair_style = 2
+stair_width = 4.2
+total_rise = 0.28
+climb_dir_z = -1.0
+low_step_count = 2
+low_step_run = 0.85
+vis_range_end = 110.0

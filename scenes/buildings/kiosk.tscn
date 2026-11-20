@@ -1,0 +1,176 @@
+[gd_scene load_steps=25 format=3 uid="uid://c8azharikiosk01"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/albedo.jpg" id="ta_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/normal.jpg" id="tn_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/roughness.jpg" id="tr_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+
+[sub_resource type="StandardMaterial3D" id="m_body"]
+albedo_color = Color(0.18, 0.54, 0.78, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.4
+roughness = 0.55
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_trim"]
+albedo_color = Color(0.96, 0.78, 0.18, 1)
+metallic = 0.0
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.68, 0.48, 0.28, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.8
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_cooler"]
+albedo_color = Color(0.86, 0.20, 0.18, 1)
+metallic = 0.2
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="m_snacks"]
+albedo_color = Color(0.92, 0.54, 0.16, 1)
+metallic = 0.0
+roughness = 0.65
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_body")
+size = Vector3(2.600, 1.100, 2.200)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(2.600, 1.100, 2.200)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_body")
+size = Vector3(2.600, 1.100, 0.220)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(2.600, 1.100, 0.220)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_trim")
+size = Vector3(0.140, 1.100, 0.140)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(0.140, 1.100, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_trim")
+size = Vector3(3.000, 0.160, 3.100)
+
+[sub_resource type="BoxShape3D" id="BS_3"]
+size = Vector3(3.000, 0.160, 3.100)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_wood")
+size = Vector3(2.500, 0.080, 0.480)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_snacks")
+size = Vector3(0.750, 0.340, 0.280)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_trim")
+size = Vector3(0.750, 0.340, 0.280)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_cooler")
+size = Vector3(0.780, 1.900, 0.750)
+
+[sub_resource type="BoxShape3D" id="BS_7"]
+size = Vector3(0.780, 1.900, 0.750)
+
+[node name="Kiosk" type="Node3D" groups=["kiosks"]]
+
+[node name="KioskBase" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.550, 0.000)
+metadata/interact_message = "كشك الأزهري - مياه باردة، بسكويت، عصائر، ورصيد"
+
+[node name="M" type="MeshInstance3D" parent="KioskBase"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="KioskBase"]
+shape = SubResource("BS_0")
+
+[node name="KioskBack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.550, -0.980)
+
+[node name="M" type="MeshInstance3D" parent="KioskBack"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="KioskBack"]
+shape = SubResource("BS_1")
+
+[node name="KioskPillarL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.200, 1.550, 0.980)
+
+[node name="M" type="MeshInstance3D" parent="KioskPillarL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="KioskPillarL"]
+shape = SubResource("BS_2")
+
+[node name="KioskPillarR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.200, 1.550, 0.980)
+
+[node name="M" type="MeshInstance3D" parent="KioskPillarR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="KioskPillarR"]
+shape = SubResource("BS_2")
+
+[node name="KioskRoof" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.220, 0.350)
+
+[node name="M" type="MeshInstance3D" parent="KioskRoof"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_3")
+
+[node name="C" type="CollisionShape3D" parent="KioskRoof"]
+shape = SubResource("BS_3")
+
+[node name="CounterShelf" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.120, 1.050)
+visibility_range_end = 95.0
+mesh = SubResource("BM_4")
+
+[node name="SnackDisplayA" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650, 1.320, 0.950)
+visibility_range_end = 95.0
+mesh = SubResource("BM_5")
+
+[node name="SnackDisplayB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.650, 1.320, 0.950)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="DrinkCooler" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.750, 0.950, 0.100)
+
+[node name="M" type="MeshInstance3D" parent="DrinkCooler"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_7")
+
+[node name="C" type="CollisionShape3D" parent="DrinkCooler"]
+shape = SubResource("BS_7")
+
+[node name="KioskSign" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.480, 1.920)
+text = "كشك المرطبات والبارد"
+font_size = 42
+outline_size = 8

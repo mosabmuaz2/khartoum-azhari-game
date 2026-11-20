@@ -1,0 +1,1599 @@
+[gd_scene load_steps=116 format=3 uid="uid://c8azharimain001"]
+
+[ext_resource type="Script" path="res://scripts/network_manager.gd" id="1_net_mgr"]
+[ext_resource type="PackedScene" path="res://scenes/raksha.tscn" id="2_raksha"]
+[ext_resource type="PackedScene" path="res://scenes/boks.tscn" id="3_boks"]
+[ext_resource type="PackedScene" path="res://scenes/amjad.tscn" id="4_amjad"]
+[ext_resource type="PackedScene" path="res://scenes/sedan.tscn" id="5_sedan"]
+[ext_resource type="PackedScene" path="res://scenes/daffar.tscn" id="6_daffar"]
+[ext_resource type="PackedScene" path="res://scenes/npc.tscn" id="7_npc"]
+[ext_resource type="Script" path="res://scripts/world_ambiance_controller.gd" id="8_world_amb"]
+[ext_resource type="Script" path="res://scripts/street_details_spawner.gd" id="9_street_det"]
+[ext_resource type="Script" path="res://scripts/crowd_spawner.gd" id="10_crowd"]
+[ext_resource type="Script" path="res://scripts/time_of_day_controller.gd" id="11_tod"]
+[ext_resource type="Script" path="res://scripts/minimap.gd" id="12_minimap"]
+[ext_resource type="Script" path="res://scripts/asset_pack_loader.gd" id="13_asset_pack"]
+[ext_resource type="Script" path="res://scripts/traffic_ai.gd" id="14_traffic_ai"]
+[ext_resource type="Script" path="res://scripts/bus_system.gd" id="15_bus_sys"]
+[ext_resource type="Script" path="res://scripts/city_mega_builder.gd" id="16_city_mega"]
+[ext_resource type="Script" path="res://scripts/role_npc_spawner.gd" id="17_role_npcs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mission_hud.tscn" id="18_mission_hud"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/interactive_mosque.tscn" id="b_mosque"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/interactive_compound.tscn" id="b_house"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/interactive_apartment.tscn" id="b_apt"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/interactive_dukkan.tscn" id="b_souq"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/closed_house.tscn" id="b_closed"]
+[ext_resource type="PackedScene" path="res://scenes/nile_river.tscn" id="b_nile"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/gas_station.tscn" id="b_gas"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/kiosk.tscn" id="b_kiosk"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/amary_saud_shop.tscn" id="b_amary"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/bus_station.tscn" id="b_bus_st"]
+[ext_resource type="PackedScene" path="res://scenes/buildings/parking_lot.tscn" id="b_parking"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/albedo.jpg" id="t_asphalt_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/normal.jpg" id="t_asphalt_nor"]
+[ext_resource type="Texture2D" path="res://assets/textures/asphalt/roughness.jpg" id="t_asphalt_rgh"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/albedo.jpg" id="t_sand_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/normal.jpg" id="t_sand_nor"]
+[ext_resource type="Texture2D" path="res://assets/textures/sand_dirt/roughness.jpg" id="t_sand_rgh"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="t_plaster_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="t_plaster_nor"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="t_plaster_rgh"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="t_wood_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="t_wood_nor"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="t_wood_rgh"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/albedo.jpg" id="t_fab_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/normal.jpg" id="t_fab_nor"]
+[ext_resource type="Texture2D" path="res://assets/textures/fabric/roughness.jpg" id="t_fab_rgh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sunset"]
+sky_top_color = Color(0.24, 0.38, 0.62, 1)
+sky_horizon_color = Color(0.96, 0.66, 0.42, 1)
+sky_curve = 0.16
+ground_bottom_color = Color(0.42, 0.31, 0.22, 1)
+ground_horizon_color = Color(0.88, 0.63, 0.43, 1)
+ground_curve = 0.04
+sun_angle_max = 32.0
+sun_curve = 0.12
+
+[sub_resource type="Sky" id="Sky_sunset"]
+sky_material = SubResource("ProceduralSkyMaterial_sunset")
+
+[sub_resource type="Environment" id="Environment_sunset"]
+background_mode = 2
+sky = SubResource("Sky_sunset")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.78
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.91, 0.68, 0.47, 1)
+fog_density = 0.0010
+
+[sub_resource type="StandardMaterial3D" id="mat_sand_earth"]
+albedo_color = Color(1.0, 0.74, 0.56, 1)
+albedo_texture = ExtResource("t_sand_alb")
+roughness = 0.95
+roughness_texture = ExtResource("t_sand_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_sand_nor")
+uv1_scale = Vector3(44, 44, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_dirt_road"]
+albedo_color = Color(0.94, 0.64, 0.46, 1)
+albedo_texture = ExtResource("t_sand_alb")
+roughness = 0.95
+roughness_texture = ExtResource("t_sand_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_sand_nor")
+uv1_scale = Vector3(24, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_asphalt"]
+albedo_color = Color(0.85, 0.85, 0.85, 1)
+albedo_texture = ExtResource("t_asphalt_alb")
+roughness = 0.9
+roughness_texture = ExtResource("t_asphalt_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_asphalt_nor")
+uv1_scale = Vector3(28, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_asphalt_circle"]
+albedo_color = Color(0.85, 0.85, 0.85, 1)
+albedo_texture = ExtResource("t_asphalt_alb")
+roughness = 0.9
+roughness_texture = ExtResource("t_asphalt_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_asphalt_nor")
+uv1_scale = Vector3(5, 5, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_wall_cream"]
+albedo_color = Color(1.0, 0.94, 0.82, 1)
+albedo_texture = ExtResource("t_plaster_alb")
+roughness = 0.88
+roughness_texture = ExtResource("t_plaster_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_plaster_nor")
+uv1_scale = Vector3(3, 1.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_wood"]
+albedo_color = Color(0.82, 0.66, 0.48, 1)
+albedo_texture = ExtResource("t_wood_alb")
+roughness = 0.85
+roughness_texture = ExtResource("t_wood_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_wood_nor")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_fabric_red"]
+albedo_color = Color(0.88, 0.30, 0.24, 1)
+albedo_texture = ExtResource("t_fab_alb")
+roughness = 0.9
+roughness_texture = ExtResource("t_fab_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_fab_nor")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_fabric_blue"]
+albedo_color = Color(0.26, 0.54, 0.82, 1)
+albedo_texture = ExtResource("t_fab_alb")
+roughness = 0.9
+roughness_texture = ExtResource("t_fab_rgh")
+normal_enabled = true
+normal_scale = 0.85
+normal_texture = ExtResource("t_fab_nor")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_road_line"]
+albedo_color = Color(0.94, 0.9, 0.8, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_curb"]
+albedo_color = Color(0.7, 0.65, 0.57, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_bump"]
+albedo_color = Color(0.9, 0.68, 0.14, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="mat_mosque_white"]
+albedo_color = Color(0.96, 0.95, 0.90, 1)
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="mat_foliage"]
+albedo_color = Color(0.24, 0.49, 0.22, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="mat_metal"]
+albedo_color = Color(0.45, 0.48, 0.50, 1)
+metallic = 0.4
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="mat_wire"]
+albedo_color = Color(0.10, 0.10, 0.11, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_water_pool"]
+albedo_color = Color(0.16, 0.58, 0.78, 0.68)
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="mat_lamp_glow"]
+albedo_color = Color(1, 0.88, 0.58, 1)
+emission_enabled = true
+emission = Color(1, 0.82, 0.45, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="mat_ember"]
+albedo_color = Color(1, 0.45, 0.12, 1)
+emission_enabled = true
+emission = Color(1, 0.38, 0.08, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="mat_ball"]
+albedo_color = Color(0.96, 0.96, 0.96, 1)
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="BM_ground"]
+material = SubResource("mat_sand_earth")
+size = Vector3(480, 1, 480)
+
+[sub_resource type="BoxShape3D" id="BS_ground"]
+size = Vector3(480, 1, 480)
+
+[sub_resource type="BoxMesh" id="BM_road_ns"]
+material = SubResource("mat_asphalt")
+size = Vector3(12, 0.02, 440)
+
+[sub_resource type="BoxMesh" id="BM_road_ew"]
+material = SubResource("mat_asphalt")
+size = Vector3(440, 0.02, 12)
+
+[sub_resource type="BoxMesh" id="BM_dirt_ns"]
+material = SubResource("mat_dirt_road")
+size = Vector3(8, 0.02, 380)
+
+[sub_resource type="BoxMesh" id="BM_dirt_ew"]
+material = SubResource("mat_dirt_road")
+size = Vector3(380, 0.02, 8)
+
+[sub_resource type="BoxMesh" id="BM_dash_ns"]
+material = SubResource("mat_road_line")
+size = Vector3(0.3, 0.01, 4.5)
+
+[sub_resource type="BoxMesh" id="BM_dash_ew"]
+material = SubResource("mat_road_line")
+size = Vector3(4.5, 0.01, 0.3)
+
+[sub_resource type="BoxMesh" id="BM_bump_ew"]
+material = SubResource("mat_bump")
+size = Vector3(11.4, 0.08, 1.0)
+
+[sub_resource type="BoxMesh" id="BM_bump_ns"]
+material = SubResource("mat_bump")
+size = Vector3(1.0, 0.08, 11.4)
+
+[sub_resource type="BoxMesh" id="BM_sidewalk_40"]
+material = SubResource("mat_curb")
+size = Vector3(44, 0.03, 44)
+
+[sub_resource type="CylinderMesh" id="CM_roundabout_asphalt"]
+material = SubResource("mat_asphalt_circle")
+top_radius = 13.5
+bottom_radius = 13.5
+height = 0.025
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CM_roundabout_island"]
+material = SubResource("mat_curb")
+top_radius = 4.2
+bottom_radius = 4.5
+height = 0.42
+radial_segments = 24
+
+[sub_resource type="CylinderShape3D" id="CS_roundabout_island"]
+height = 0.42
+radius = 4.5
+
+[sub_resource type="CylinderMesh" id="CM_roundabout_pillar"]
+material = SubResource("mat_mosque_white")
+top_radius = 0.65
+bottom_radius = 0.85
+height = 2.6
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="BM_tea_pad"]
+material = SubResource("mat_curb")
+size = Vector3(6.8, 0.06, 6.8)
+
+[sub_resource type="BoxMesh" id="BM_tea_canopy"]
+material = SubResource("mat_fabric_red")
+size = Vector3(6.4, 0.14, 6.4)
+
+[sub_resource type="BoxMesh" id="BM_post"]
+material = SubResource("mat_wood")
+size = Vector3(0.2, 2.6, 0.2)
+
+[sub_resource type="BoxShape3D" id="BS_post"]
+size = Vector3(0.2, 2.6, 0.2)
+
+[sub_resource type="BoxMesh" id="BM_tea_table"]
+material = SubResource("mat_wood")
+size = Vector3(1.9, 0.84, 0.85)
+
+[sub_resource type="BoxShape3D" id="BS_tea_table"]
+size = Vector3(1.9, 0.84, 0.85)
+
+[sub_resource type="CylinderMesh" id="CM_kanoon"]
+material = SubResource("mat_ember")
+top_radius = 0.22
+bottom_radius = 0.18
+height = 0.28
+radial_segments = 10
+
+[sub_resource type="CylinderMesh" id="CM_kettle"]
+material = SubResource("mat_metal")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.28
+radial_segments = 10
+
+[sub_resource type="BoxMesh" id="BM_basin_wall_x"]
+material = SubResource("mat_wall_cream")
+size = Vector3(6.6, 0.75, 0.4)
+
+[sub_resource type="BoxShape3D" id="BS_basin_wall_x"]
+size = Vector3(6.6, 0.75, 0.4)
+
+[sub_resource type="BoxMesh" id="BM_basin_wall_z"]
+material = SubResource("mat_wall_cream")
+size = Vector3(0.4, 0.75, 4.6)
+
+[sub_resource type="BoxShape3D" id="BS_basin_wall_z"]
+size = Vector3(0.4, 0.75, 4.6)
+
+[sub_resource type="BoxMesh" id="BM_basin_water"]
+material = SubResource("mat_water_pool")
+size = Vector3(5.8, 0.45, 3.8)
+
+[sub_resource type="BoxMesh" id="BM_fish_stall_roof"]
+material = SubResource("mat_fabric_blue")
+size = Vector3(7.8, 0.14, 4.4)
+
+[sub_resource type="BoxMesh" id="BM_pitch_line_long"]
+material = SubResource("mat_road_line")
+size = Vector3(44, 0.02, 0.28)
+
+[sub_resource type="BoxMesh" id="BM_pitch_line_short"]
+material = SubResource("mat_road_line")
+size = Vector3(0.28, 0.02, 28)
+
+[sub_resource type="BoxMesh" id="BM_goal_post"]
+material = SubResource("mat_mosque_white")
+size = Vector3(0.14, 2.4, 0.14)
+
+[sub_resource type="BoxShape3D" id="BS_goal_post"]
+size = Vector3(0.14, 2.4, 0.14)
+
+[sub_resource type="BoxMesh" id="BM_goal_cross"]
+material = SubResource("mat_mosque_white")
+size = Vector3(0.14, 0.14, 5.2)
+
+[sub_resource type="SphereMesh" id="SM_ball"]
+material = SubResource("mat_ball")
+radius = 0.24
+height = 0.48
+radial_segments = 14
+rings = 8
+
+[sub_resource type="SphereShape3D" id="SS_ball"]
+radius = 0.24
+
+[sub_resource type="CylinderMesh" id="CM_trunk"]
+material = SubResource("mat_wood")
+top_radius = 0.18
+bottom_radius = 0.28
+height = 2.8
+radial_segments = 10
+
+[sub_resource type="CylinderShape3D" id="CS_trunk"]
+height = 2.8
+radius = 0.28
+
+[sub_resource type="SphereMesh" id="SM_canopy"]
+material = SubResource("mat_foliage")
+radius = 2.3
+height = 2.7
+radial_segments = 12
+rings = 6
+
+[sub_resource type="CylinderMesh" id="CM_util_pole"]
+material = SubResource("mat_wood")
+top_radius = 0.11
+bottom_radius = 0.15
+height = 6.6
+radial_segments = 8
+
+[sub_resource type="CylinderShape3D" id="CS_util_pole"]
+height = 6.6
+radius = 0.15
+
+[sub_resource type="BoxMesh" id="BM_crossarm"]
+material = SubResource("mat_metal")
+size = Vector3(1.6, 0.1, 0.1)
+
+[sub_resource type="CylinderMesh" id="CM_wire_32"]
+material = SubResource("mat_wire")
+top_radius = 0.022
+bottom_radius = 0.022
+height = 32.0
+radial_segments = 6
+
+[sub_resource type="CylinderMesh" id="CM_lamp_pole"]
+material = SubResource("mat_metal")
+top_radius = 0.08
+bottom_radius = 0.12
+height = 5.0
+radial_segments = 10
+
+[sub_resource type="CylinderShape3D" id="CS_lamp_pole"]
+height = 5.0
+radius = 0.12
+
+[sub_resource type="BoxMesh" id="BM_lamp_arm"]
+material = SubResource("mat_metal")
+size = Vector3(1.4, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BM_lamp_head"]
+material = SubResource("mat_lamp_glow")
+size = Vector3(0.45, 0.12, 0.25)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.11, 0.09, 0.08, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.92, 0.65, 0.36, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_topbar"]
+bg_color = Color(0.11, 0.09, 0.08, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.92, 0.65, 0.36, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sunset")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.766044, -0.220201, 0.603946, 0, 0.939693, 0.34202, -0.642788, -0.262003, 0.719846, 0, 24, 0)
+light_color = Color(1, 0.79, 0.54, 1)
+light_energy = 1.35
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_mode = 1
+directional_shadow_max_distance = 75.0
+
+[node name="OverviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.766044, -0.271654, 0.582563, 0, 0.906308, 0.422618, -0.642788, -0.323744, 0.694272, 24, 15, 26)
+current = true
+fov = 65.0
+far = 900.0
+
+[node name="Neighborhood" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Neighborhood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/Ground"]
+mesh = SubResource("BM_ground")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/Ground"]
+shape = SubResource("BS_ground")
+
+[node name="Roads" type="Node3D" parent="Neighborhood"]
+
+[node name="RoadNS" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("BM_road_ns")
+
+[node name="RoadEW" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012, 0)
+mesh = SubResource("BM_road_ew")
+
+[node name="SideRoadEast" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0.008, 0)
+mesh = SubResource("BM_dirt_ns")
+
+[node name="SideRoadWest" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0.008, 0)
+mesh = SubResource("BM_dirt_ns")
+
+[node name="SideRoadNorth" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009, -64)
+mesh = SubResource("BM_dirt_ew")
+
+[node name="SideRoadSouth" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009, 64)
+mesh = SubResource("BM_dirt_ew")
+
+[node name="RoundaboutRoad" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+mesh = SubResource("CM_roundabout_asphalt")
+
+[node name="RoundaboutIsland" type="StaticBody3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/Roads/RoundaboutIsland"]
+mesh = SubResource("CM_roundabout_island")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/Roads/RoundaboutIsland"]
+shape = SubResource("CS_roundabout_island")
+
+[node name="Pillar" type="MeshInstance3D" parent="Neighborhood/Roads/RoundaboutIsland"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+mesh = SubResource("CM_roundabout_pillar")
+
+[node name="Sign" type="Label3D" parent="Neighborhood/Roads/RoundaboutIsland"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0)
+billboard = 1
+text = "صينية الأزهري"
+font_size = 54
+outline_size = 8
+
+[node name="DashNS_0" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, -20)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_0" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_1" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, -32)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_1" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_2" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, -44)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_2" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_3" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, -56)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_3" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_4" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 20)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_4" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_5" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 32)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_5" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_6" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 44)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_6" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="DashNS_7" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 56)
+mesh = SubResource("BM_dash_ns")
+
+[node name="DashEW_7" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.025, 0)
+mesh = SubResource("BM_dash_ew")
+
+[node name="BumpN" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -15)
+mesh = SubResource("BM_bump_ew")
+
+[node name="BumpS" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 15)
+mesh = SubResource("BM_bump_ew")
+
+[node name="BumpW" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.04, 0)
+mesh = SubResource("BM_bump_ns")
+
+[node name="BumpE" type="MeshInstance3D" parent="Neighborhood/Roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.04, 0)
+mesh = SubResource("BM_bump_ns")
+
+[node name="Buildings" type="Node3D" parent="Neighborhood"]
+
+[node name="MosqueAzhari" parent="Neighborhood/Buildings" instance=ExtResource("b_mosque")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -28)
+
+[node name="CommercialStrip" parent="Neighborhood/Buildings" instance=ExtResource("b_souq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -16.5)
+
+[node name="ApartmentWest" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, -20, 0, 24)
+
+[node name="ApartmentEast" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, -1.00000, 0, 1, 0, 1.00000, 0, 0.00000, 20, 0, 42)
+
+[node name="HouseSW" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, 26)
+
+[node name="HouseSE" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 26)
+
+[node name="HouseNorth" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1.00000, 0, 0.00000, 0, 1, 0, -0.00000, 0, -1.00000, 36, 0, -40)
+
+[node name="ApartmentNW1" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, -20, 0, -48)
+
+[node name="CompoundNW1" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, -48)
+
+[node name="CompoundNW2" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88, 0, -26)
+
+[node name="CompoundNW3" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, 0, -26)
+
+[node name="CompoundNW4" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -88, 0, -50)
+
+[node name="ApartmentNW2" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, 0, -50)
+
+[node name="CompoundNW5" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88, 0, -84)
+
+[node name="CompoundNW6" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, 0, -84)
+
+[node name="ApartmentNW3" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, -20, 0, -84)
+
+[node name="CompoundNW7" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, -84)
+
+[node name="CompoundNW8" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -45, 0, -114)
+
+[node name="ApartmentNE1" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, -1.00000, 0, 1, 0, 1.00000, 0, 0.00000, 20, 0, -44)
+
+[node name="CompoundNE1" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -84)
+
+[node name="CompoundNE2" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -84)
+
+[node name="ApartmentNE2" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, -1.00000, 0, 1, 0, 1.00000, 0, 0.00000, 20, 0, -112)
+
+[node name="CompoundNE3" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 48, 0, -112)
+
+[node name="DukkanStripNE" parent="Neighborhood/Buildings" instance=ExtResource("b_souq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122, 0, -18)
+
+[node name="CompoundFarNE1" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 0, -48)
+
+[node name="CompoundFarNE2" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122, 0, -48)
+
+[node name="CompoundFarNE3" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 0, -84)
+
+[node name="CompoundFarNE4" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 122, 0, -84)
+
+[node name="ApartmentFarNE1" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, 0, -112)
+
+[node name="ApartmentSW2" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, -20, 0, 48)
+
+[node name="CompoundSW2" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -44, 0, 50)
+
+[node name="DukkanStripWest" parent="Neighborhood/Buildings" instance=ExtResource("b_souq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105, 0, -16.5)
+
+[node name="DukkanStripSW" parent="Neighborhood/Buildings" instance=ExtResource("b_souq")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -105, 0, 16.5)
+
+[node name="CompoundSW3" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88, 0, 44)
+
+[node name="CompoundSW4" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, 0, 44)
+
+[node name="CompoundSE2" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 44, 0, 50)
+
+[node name="CompoundSE3" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 84)
+
+[node name="CompoundSE4" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 84)
+
+[node name="ApartmentSouth1" parent="Neighborhood/Buildings" instance=ExtResource("b_apt")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, -20, 0, 84)
+
+[node name="CompoundSouth1" parent="Neighborhood/Buildings" instance=ExtResource("b_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, 84)
+
+[node name="GasStation" parent="Neighborhood/Buildings" instance=ExtResource("b_gas")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 52, 0, 18)
+
+[node name="AmarySaudShop" parent="Neighborhood/Buildings" instance=ExtResource("b_amary")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 28, 0, 14.5)
+
+[node name="BusStationCentral" parent="Neighborhood/Buildings" instance=ExtResource("b_bus_st")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.5, 0, -26)
+
+[node name="BusStationMarket" parent="Neighborhood/Buildings" instance=ExtResource("b_bus_st")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 64, 0, 11.5)
+
+[node name="BusStationCorniche" parent="Neighborhood/Buildings" instance=ExtResource("b_bus_st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118, 0, -11.5)
+
+[node name="ParkingLotMosque" parent="Neighborhood/Buildings" instance=ExtResource("b_parking")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -16)
+
+[node name="ParkingLotMarket" parent="Neighborhood/Buildings" instance=ExtResource("b_parking")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68, 0, -16)
+
+[node name="ParkingLotBusStation" parent="Neighborhood/Buildings" instance=ExtResource("b_parking")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -68)
+
+[node name="ParkingLotCorniche" parent="Neighborhood/Buildings" instance=ExtResource("b_parking")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -124, 0, 22)
+
+[node name="Kiosk_0" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -14.0)
+
+[node name="Kiosk_1" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 0, -16.5)
+
+[node name="Kiosk_2" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 76.5, 0, 14.2)
+
+[node name="Kiosk_3" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 86.0, 0, 15.5)
+
+[node name="Kiosk_4" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -133.5, 0, -24.0)
+
+[node name="Kiosk_5" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -133.5, 0, 18.0)
+
+[node name="Kiosk_6" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.0, 0, -14.2)
+
+[node name="Kiosk_7" parent="Neighborhood/Buildings" instance=ExtResource("b_kiosk")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -34.0, 0, 14.2)
+
+[node name="ClosedHouse_0" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 0, -48)
+
+[node name="ClosedHouse_1" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 0, -84)
+
+[node name="ClosedHouse_2" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -74, 0, -112)
+
+[node name="ClosedHouse_3" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -98, 0, -112)
+
+[node name="ClosedHouse_4" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -120, 0, -112)
+
+[node name="ClosedHouse_5" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, -48)
+
+[node name="ClosedHouse_6" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, -84)
+
+[node name="ClosedHouse_7" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 108, 0, -112)
+
+[node name="ClosedHouse_8" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 132, 0, -112)
+
+[node name="ClosedHouse_9" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 0, 84)
+
+[node name="ClosedHouse_10" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98, 0, 84)
+
+[node name="ClosedHouse_11" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120, 0, 84)
+
+[node name="ClosedHouse_12" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -74, 0, 114)
+
+[node name="ClosedHouse_13" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -98, 0, 114)
+
+[node name="ClosedHouse_14" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 24, 0, 114)
+
+[node name="ClosedHouse_15" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 50, 0, 114)
+
+[node name="ClosedHouse_16" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, 0, 84)
+
+[node name="ClosedHouse_17" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108, 0, 84)
+
+[node name="ClosedHouse_18" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 82, 0, 114)
+
+[node name="ClosedHouse_19" parent="Neighborhood/Buildings" instance=ExtResource("b_closed")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 108, 0, 114)
+
+[node name="NileRiver" parent="Neighborhood" instance=ExtResource("b_nile")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, 0)
+
+[node name="FishMarketNE" type="Node3D" parent="Neighborhood"]
+
+[node name="MarketPad" type="MeshInstance3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0.015, -28)
+mesh = SubResource("BM_sidewalk_40")
+
+[node name="MarketSign" type="Label3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 4.2, -16)
+text = "سوق السمك - أسماك النيل"
+font_size = 76
+outline_size = 10
+
+[node name="BasinWallN" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0.37, -30.1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/BasinWallN"]
+mesh = SubResource("BM_basin_wall_x")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/BasinWallN"]
+shape = SubResource("BS_basin_wall_x")
+
+[node name="BasinWallS" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0.37, -25.9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/BasinWallS"]
+mesh = SubResource("BM_basin_wall_x")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/BasinWallS"]
+shape = SubResource("BS_basin_wall_x")
+
+[node name="BasinWallW" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.9, 0.37, -28)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/BasinWallW"]
+mesh = SubResource("BM_basin_wall_z")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/BasinWallW"]
+shape = SubResource("BS_basin_wall_z")
+
+[node name="BasinWallE" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.1, 0.37, -28)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/BasinWallE"]
+mesh = SubResource("BM_basin_wall_z")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/BasinWallE"]
+shape = SubResource("BS_basin_wall_z")
+
+[node name="BasinWater" type="MeshInstance3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 0.32, -28)
+mesh = SubResource("BM_basin_water")
+
+[node name="FishStallRoof" type="MeshInstance3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 2.8, -20)
+mesh = SubResource("BM_fish_stall_roof")
+
+[node name="FishPost_0" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.5, 1.4, -18.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/FishPost_0"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/FishPost_0"]
+shape = SubResource("BS_post")
+
+[node name="FishPost_1" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.5, 1.4, -18.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/FishPost_1"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/FishPost_1"]
+shape = SubResource("BS_post")
+
+[node name="FishPost_2" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.5, 1.4, -21.8)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/FishPost_2"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/FishPost_2"]
+shape = SubResource("BS_post")
+
+[node name="FishPost_3" type="StaticBody3D" parent="Neighborhood/FishMarketNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.5, 1.4, -21.8)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/FishPost_3"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/FishPost_3"]
+shape = SubResource("BS_post")
+
+[node name="FishCounter" type="StaticBody3D" parent="Neighborhood/FishMarketNE" groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 0.45, -20)
+metadata/interact_message = "سوق السمك - أسماك النيل الطازجة"
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/FishMarketNE/FishCounter"]
+mesh = SubResource("BM_tea_table")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/FishMarketNE/FishCounter"]
+shape = SubResource("BS_tea_table")
+
+[node name="TeaCornerSE" type="Node3D" parent="Neighborhood"]
+
+[node name="TeaPad" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 0.03, 16.6)
+mesh = SubResource("BM_tea_pad")
+
+[node name="TeaCanopy" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 2.66, 16.6)
+mesh = SubResource("BM_tea_canopy")
+
+[node name="LanternLight" type="OmniLight3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, 2.35, 16.6)
+light_color = Color(1, 0.78, 0.4, 1)
+light_energy = 2.4
+omni_range = 11.5
+
+[node name="Post0" type="StaticBody3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6, 1.3, 13.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE/Post0"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/TeaCornerSE/Post0"]
+shape = SubResource("BS_post")
+
+[node name="Post1" type="StaticBody3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6, 1.3, 13.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE/Post1"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/TeaCornerSE/Post1"]
+shape = SubResource("BS_post")
+
+[node name="Post2" type="StaticBody3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6, 1.3, 19.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE/Post2"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/TeaCornerSE/Post2"]
+shape = SubResource("BS_post")
+
+[node name="Post3" type="StaticBody3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6, 1.3, 19.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE/Post3"]
+mesh = SubResource("BM_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/TeaCornerSE/Post3"]
+shape = SubResource("BS_post")
+
+[node name="TeaTable" type="StaticBody3D" parent="Neighborhood/TeaCornerSE" groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6, 0.42, 17.8)
+metadata/interact_message = "ست الشاي - شاي بالنعناع وجبنة سودانية!"
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE/TeaTable"]
+mesh = SubResource("BM_tea_table")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/TeaCornerSE/TeaTable"]
+shape = SubResource("BS_tea_table")
+
+[node name="Kanoon" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2, 0.98, 17.8)
+mesh = SubResource("CM_kanoon")
+
+[node name="Kettle" type="MeshInstance3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9, 0.98, 17.8)
+mesh = SubResource("CM_kettle")
+
+[node name="TeaSign" type="Label3D" parent="Neighborhood/TeaCornerSE"]
+transform = Transform3D(0.70711, 0, -0.70711, 0, 1, 0, 0.70711, 0, 0.70711, 14.2, 2.35, 14.2)
+text = "ست الشاي"
+font_size = 54
+outline_size = 8
+
+[node name="DafouriPitchSE" type="Node3D" parent="Neighborhood"]
+
+[node name="PitchSign" type="Label3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 4.0, 18)
+billboard = 1
+text = "ميدان دافوري"
+font_size = 72
+outline_size = 10
+
+[node name="LineN" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0.02, 20)
+mesh = SubResource("BM_pitch_line_long")
+
+[node name="LineS" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0.02, 48)
+mesh = SubResource("BM_pitch_line_long")
+
+[node name="LineW" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0.02, 34)
+mesh = SubResource("BM_pitch_line_short")
+
+[node name="LineE" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114, 0.02, 34)
+mesh = SubResource("BM_pitch_line_short")
+
+[node name="CenterLine" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0.02, 34)
+mesh = SubResource("BM_pitch_line_short")
+
+[node name="GoalWestPostL" type="StaticBody3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.2, 1.2, 31.4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE/GoalWestPostL"]
+mesh = SubResource("BM_goal_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/DafouriPitchSE/GoalWestPostL"]
+shape = SubResource("BS_goal_post")
+
+[node name="GoalWestPostR" type="StaticBody3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.2, 1.2, 36.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE/GoalWestPostR"]
+mesh = SubResource("BM_goal_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/DafouriPitchSE/GoalWestPostR"]
+shape = SubResource("BS_goal_post")
+
+[node name="GoalWestCrossbar" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.2, 2.4, 34)
+mesh = SubResource("BM_goal_cross")
+
+[node name="GoalEastPostL" type="StaticBody3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.8, 1.2, 31.4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE/GoalEastPostL"]
+mesh = SubResource("BM_goal_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/DafouriPitchSE/GoalEastPostL"]
+shape = SubResource("BS_goal_post")
+
+[node name="GoalEastPostR" type="StaticBody3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.8, 1.2, 36.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE/GoalEastPostR"]
+mesh = SubResource("BM_goal_post")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/DafouriPitchSE/GoalEastPostR"]
+shape = SubResource("BS_goal_post")
+
+[node name="GoalEastCrossbar" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.8, 2.4, 34)
+mesh = SubResource("BM_goal_cross")
+
+[node name="Football" type="RigidBody3D" parent="Neighborhood/DafouriPitchSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0.35, 34)
+mass = 0.45
+collision_layer = 2
+collision_mask = 7
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/DafouriPitchSE/Football"]
+mesh = SubResource("SM_ball")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/DafouriPitchSE/Football"]
+shape = SubResource("SS_ball")
+
+[node name="StreetProps" type="Node3D" parent="Neighborhood"]
+
+[node name="LampNW" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2.5, -9.5)
+
+[node name="Pole" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNW"]
+mesh = SubResource("CM_lamp_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/LampNW"]
+shape = SubResource("CS_lamp_pole")
+
+[node name="Arm" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 2.4, 0)
+mesh = SubResource("BM_lamp_arm")
+
+[node name="Head" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 2.32, 0)
+mesh = SubResource("BM_lamp_head")
+
+[node name="LampNE" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2.5, -9.5)
+
+[node name="Pole" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNE"]
+mesh = SubResource("CM_lamp_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/LampNE"]
+shape = SubResource("CS_lamp_pole")
+
+[node name="Arm" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 2.4, 0)
+mesh = SubResource("BM_lamp_arm")
+
+[node name="Head" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 2.32, 0)
+mesh = SubResource("BM_lamp_head")
+
+[node name="LampSW" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 2.5, 9.5)
+
+[node name="Pole" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSW"]
+mesh = SubResource("CM_lamp_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/LampSW"]
+shape = SubResource("CS_lamp_pole")
+
+[node name="Arm" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 2.4, 0)
+mesh = SubResource("BM_lamp_arm")
+
+[node name="Head" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 2.32, 0)
+mesh = SubResource("BM_lamp_head")
+
+[node name="LampSE" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 2.5, 9.5)
+
+[node name="Pole" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSE"]
+mesh = SubResource("CM_lamp_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/LampSE"]
+shape = SubResource("CS_lamp_pole")
+
+[node name="Arm" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 2.4, 0)
+mesh = SubResource("BM_lamp_arm")
+
+[node name="Head" type="MeshInstance3D" parent="Neighborhood/StreetProps/LampSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 2.32, 0)
+mesh = SubResource("BM_lamp_head")
+
+[node name="PoleE1" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.3, -8.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE1"]
+mesh = SubResource("CM_util_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/PoleE1"]
+shape = SubResource("CS_util_pole")
+
+[node name="Crossarm" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE1"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3.0, 0)
+mesh = SubResource("BM_crossarm")
+
+[node name="PoleE2" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 3.3, -8.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE2"]
+mesh = SubResource("CM_util_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/PoleE2"]
+shape = SubResource("CS_util_pole")
+
+[node name="Crossarm" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE2"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3.0, 0)
+mesh = SubResource("BM_crossarm")
+
+[node name="PoleE3" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76, 3.3, -8.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE3"]
+mesh = SubResource("CM_util_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/PoleE3"]
+shape = SubResource("CS_util_pole")
+
+[node name="Crossarm" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleE3"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3.0, 0)
+mesh = SubResource("BM_crossarm")
+
+[node name="PoleW1" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.3, -8.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleW1"]
+mesh = SubResource("CM_util_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/PoleW1"]
+shape = SubResource("CS_util_pole")
+
+[node name="Crossarm" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleW1"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3.0, 0)
+mesh = SubResource("BM_crossarm")
+
+[node name="PoleW2" type="StaticBody3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 3.3, -8.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleW2"]
+mesh = SubResource("CM_util_pole")
+
+[node name="Col" type="CollisionShape3D" parent="Neighborhood/StreetProps/PoleW2"]
+shape = SubResource("CS_util_pole")
+
+[node name="Crossarm" type="MeshInstance3D" parent="Neighborhood/StreetProps/PoleW2"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3.0, 0)
+mesh = SubResource("BM_crossarm")
+
+[node name="WireE1" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 28, 6.25, -8.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WireE2" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 28, 6.25, -9.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WireE3" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 60, 6.25, -8.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WireE4" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 60, 6.25, -9.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WireW1" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -28, 6.25, -8.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WireW2" type="MeshInstance3D" parent="Neighborhood/StreetProps"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -28, 6.25, -9.0)
+mesh = SubResource("CM_wire_32")
+
+[node name="WorldLife" type="Node3D" parent="."]
+script = ExtResource("8_world_amb")
+
+[node name="StreetDetails" type="Node3D" parent="."]
+script = ExtResource("9_street_det")
+
+[node name="CrowdSpawner" type="Node3D" parent="."]
+script = ExtResource("10_crowd")
+
+[node name="TimeOfDay" type="Node" parent="."]
+script = ExtResource("11_tod")
+
+[node name="AssetPack" type="Node3D" parent="."]
+script = ExtResource("13_asset_pack")
+
+[node name="TrafficSystem" type="Node3D" parent="."]
+script = ExtResource("14_traffic_ai")
+
+[node name="BusSystem" type="Node3D" parent="."]
+script = ExtResource("15_bus_sys")
+
+[node name="CityExpansion" type="Node3D" parent="."]
+script = ExtResource("16_city_mega")
+
+[node name="RoleNPCSpawner" type="Node3D" parent="."]
+script = ExtResource("17_role_npcs")
+
+[node name="MissionHUD" parent="." instance=ExtResource("18_mission_hud")]
+
+[node name="Vehicles" type="Node3D" parent="."]
+
+[node name="Raksha1" parent="Vehicles" instance=ExtResource("2_raksha")]
+transform = Transform3D(-1.00000, 0, 0.00000, 0, 1, 0, -0.00000, 0, -1.00000, 7.2, 0.0, -18.5)
+
+[node name="Boks1" parent="Vehicles" instance=ExtResource("3_boks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 0.0, 18.5)
+
+[node name="Amjad1" parent="Vehicles" instance=ExtResource("4_amjad")]
+transform = Transform3D(0.00000, 0, 1.00000, 0, 1, 0, -1.00000, 0, 0.00000, 18.5, 0.0, 7.2)
+
+[node name="Sedan1" parent="Vehicles" instance=ExtResource("5_sedan")]
+transform = Transform3D(0.00000, 0, -1.00000, 0, 1, 0, 1.00000, 0, 0.00000, -18.5, 0.0, -7.2)
+
+[node name="Daffar1" parent="Vehicles" instance=ExtResource("6_daffar")]
+transform = Transform3D(-1.00000, 0, 0.00000, 0, 1, 0, -0.00000, 0, -1.00000, 7.4, 0.0, 34.0)
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="Mutaz" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0.1, -9.5)
+npc_name = "ود الحلة (معتز)"
+dialogue_lines = PackedStringArray("أهلاً يا زول! الجو الليلة سمح شديد في الأزهري.", "شوف الركشة والأمجاد والبوكس واقفين قدامك، اتفضل سوق!", "الحلة منورة بوجودك يا حبيب.")
+patrol_points = PackedVector3Array(8.5, 0, -9.5, 11.5, 0, -9.5, 11.5, 0, -6.5, 8.5, 0, -6.5)
+walk_speed = 1.7
+model_keyword = "Man"
+target_height = 1.78
+
+[node name="Nafisa" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0.1, 15.0)
+npc_name = "خالتو نفيسة (ست الشاي)"
+dialogue_lines = PackedStringArray("يا ولدي اتفضل أقعد في البنبر، الشاي بالنعناع جاهز!", "الجبنة سخنة وريحتها تفتح النفس.", "ربنا يبارك فيك ويحفظ شباب الحلة.")
+patrol_points = PackedVector3Array(15.2, 0, 15.0, 16.8, 0, 15.0, 16.8, 0, 15.8, 15.2, 0, 15.8)
+walk_speed = 1.25
+model_keyword = "teewoman"
+target_height = 1.68
+
+[node name="Basheer" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0.1, -10.5)
+npc_name = "العم بشير (بتاع الدكان)"
+dialogue_lines = PackedStringArray("مرحب بيك في دكان الأزهري! العيش السخن والموية الباردة موجودين.", "الراديو شغال في العربية؟ شوف أغاني الحلة الجميلة.", "كل الجيران هنا أهل وإخوان يا ولدي.")
+patrol_points = PackedVector3Array(17.5, 0, -10.5, 28.0, 0, -10.5, 38.0, 0, -10.5, 22.0, 0, -10.5)
+walk_speed = 1.5
+model_keyword = "Oldman"
+target_height = 1.74
+
+[node name="AlTayeb" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 0.1, -15.5)
+npc_name = "العم الطيب"
+dialogue_lines = PackedStringArray("السلام عليكم ورحمة الله وبركاته يا ابني.", "ما شاء الله، المسجد مفتوح والأذان يشرح الصدر في حي الأزهري.", "ربنا يوفقكم ويسهل أمركم دايماً.")
+patrol_points = PackedVector3Array(-24.0, 0, -15.5, -31.0, 0, -15.5, -31.0, 0, -11.0, -24.0, 0, -11.0)
+walk_speed = 1.45
+model_keyword = "Oldman"
+target_height = 1.74
+
+[node name="NajmAlHilla" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0, 0.1, 11.0)
+npc_name = "نجم الحلة"
+dialogue_lines = PackedStringArray("يا مان كيف الحال؟ جاهز نلف الأزهري بالدفار ولا الأمجاد؟", "لو دست F أنا طوالي بمشي معاك وبركب جنبك!", "المطبات هنا تقيلة، سُق بالراحة يا بطل.")
+patrol_points = PackedVector3Array(-11.0, 0, 11.0, -12.0, 0, 22.0, -9.5, 0, 22.0, -9.5, 0, 11.0)
+walk_speed = 1.95
+model_keyword = "dreiver"
+target_height = 1.76
+
+[node name="Othman" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0, 0.1, -13.5)
+npc_name = "الحاج عثمان (التاجر)"
+dialogue_lines = PackedStringArray("أهلاً بيك في سوق السمك! بلطي وعجل من النيل طازة.", "التجارة في الأزهري ماشة زي الفل الحمد لله.")
+patrol_points = PackedVector3Array(76.0, 0, -13.5, 86.0, 0, -13.5, 86.0, 0, -23.0, 76.0, 0, -23.0)
+walk_speed = 1.55
+model_keyword = "ritchman"
+target_height = 1.78
+
+[node name="UmSalama" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.0, 0.1, -10.0)
+npc_name = "أم سلمة"
+dialogue_lines = PackedStringArray("يسعد مساك يا ولدي، كيف أهل البيت؟", "العيش في مخبز الخرطوم الليلة ريحته واصلة آخر الشارع.")
+patrol_points = PackedVector3Array(29.0, 0, -10.0, 46.0, 0, -10.0, 34.0, 0, -10.0, 21.0, 0, -10.0)
+walk_speed = 1.6
+model_keyword = "mama"
+target_height = 1.68
+
+[node name="Yaseen" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.0, 0.1, 22.0)
+npc_name = "ياسين (الطفل)"
+dialogue_lines = PackedStringArray("يلا نلعب كورة في ميدان دافوري!", "شوف الشوتة الجاية دي في المقص!")
+patrol_points = PackedVector3Array(82.0, 0, 22.0, 96.0, 0, 22.0, 96.0, 0, 36.0, 82.0, 0, 36.0)
+walk_speed = 2.2
+model_keyword = "kid"
+target_height = 1.3
+
+[node name="AmakHassan" parent="NPCs" instance=ExtResource("7_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.0, 0.1, 38.5)
+npc_name = "عمك حسن"
+dialogue_lines = PackedStringArray("ربنا يديك الصحة والعافية يا ولدي.", "ناس الحلة في الأزهري دايماً أهل كرم وجود.")
+patrol_points = PackedVector3Array(-32.0, 0, 38.5, -48.0, 0, 38.5, -44.0, 0, 41.0, -32.0, 0, 41.0)
+walk_speed = 1.35
+model_keyword = "homeless"
+target_height = 1.72
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("1_net_mgr")
+
+[node name="NetworkHUD" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="StartupOverlay" type="CenterContainer" parent="NetworkHUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="NetworkHUD/StartupOverlay"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="NetworkHUD/StartupOverlay/Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="NetworkHUD/StartupOverlay/Card/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Al-Azhari Neighborhood"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 13
+text = "Khartoum Open-World Multiplayer (ENet :7777)"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Host Game"
+
+[node name="JoinRow" type="HBoxContainer" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="IpInput" type="LineEdit" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox/JoinRow"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+placeholder_text = "Server IP (e.g. 127.0.0.1)"
+
+[node name="JoinButton" type="Button" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox/JoinRow"]
+custom_minimum_size = Vector2(120, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Join Game"
+
+[node name="StatusRow" type="HBoxContainer" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox/StatusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+text = "Status: Offline"
+
+[node name="PlayerCountLabel" type="Label" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox/StatusRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.56, 1)
+text = "Players: 0"
+
+[node name="ControlsHint" type="Label" parent="NetworkHUD/StartupOverlay/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "WASD Move | Shift Sprint | Space Jump | E Drive | R Radio | H Horn | T Talk | F Follow | L Time"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TopBar" type="PanelContainer" parent="NetworkHUD"]
+visible = false
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 680.0
+offset_bottom = 58.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_topbar")
+
+[node name="Margin" type="MarginContainer" parent="NetworkHUD/TopBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="NetworkHUD/TopBar/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TopStatusLabel" type="Label" parent="NetworkHUD/TopBar/Margin/HBox"]
+layout_mode = 2
+text = "Hosting (:7777)"
+
+[node name="TopCountLabel" type="Label" parent="NetworkHUD/TopBar/Margin/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.56, 1)
+text = "Players: 1"
+
+[node name="TimeButton" type="Button" parent="NetworkHUD/TopBar/Margin/HBox"]
+layout_mode = 2
+text = "Time: Sunset"
+
+[node name="MobileToggleButton" type="Button" parent="NetworkHUD/TopBar/Margin/HBox"]
+layout_mode = 2
+text = "Mobile UI: OFF"
+
+[node name="DisconnectButton" type="Button" parent="NetworkHUD/TopBar/Margin/HBox"]
+layout_mode = 2
+text = "Disconnect"
+
+[node name="MinimapPanel" type="Control" parent="NetworkHUD"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -196.0
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = 194.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("12_minimap")
+
+[node name="ToastLabel" type="Label" parent="NetworkHUD"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 74.0
+offset_right = 320.0
+offset_bottom = 104.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.08, 0.06, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Al-Azhari Neighborhood"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="NetworkHUD"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -70.0
+offset_right = 380.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.62, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.08, 0.06, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "[E] Drive Raksha"
+horizontal_alignment = 1
+
+[node name="SubtitlePanel" type="PanelContainer" parent="NetworkHUD"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -142.0
+offset_right = 320.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_topbar")
+
+[node name="Margin" type="MarginContainer" parent="NetworkHUD/SubtitlePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
+
+[node name="SubtitleLabel" type="Label" parent="NetworkHUD/SubtitlePanel/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 17
+text = "أهلاً بك في الأزهري"
+horizontal_alignment = 1
+autowrap_mode = 2

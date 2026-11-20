@@ -1,0 +1,1482 @@
+[gd_scene load_steps=110 format=3 uid="uid://c8azhariapt0001"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/albedo.jpg" id="ta_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/normal.jpg" id="tn_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/plaster/roughness.jpg" id="tr_plaster"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/albedo.jpg" id="ta_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/normal.jpg" id="tn_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/ceramic_tiles/roughness.jpg" id="tr_ceramic_tiles"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/albedo.jpg" id="ta_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/normal.jpg" id="tn_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/wood/roughness.jpg" id="tr_wood"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/albedo.jpg" id="ta_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/normal.jpg" id="tn_corrugated"]
+[ext_resource type="Texture2D" path="res://assets/textures/corrugated/roughness.jpg" id="tr_corrugated"]
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="door_scr"]
+[ext_resource type="Script" path="res://scripts/sudanese_staircase.gd" id="stair_scr"]
+[ext_resource type="Script" path="res://scripts/apartment_interior_builder.gd" id="apt_int_scr"]
+[ext_resource type="Script" path="res://scripts/market_interior_builder.gd" id="mkt_int_scr"]
+[ext_resource type="Script" path="res://scripts/sudanese_rooftop_builder.gd" id="rooftop_scr"]
+
+[sub_resource type="StandardMaterial3D" id="m_wall"]
+albedo_color = Color(0.95, 0.87, 0.73, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.88
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(5, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_band"]
+albedo_color = Color(0.90, 0.80, 0.66, 1)
+albedo_texture = ExtResource("ta_plaster")
+metallic = 0.0
+roughness = 0.88
+roughness_texture = ExtResource("tr_plaster")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_plaster")
+uv1_scale = Vector3(5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_tile"]
+albedo_color = Color(0.92, 0.90, 0.86, 1)
+albedo_texture = ExtResource("ta_ceramic_tiles")
+metallic = 0.0
+roughness = 0.55
+roughness_texture = ExtResource("tr_ceramic_tiles")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_ceramic_tiles")
+uv1_scale = Vector3(6, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_wood"]
+albedo_color = Color(0.68, 0.50, 0.34, 1)
+albedo_texture = ExtResource("ta_wood")
+metallic = 0.0
+roughness = 0.82
+roughness_texture = ExtResource("tr_wood")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_wood")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_shutter_blue"]
+albedo_color = Color(0.32, 0.48, 0.68, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.4
+roughness = 0.6
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_shutter_grn"]
+albedo_color = Color(0.34, 0.56, 0.46, 1)
+albedo_texture = ExtResource("ta_corrugated")
+metallic = 0.4
+roughness = 0.6
+roughness_texture = ExtResource("tr_corrugated")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("tn_corrugated")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="m_iron"]
+albedo_color = Color(0.15, 0.16, 0.18, 1)
+metallic = 0.7
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="m_glass"]
+albedo_color = Color(0.38, 0.54, 0.64, 0.48)
+metallic = 0.0
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="m_ac"]
+albedo_color = Color(0.92, 0.90, 0.86, 1)
+metallic = 0.2
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="m_tank_blue"]
+albedo_color = Color(0.22, 0.52, 0.84, 1)
+metallic = 0.0
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="m_tank_white"]
+albedo_color = Color(0.92, 0.92, 0.90, 1)
+metallic = 0.0
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="m_dish"]
+albedo_color = Color(0.90, 0.90, 0.88, 1)
+metallic = 0.3
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CM_tank_blue"]
+material = SubResource("m_tank_blue")
+top_radius = 0.78
+bottom_radius = 0.78
+height = 1.45
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="CM_tank_white"]
+material = SubResource("m_tank_white")
+top_radius = 0.72
+bottom_radius = 0.72
+height = 1.35
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="CM_dish"]
+material = SubResource("m_dish")
+top_radius = 0.52
+bottom_radius = 0.08
+height = 0.2
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="BM_0"]
+material = SubResource("m_tile")
+size = Vector3(18.200, 0.100, 10.200)
+
+[sub_resource type="BoxShape3D" id="BS_0"]
+size = Vector3(18.200, 0.100, 10.200)
+
+[sub_resource type="BoxMesh" id="BM_1"]
+material = SubResource("m_wall")
+size = Vector3(18.000, 3.400, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_1"]
+size = Vector3(18.000, 3.400, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_2"]
+material = SubResource("m_wall")
+size = Vector3(0.350, 3.400, 10.000)
+
+[sub_resource type="BoxShape3D" id="BS_2"]
+size = Vector3(0.350, 3.400, 10.000)
+
+[sub_resource type="BoxMesh" id="BM_3"]
+material = SubResource("m_band")
+size = Vector3(18.500, 0.240, 10.500)
+
+[sub_resource type="BoxMesh" id="BM_4"]
+material = SubResource("m_wall")
+size = Vector3(2.200, 3.400, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_4"]
+size = Vector3(2.200, 3.400, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_5"]
+material = SubResource("m_wall")
+size = Vector3(2.600, 0.900, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_5"]
+size = Vector3(2.600, 0.900, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_6"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.500, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_7"]
+material = SubResource("m_wood")
+size = Vector3(2.600, 0.080, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_8"]
+material = SubResource("m_wall")
+size = Vector3(1.100, 3.400, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_8"]
+size = Vector3(1.100, 3.400, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_9"]
+material = SubResource("m_wall")
+size = Vector3(1.800, 0.800, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_9"]
+size = Vector3(1.800, 0.800, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_10"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.600, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_11"]
+material = SubResource("m_wood")
+size = Vector3(1.800, 0.080, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_12"]
+material = SubResource("m_shutter_blue")
+size = Vector3(2.550, 2.450, 0.080)
+
+[sub_resource type="BoxShape3D" id="BS_12"]
+size = Vector3(2.550, 2.450, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_13"]
+material = SubResource("m_shutter_grn")
+size = Vector3(2.550, 2.450, 0.080)
+
+[sub_resource type="BoxShape3D" id="BS_13"]
+size = Vector3(2.550, 2.450, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_14"]
+material = SubResource("m_band")
+size = Vector3(3.000, 0.240, 0.900)
+
+[sub_resource type="BoxShape3D" id="BS_14"]
+size = Vector3(3.000, 0.240, 0.900)
+
+[sub_resource type="BoxMesh" id="BM_15"]
+material = SubResource("m_wood")
+size = Vector3(3.400, 1.000, 0.650)
+
+[sub_resource type="BoxShape3D" id="BS_15"]
+size = Vector3(3.400, 1.000, 0.650)
+
+[sub_resource type="BoxMesh" id="BM_16"]
+material = SubResource("m_wall")
+size = Vector3(0.350, 3.400, 4.200)
+
+[sub_resource type="BoxShape3D" id="BS_16"]
+size = Vector3(0.350, 3.400, 4.200)
+
+[sub_resource type="BoxMesh" id="BM_17"]
+material = SubResource("m_wall")
+size = Vector3(0.350, 1.000, 1.600)
+
+[sub_resource type="BoxShape3D" id="BS_17"]
+size = Vector3(0.350, 1.000, 1.600)
+
+[sub_resource type="BoxMesh" id="BM_18"]
+material = SubResource("m_wood")
+size = Vector3(0.410, 2.400, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_19"]
+material = SubResource("m_wood")
+size = Vector3(0.410, 0.080, 1.600)
+
+[sub_resource type="BoxMesh" id="BM_20"]
+material = SubResource("m_band")
+size = Vector3(2.200, 0.140, 2.800)
+
+[sub_resource type="BoxShape3D" id="BS_20"]
+size = Vector3(2.200, 0.140, 2.800)
+
+[sub_resource type="BoxMesh" id="BM_21"]
+material = SubResource("m_wall")
+size = Vector3(2.000, 0.900, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_21"]
+size = Vector3(2.000, 0.900, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_22"]
+material = SubResource("m_wall")
+size = Vector3(2.000, 1.000, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_22"]
+size = Vector3(2.000, 1.000, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_23"]
+material = SubResource("m_glass")
+size = Vector3(1.880, 1.380, 0.040)
+
+[sub_resource type="BoxMesh" id="BM_24"]
+material = SubResource("m_wood")
+size = Vector3(2.000, 0.080, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_25"]
+material = SubResource("m_wood")
+size = Vector3(2.000, 0.080, 0.180)
+
+[sub_resource type="BoxMesh" id="BM_26"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 1.500, 0.140)
+
+[sub_resource type="BoxMesh" id="BM_27"]
+material = SubResource("m_iron")
+size = Vector3(0.030, 1.400, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_28"]
+material = SubResource("m_iron")
+size = Vector3(1.900, 0.030, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_29"]
+material = SubResource("m_wall")
+size = Vector3(1.850, 3.400, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_29"]
+size = Vector3(1.850, 3.400, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_30"]
+material = SubResource("m_wall")
+size = Vector3(1.500, 1.000, 0.350)
+
+[sub_resource type="BoxShape3D" id="BS_30"]
+size = Vector3(1.500, 1.000, 0.350)
+
+[sub_resource type="BoxMesh" id="BM_31"]
+material = SubResource("m_wood")
+size = Vector3(0.080, 2.400, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_32"]
+material = SubResource("m_wood")
+size = Vector3(1.500, 0.080, 0.410)
+
+[sub_resource type="BoxMesh" id="BM_33"]
+material = SubResource("m_band")
+size = Vector3(5.200, 0.160, 2.000)
+
+[sub_resource type="BoxShape3D" id="BS_33"]
+size = Vector3(5.200, 0.160, 2.000)
+
+[sub_resource type="BoxMesh" id="BM_34"]
+material = SubResource("m_iron")
+size = Vector3(5.200, 0.900, 0.080)
+
+[sub_resource type="BoxShape3D" id="BS_34"]
+size = Vector3(5.200, 0.900, 0.080)
+
+[sub_resource type="BoxMesh" id="BM_35"]
+material = SubResource("m_band")
+size = Vector3(1.800, 0.160, 4.400)
+
+[sub_resource type="BoxShape3D" id="BS_35"]
+size = Vector3(1.800, 0.160, 4.400)
+
+[sub_resource type="BoxMesh" id="BM_36"]
+material = SubResource("m_iron")
+size = Vector3(0.080, 0.900, 4.400)
+
+[sub_resource type="BoxShape3D" id="BS_36"]
+size = Vector3(0.080, 0.900, 4.400)
+
+[sub_resource type="BoxMesh" id="BM_37"]
+material = SubResource("m_ac")
+size = Vector3(0.860, 0.560, 0.360)
+
+[sub_resource type="BoxShape3D" id="BS_37"]
+size = Vector3(0.860, 0.560, 0.360)
+
+[sub_resource type="BoxMesh" id="BM_38"]
+material = SubResource("m_iron")
+size = Vector3(0.420, 0.420, 0.030)
+
+[sub_resource type="BoxMesh" id="BM_39"]
+material = SubResource("m_band")
+size = Vector3(1.400, 0.400, 0.600)
+
+[sub_resource type="BoxMesh" id="BM_40"]
+size = Vector3(1.480, 0.160, 5.900)
+
+[sub_resource type="BoxShape3D" id="BS_40"]
+size = Vector3(1.480, 0.160, 5.900)
+
+[sub_resource type="BoxMesh" id="BM_41"]
+size = Vector3(1.550, 0.160, 5.900)
+
+[sub_resource type="BoxShape3D" id="BS_41"]
+size = Vector3(1.550, 0.160, 5.900)
+
+[sub_resource type="BoxMesh" id="BM_42"]
+material = SubResource("m_wall")
+size = Vector3(18.400, 0.280, 10.400)
+
+[sub_resource type="BoxShape3D" id="BS_42"]
+size = Vector3(18.400, 0.280, 10.400)
+
+[sub_resource type="BoxMesh" id="BM_43"]
+material = SubResource("m_band")
+size = Vector3(18.400, 0.750, 0.250)
+
+[sub_resource type="BoxShape3D" id="BS_43"]
+size = Vector3(18.400, 0.750, 0.250)
+
+[sub_resource type="BoxMesh" id="BM_44"]
+material = SubResource("m_band")
+size = Vector3(0.250, 0.750, 10.400)
+
+[sub_resource type="BoxShape3D" id="BS_44"]
+size = Vector3(0.250, 0.750, 10.400)
+
+[sub_resource type="BoxMesh" id="BM_45"]
+material = SubResource("m_wall")
+size = Vector3(3.800, 2.400, 3.600)
+
+[sub_resource type="BoxShape3D" id="BS_45"]
+size = Vector3(3.800, 2.400, 3.600)
+
+[sub_resource type="BoxMesh" id="BM_roof_parapetR_seg"]
+material = SubResource("m_wall")
+size = Vector3(0.250, 0.750, 4.400)
+
+[sub_resource type="BoxShape3D" id="BS_roof_parapetR_seg"]
+size = Vector3(0.250, 0.750, 4.400)
+
+[node name="ApartmentBuilding" type="Node3D"]
+
+[node name="Floor_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.050, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="Floor_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="Floor_0"]
+shape = SubResource("BS_0")
+
+[node name="WallBack_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 1.700, -5.000)
+
+[node name="M" type="MeshInstance3D" parent="WallBack_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="WallBack_0"]
+shape = SubResource("BS_1")
+
+[node name="WallLeft_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 1.700, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallLeft_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="WallLeft_0"]
+shape = SubResource("BS_2")
+
+[node name="SlabBand_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.350, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_3")
+
+[node name="WallRight_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 1.700, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_0"]
+shape = SubResource("BS_2")
+
+[node name="FrontShopL_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.900, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopL_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopL_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontShopL_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.100, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopL_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopL_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontShopL_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.500, 2.950, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopL_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopL_Top"]
+shape = SubResource("BS_5")
+
+[node name="FrontShopL_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.760, 1.250, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="FrontShopL_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.240, 1.250, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="FrontShopL_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.500, 2.460, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="FrontLobby_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.450, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontLobby_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="FrontLobby_L"]
+shape = SubResource("BS_8")
+
+[node name="FrontLobby_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.450, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontLobby_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_8")
+
+[node name="C" type="CollisionShape3D" parent="FrontLobby_R"]
+shape = SubResource("BS_8")
+
+[node name="FrontLobby_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.000, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontLobby_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_9")
+
+[node name="C" type="CollisionShape3D" parent="FrontLobby_Top"]
+shape = SubResource("BS_9")
+
+[node name="FrontLobby_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.860, 1.300, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_10")
+
+[node name="FrontLobby_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.860, 1.300, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_10")
+
+[node name="FrontLobby_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 2.560, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_11")
+
+[node name="FrontShopR_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.100, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopR_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopR_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontShopR_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.900, 1.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopR_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopR_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontShopR_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500, 2.950, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontShopR_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_5")
+
+[node name="C" type="CollisionShape3D" parent="FrontShopR_Top"]
+shape = SubResource("BS_5")
+
+[node name="FrontShopR_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.240, 1.250, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="FrontShopR_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.760, 1.250, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_6")
+
+[node name="FrontShopR_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500, 2.460, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_7")
+
+[node name="ShutterShopL" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.500, 0.000, 5.050)
+script = ExtResource("door_scr")
+door_label = "شتر الدكان الغربي"
+door_style = 4
+opening_width = 2.48
+opening_height = 2.44
+is_shutter = true
+slide_height = 2.20
+is_open = true
+
+[node name="ShutterShopR" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500, 0.000, 5.050)
+script = ExtResource("door_scr")
+door_label = "شتر الدكان الشرقي"
+door_style = 4
+opening_width = 2.48
+opening_height = 2.44
+is_shutter = true
+slide_height = 2.20
+is_open = true
+
+[node name="LobbyEntranceDoor" type="Node3D" parent="." groups=["interactive_doors"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 5.000)
+script = ExtResource("door_scr")
+door_label = "باب العمارة"
+door_style = 3
+opening_width = 1.62
+opening_height = 2.50
+wall_thickness = 0.35
+open_angle_deg = 86.0
+is_open = true
+build_recessed_frame = false
+
+[node name="ShopStepsL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.500, 0.120, 5.650)
+
+[node name="M" type="MeshInstance3D" parent="ShopStepsL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_14")
+
+[node name="C" type="CollisionShape3D" parent="ShopStepsL"]
+shape = SubResource("BS_14")
+
+[node name="ShopStepsR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500, 0.120, 5.650)
+
+[node name="M" type="MeshInstance3D" parent="ShopStepsR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_14")
+
+[node name="C" type="CollisionShape3D" parent="ShopStepsR"]
+shape = SubResource("BS_14")
+
+[node name="ShopCounterL" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.500, 0.500, 1.200)
+
+[node name="M" type="MeshInstance3D" parent="ShopCounterL"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_15")
+
+[node name="C" type="CollisionShape3D" parent="ShopCounterL"]
+shape = SubResource("BS_15")
+
+[node name="ShopCounterR" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500, 0.500, 1.200)
+
+[node name="M" type="MeshInstance3D" parent="ShopCounterR"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_15")
+
+[node name="C" type="CollisionShape3D" parent="ShopCounterR"]
+shape = SubResource("BS_15")
+
+[node name="Floor_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.450, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="Floor_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="Floor_1"]
+shape = SubResource("BS_0")
+
+[node name="WallBack_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.100, -5.000)
+
+[node name="M" type="MeshInstance3D" parent="WallBack_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="WallBack_1"]
+shape = SubResource("BS_1")
+
+[node name="WallLeft_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 5.100, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallLeft_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="WallLeft_1"]
+shape = SubResource("BS_2")
+
+[node name="SlabBand_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.750, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_3")
+
+[node name="WallRight_1_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 5.100, -2.900)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_1_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_16")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_1_L"]
+shape = SubResource("BS_16")
+
+[node name="WallRight_1_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 5.100, 2.900)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_1_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_16")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_1_R"]
+shape = SubResource("BS_16")
+
+[node name="WallRight_1_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 6.300, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_1_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_17")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_1_Top"]
+shape = SubResource("BS_17")
+
+[node name="WallRight_1_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 4.600, -0.760)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="WallRight_1_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 4.600, 0.760)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="WallRight_1_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 5.760, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="FrontWinL_1_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.900, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_1_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_1_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinL_1_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_1_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_1_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinL_1_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 3.850, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_1_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_21")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_1_Sill"]
+shape = SubResource("BS_21")
+
+[node name="FrontWinL_1_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 6.300, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_1_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_22")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_1_Top"]
+shape = SubResource("BS_22")
+
+[node name="FrontWinL_1_Win" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 5.050, 5.000)
+
+[node name="Glass" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="FrameT" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_24")
+
+[node name="FrameB" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="FrameL" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="FrameR" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="BarV_1" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_2" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_3" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_4" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarH" type="MeshInstance3D" parent="FrontWinL_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_28")
+
+[node name="FrontBalconyDoor_1_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.675, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_1_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_1_L"]
+shape = SubResource("BS_29")
+
+[node name="FrontBalconyDoor_1_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.675, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_1_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_1_R"]
+shape = SubResource("BS_29")
+
+[node name="FrontBalconyDoor_1_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.300, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_1_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_30")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_1_Top"]
+shape = SubResource("BS_30")
+
+[node name="FrontBalconyDoor_1_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.710, 4.600, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_31")
+
+[node name="FrontBalconyDoor_1_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.710, 4.600, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_31")
+
+[node name="FrontBalconyDoor_1_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 5.760, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_32")
+
+[node name="FrontWinR_1_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_1_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_1_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinR_1_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.900, 5.100, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_1_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_1_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinR_1_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 3.850, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_1_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_21")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_1_Sill"]
+shape = SubResource("BS_21")
+
+[node name="FrontWinR_1_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 6.300, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_1_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_22")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_1_Top"]
+shape = SubResource("BS_22")
+
+[node name="FrontWinR_1_Win" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 5.050, 5.000)
+
+[node name="Glass" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="FrameT" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_24")
+
+[node name="FrameB" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="FrameL" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="FrameR" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="BarV_1" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_2" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_3" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_4" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarH" type="MeshInstance3D" parent="FrontWinR_1_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_28")
+
+[node name="BalconyDeck_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 3.480, 6.000)
+
+[node name="M" type="MeshInstance3D" parent="BalconyDeck_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_33")
+
+[node name="C" type="CollisionShape3D" parent="BalconyDeck_1"]
+shape = SubResource("BS_33")
+
+[node name="SideBalconyDeck_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.900, 3.480, 1.800)
+
+[node name="M" type="MeshInstance3D" parent="SideBalconyDeck_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_35")
+
+[node name="C" type="CollisionShape3D" parent="SideBalconyDeck_1"]
+shape = SubResource("BS_35")
+
+[node name="ACUnit_1_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.400, 4.250, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_1_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_1_0"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_1_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.550, 4.250, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="ACUnit_1_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.800, 4.250, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_1_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_1_1"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_1_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.950, 4.250, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="ACUnit_1_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.400, 4.250, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_1_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_1_2"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_1_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.250, 4.250, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="Floor_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.850, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="Floor_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_0")
+
+[node name="C" type="CollisionShape3D" parent="Floor_2"]
+shape = SubResource("BS_0")
+
+[node name="WallBack_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 8.500, -5.000)
+
+[node name="M" type="MeshInstance3D" parent="WallBack_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_1")
+
+[node name="C" type="CollisionShape3D" parent="WallBack_2"]
+shape = SubResource("BS_1")
+
+[node name="WallLeft_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.000, 8.500, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallLeft_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_2")
+
+[node name="C" type="CollisionShape3D" parent="WallLeft_2"]
+shape = SubResource("BS_2")
+
+[node name="SlabBand_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 10.150, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_3")
+
+[node name="WallRight_2_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 8.500, -2.900)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_2_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_16")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_2_L"]
+shape = SubResource("BS_16")
+
+[node name="WallRight_2_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 8.500, 2.900)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_2_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_16")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_2_R"]
+shape = SubResource("BS_16")
+
+[node name="WallRight_2_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 9.700, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="WallRight_2_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_17")
+
+[node name="C" type="CollisionShape3D" parent="WallRight_2_Top"]
+shape = SubResource("BS_17")
+
+[node name="WallRight_2_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 8.000, -0.760)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="WallRight_2_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 8.000, 0.760)
+visibility_range_end = 95.0
+mesh = SubResource("BM_18")
+
+[node name="WallRight_2_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.000, 9.160, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_19")
+
+[node name="FrontWinL_2_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.900, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_2_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_2_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinL_2_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.700, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_2_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_2_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinL_2_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 7.250, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_2_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_21")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_2_Sill"]
+shape = SubResource("BS_21")
+
+[node name="FrontWinL_2_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 9.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinL_2_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_22")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinL_2_Top"]
+shape = SubResource("BS_22")
+
+[node name="FrontWinL_2_Win" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800, 8.450, 5.000)
+
+[node name="Glass" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="FrameT" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_24")
+
+[node name="FrameB" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="FrameL" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="FrameR" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="BarV_1" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_2" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_3" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_4" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarH" type="MeshInstance3D" parent="FrontWinL_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_28")
+
+[node name="FrontBalconyDoor_2_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.675, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_2_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_2_L"]
+shape = SubResource("BS_29")
+
+[node name="FrontBalconyDoor_2_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.675, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_2_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_29")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_2_R"]
+shape = SubResource("BS_29")
+
+[node name="FrontBalconyDoor_2_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 9.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontBalconyDoor_2_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_30")
+
+[node name="C" type="CollisionShape3D" parent="FrontBalconyDoor_2_Top"]
+shape = SubResource("BS_30")
+
+[node name="FrontBalconyDoor_2_FrameL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.710, 8.000, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_31")
+
+[node name="FrontBalconyDoor_2_FrameR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.710, 8.000, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_31")
+
+[node name="FrontBalconyDoor_2_FrameT" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 9.160, 5.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_32")
+
+[node name="FrontWinR_2_L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.700, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_2_L"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_2_L"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinR_2_R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.900, 8.500, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_2_R"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_4")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_2_R"]
+shape = SubResource("BS_4")
+
+[node name="FrontWinR_2_Sill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 7.250, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_2_Sill"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_21")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_2_Sill"]
+shape = SubResource("BS_21")
+
+[node name="FrontWinR_2_Top" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 9.700, 5.000)
+
+[node name="M" type="MeshInstance3D" parent="FrontWinR_2_Top"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_22")
+
+[node name="C" type="CollisionShape3D" parent="FrontWinR_2_Top"]
+shape = SubResource("BS_22")
+
+[node name="FrontWinR_2_Win" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.800, 8.450, 5.000)
+
+[node name="Glass" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_23")
+
+[node name="FrameT" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_24")
+
+[node name="FrameB" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, -0.710, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_25")
+
+[node name="FrameL" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="FrameR" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.960, 0.000, 0.000)
+visibility_range_end = 95.0
+mesh = SubResource("BM_26")
+
+[node name="BarV_1" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_2" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_3" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarV_4" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_27")
+
+[node name="BarH" type="MeshInstance3D" parent="FrontWinR_2_Win"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 0.000, 0.060)
+visibility_range_end = 95.0
+mesh = SubResource("BM_28")
+
+[node name="BalconyDeck_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 6.880, 6.000)
+
+[node name="M" type="MeshInstance3D" parent="BalconyDeck_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_33")
+
+[node name="C" type="CollisionShape3D" parent="BalconyDeck_2"]
+shape = SubResource("BS_33")
+
+[node name="SideBalconyDeck_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.900, 6.880, 1.800)
+
+[node name="M" type="MeshInstance3D" parent="SideBalconyDeck_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_35")
+
+[node name="C" type="CollisionShape3D" parent="SideBalconyDeck_2"]
+shape = SubResource("BS_35")
+
+[node name="ACUnit_2_0" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.400, 7.650, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_2_0"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_2_0"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_2_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.550, 7.650, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="ACUnit_2_1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.800, 7.650, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_2_1"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_2_1"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_2_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.950, 7.650, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="ACUnit_2_2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.400, 7.650, 5.320)
+
+[node name="M" type="MeshInstance3D" parent="ACUnit_2_2"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_37")
+
+[node name="C" type="CollisionShape3D" parent="ACUnit_2_2"]
+shape = SubResource("BS_37")
+
+[node name="ACFan_2_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.250, 7.650, 5.510)
+visibility_range_end = 95.0
+mesh = SubResource("BM_38")
+
+[node name="RoofSlab" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000, 10.300, 0.000)
+
+[node name="M" type="MeshInstance3D" parent="RoofSlab"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_42")
+
+[node name="C" type="CollisionShape3D" parent="RoofSlab"]
+shape = SubResource("BS_42")
+
+[node name="PenthouseTower" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.200, 11.600, -1.800)
+
+[node name="M" type="MeshInstance3D" parent="PenthouseTower"]
+visibility_range_end = 185.0
+mesh = SubResource("BM_45")
+
+[node name="C" type="CollisionShape3D" parent="PenthouseTower"]
+shape = SubResource("BS_45")
+
+[node name="ExteriorSwitchbackStaircase" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.175, 0.000, 0.000)
+script = ExtResource("stair_scr")
+stair_style = 1
+stair_width = 1.15
+riser_target = 0.175
+tread_depth = 0.28
+story_heights = PackedFloat32Array(0, 3.5, 6.9, 10.44)
+floor_landing_depth = 1.6
+mid_landing_depth = 1.2
+center_gap = 0.12
+vis_range_end = 150.0
+
+[node name="ApartmentInteriors" type="Node3D" parent="."]
+script = ExtResource("apt_int_scr")
+floor_elevations = PackedFloat32Array(3.5, 6.9)
+ceiling_height = 3.3
+vis_range_interior = 90.0
+vis_range_balcony = 135.0
+
+[node name="GroundMarketInterior" type="Node3D" parent="."]
+script = ExtResource("mkt_int_scr")
+market_mode = 2
+floor_y = 0.1
+vis_range_end = 80.0
+[node name="SudaneseRooftop" type="Node3D" parent="."]
+script = ExtResource("rooftop_scr")
+roof_preset = 2
+roof_width = 18.4
+roof_depth = 10.4
+roof_y = 10.44
+roof_center = Vector3(0, 0, 0)
+parapet_height = 1.05
+has_stair_entry = true
+entry_gap_z = 0.0
+entry_gap_width = 1.5
+has_penthouse_hood = true
+wall_tint = Color(0.95, 0.87, 0.73, 1)
+vis_range_props = 110.0
+vis_range_structure = 240.0

@@ -1,0 +1,246 @@
+[gd_scene load_steps=26 format=3 uid="uid://c8azharibus0001"]
+
+[ext_resource type="Script" path="res://scripts/vehicle_controller.gd" id="1_veh_ctrl"]
+[ext_resource type="Script" path="res://scripts/vehicles/vehicle_seat_manager.gd" id="seat_mgr"]
+
+[sub_resource type="BoxShape3D" id="BS_bus"]
+size = Vector3(2.48, 2.95, 9.8)
+
+[sub_resource type="StandardMaterial3D" id="mat_white"]
+albedo_color = Color(0.96, 0.95, 0.92, 1)
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="mat_green"]
+albedo_color = Color(0.12, 0.52, 0.30, 1)
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="mat_gold"]
+albedo_color = Color(0.88, 0.68, 0.20, 1)
+metallic = 0.35
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="mat_glass"]
+albedo_color = Color(0.32, 0.48, 0.58, 0.34)
+roughness = 0.15
+transparency = 1
+
+[sub_resource type="StandardMaterial3D" id="mat_dark"]
+albedo_color = Color(0.16, 0.17, 0.19, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="mat_seat"]
+albedo_color = Color(0.18, 0.36, 0.58, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_tire"]
+albedo_color = Color(0.11, 0.11, 0.11, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_rim"]
+albedo_color = Color(0.76, 0.78, 0.80, 1)
+metallic = 0.55
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="mat_headlight"]
+albedo_color = Color(1, 0.97, 0.85, 1)
+emission_enabled = true
+emission = Color(1, 0.92, 0.7, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="mat_taillight"]
+albedo_color = Color(0.85, 0.15, 0.12, 1)
+emission_enabled = true
+emission = Color(0.7, 0.1, 0.08, 1)
+emission_energy_multiplier = 0.9
+
+[sub_resource type="BoxMesh" id="BM_lower"]
+material = SubResource("mat_white")
+size = Vector3(2.44, 1.15, 9.6)
+
+[sub_resource type="BoxMesh" id="BM_upper"]
+material = SubResource("mat_white")
+size = Vector3(2.40, 1.35, 9.4)
+
+[sub_resource type="BoxMesh" id="BM_stripe_green"]
+material = SubResource("mat_green")
+size = Vector3(2.47, 0.42, 9.5)
+
+[sub_resource type="BoxMesh" id="BM_stripe_gold"]
+material = SubResource("mat_gold")
+size = Vector3(2.48, 0.12, 9.52)
+
+[sub_resource type="BoxMesh" id="BM_win_side"]
+material = SubResource("mat_glass")
+size = Vector3(2.42, 0.92, 8.2)
+
+[sub_resource type="BoxMesh" id="BM_win_front"]
+material = SubResource("mat_glass")
+size = Vector3(2.22, 1.05, 0.08)
+
+[sub_resource type="BoxMesh" id="BM_door"]
+material = SubResource("mat_green")
+size = Vector3(0.08, 1.95, 0.95)
+
+[sub_resource type="BoxMesh" id="BM_seat"]
+material = SubResource("mat_seat")
+size = Vector3(0.76, 0.68, 0.56)
+
+[sub_resource type="BoxMesh" id="BM_bumper"]
+material = SubResource("mat_dark")
+size = Vector3(2.50, 0.28, 0.28)
+
+[sub_resource type="BoxMesh" id="BM_headlight"]
+material = SubResource("mat_headlight")
+size = Vector3(0.36, 0.22, 0.08)
+
+[sub_resource type="BoxMesh" id="BM_taillight"]
+material = SubResource("mat_taillight")
+size = Vector3(0.28, 0.34, 0.08)
+
+[sub_resource type="CylinderMesh" id="CM_tire"]
+material = SubResource("mat_tire")
+top_radius = 0.46
+bottom_radius = 0.46
+height = 0.28
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="CM_rim"]
+material = SubResource("mat_rim")
+top_radius = 0.26
+bottom_radius = 0.26
+height = 0.30
+radial_segments = 10
+
+[node name="SudaneseBus" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_veh_ctrl")
+vehicle_name = "Sudanese Bus"
+max_speed = 13.8
+reverse_speed = 5.5
+acceleration = 10.5
+deceleration = 8.5
+brake_strength = 20.0
+turn_speed = 2.1
+driver_seat_offset = Vector3(-0.68, 1.5, -3.45)
+passenger_seat_offset = Vector3(0.72, 1.5, -0.8)
+exit_offset = Vector3(1.95, 0.25, -2.2)
+camera_distance = 9.5
+max_fuel_liters = 180.0
+fuel_liters = 145.0
+fuel_consumption_per_sec = 0.42
+is_bus = true
+pack_model_path = "res://assets/models/vehicles/pack/Bus.fbx"
+pack_target_length = 9.4
+pack_paint_color = Color(0.96, 0.95, 0.92, 1)
+pack_stripe_color = Color(0.12, 0.52, 0.3, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+shape = SubResource("BS_bus")
+
+[node name="BodyVisuals" type="Node3D" parent="."]
+
+[node name="RouteSignFront" type="Label3D" parent="BodyVisuals"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 2.88, -4.74)
+double_sided = false
+modulate = Color(1, 0.88, 0.32, 1)
+text = "الأزهري - السوق العربي - الخرطوم"
+font_size = 36
+outline_size = 8
+
+[node name="RouteSignSide" type="Label3D" parent="BodyVisuals"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.26, 2.74, -0.5)
+double_sided = false
+modulate = Color(1, 0.88, 0.32, 1)
+text = "خط الأزهري - السوق العربي - شارع النيل"
+font_size = 34
+outline_size = 8
+
+[node name="FrontSteerLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 0.46, -3.1)
+
+[node name="WheelFL" type="Node3D" parent="FrontSteerLeft"]
+
+[node name="Tire" type="MeshInstance3D" parent="FrontSteerLeft/WheelFL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="FrontSteerLeft/WheelFL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_rim")
+
+[node name="FrontSteerRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 0.46, -3.1)
+
+[node name="WheelFR" type="Node3D" parent="FrontSteerRight"]
+
+[node name="Tire" type="MeshInstance3D" parent="FrontSteerRight/WheelFR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="FrontSteerRight/WheelFR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_rim")
+
+[node name="WheelRL" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16, 0.46, 2.75)
+
+[node name="Tire" type="MeshInstance3D" parent="WheelRL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="WheelRL"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_rim")
+
+[node name="WheelRR" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16, 0.46, 2.75)
+
+[node name="Tire" type="MeshInstance3D" parent="WheelRR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_tire")
+
+[node name="Rim" type="MeshInstance3D" parent="WheelRR"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CM_rim")
+
+[node name="VehicleSeatManager" type="Node" parent="."]
+script = ExtResource("seat_mgr")
+sit_height_offset = -0.48
+sit_back_offset = 0.14
+seated_character_scale = 0.82
+
+[node name="Seats" type="Node3D" parent="."]
+
+[node name="Seat_1_Row1Left" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 1.50, -2.10)
+
+[node name="Seat_2_Row1Right" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 1.50, -2.10)
+
+[node name="Seat_3_Row2Left" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 1.50, -0.80)
+
+[node name="Seat_4_Row2Right" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 1.50, -0.80)
+
+[node name="Seat_5_Row3Left" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 1.50, 0.50)
+
+[node name="Seat_6_Row3Right" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 1.50, 0.50)
+
+[node name="Seat_7_Row4Left" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 1.50, 1.85)
+
+[node name="Seat_8_Row4Right" type="Marker3D" parent="Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 1.50, 1.85)
+
+[node name="ExitPoints" type="Node3D" parent="."]
+
+[node name="Exit_Left" type="Marker3D" parent="ExitPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30, 0.05, -2.50)
+
+[node name="Exit_Right" type="Marker3D" parent="ExitPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30, 0.05, -2.50)

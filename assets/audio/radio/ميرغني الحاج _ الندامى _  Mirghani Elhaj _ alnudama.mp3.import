@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://crw5xww4apaq3"
+path="res://.godot/imported/ميرغني الحاج _ الندامى _  Mirghani Elhaj _ alnudama.mp3-b4c36c4fa19cb121a7cc40eeaad4b71e.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/radio/ميرغني الحاج _ الندامى _  Mirghani Elhaj _ alnudama.mp3"
+dest_files=["res://.godot/imported/ميرغني الحاج _ الندامى _  Mirghani Elhaj _ alnudama.mp3-b4c36c4fa19cb121a7cc40eeaad4b71e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

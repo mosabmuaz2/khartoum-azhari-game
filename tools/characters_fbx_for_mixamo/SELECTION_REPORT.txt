@@ -1,0 +1,63 @@
+========================================================================================
+AL-AZHARI CHARACTER GLB SELECTION & MIXAMO .ZIP CONVERSION REPORT
+Export Backend: Mixamo Static Mesh Archive (.zip: character.obj + character.mtl + albedo.png)
+Legacy FBX 7.4 Files Cleaned: 66
+========================================================================================
+
+FOLDER: السواق (سائق ركشة أو أمجاد)  -->  01_Driver_Dreiver.zip
+  [SELECTED] dreiver.glb | UVs=True | Tex=True | TriOK=True | H/W=1.72 H/D=4.59 | ManifoldMain=100.0% (6112 tris)
+  [SKIPPED ] dreiverperson.glb | Reason: filename_rejected('person'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 01_Driver_Dreiver.zip (obj=654446B mtl=167B png=1247273B)
+
+FOLDER: الشابة الأنيقة بالتوب العصري (الجميلات)  -->  02_YoungWoman_Mama2.zip
+  [SELECTED] mama2object_0.glb | UVs=True | Tex=True | TriOK=True | H/W=1.92 H/D=4.86 | ManifoldMain=100.0% (6708 tris)
+  [SKIPPED ] mama2person.glb | Reason: filename_rejected('person'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 02_YoungWoman_Mama2.zip (obj=727392B mtl=167B png=1276795B)
+
+FOLDER: الطالبة الجامعية (الطالبات)  -->  03_UniversityStudent_Girl.zip
+  [SELECTED] studentgirlobject_0.glb | UVs=True | Tex=True | TriOK=True | H/W=2.10 H/D=4.30 | ManifoldMain=93.5% (9848 tris)
+  [SKIPPED ] studentgirlperson.glb | Reason: filename_rejected('person'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 03_UniversityStudent_Girl.zip (obj=1063829B mtl=167B png=1164184B)
+
+FOLDER: الطفل  -->  04_Child_Kid.zip
+  [SELECTED] kid.glb | UVs=True | Tex=True | TriOK=True | H/W=1.77 H/D=4.94 | ManifoldMain=100.0% (6322 tris)
+  [SKIPPED ] kidsperson.glb | Reason: filename_rejected('person'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 04_Child_Kid.zip (obj=678475B mtl=167B png=1285276B)
+
+FOLDER: العم الطيب  العم بشير (بالجلابية والعِمّة والمركوب)  -->  05_Elder_Oldman.zip
+  [SELECTED] Oldman.glb | UVs=True | Tex=True | TriOK=True | H/W=2.02 H/D=3.93 | ManifoldMain=100.0% (6564 tris)
+  [SKIPPED ] Oldman_0person_0.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 05_Elder_Oldman.zip (obj=689029B mtl=167B png=1216138B)
+
+FOLDER: الغني (تاجر أو شخص ميسور الحال)  -->  06_Merchant_Richman.zip
+  [SELECTED] ritchman.glb | UVs=True | Tex=True | TriOK=True | H/W=1.83 H/D=4.40 | ManifoldMain=89.7% (8506 tris)
+  [SKIPPED ] ritchperson_0.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 06_Merchant_Richman.zip (obj=896991B mtl=167B png=1202201B)
+
+FOLDER: المسكين (شخصية محتاجة أو بسيطة)  -->  07_SimpleMan_Homeless.zip
+  [SELECTED] homeless.glb | UVs=True | Tex=True | TriOK=True | H/W=1.71 H/D=4.15 | ManifoldMain=90.3% (7999 tris)
+  [SKIPPED ] homelessperson_0_1.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 07_SimpleMan_Homeless.zip (obj=837992B mtl=167B png=1202305B)
+
+FOLDER: خالتو نفيسة (ست الشاي بالتوب السوداني)  -->  08_TeaLady_Nafisa.zip
+  [SELECTED] teewoman.glb | UVs=True | Tex=True | TriOK=True | H/W=2.05 H/D=4.63 | ManifoldMain=100.0% (6832 tris)
+  [SKIPPED ] teewoman_0person_0_1.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 08_TeaLady_Nafisa.zip (obj=750944B mtl=167B png=1347927B)
+
+FOLDER: سيدة الحي بالتوب السوداني (الحريم والنسوان)  -->  09_NeighborhoodLady_Mama.zip
+  [SELECTED] mama.glb | UVs=True | Tex=True | TriOK=True | H/W=1.98 H/D=4.57 | ManifoldMain=94.6% (7999 tris)
+  [SKIPPED ] mamaperson_0_1.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 09_NeighborhoodLady_Mama.zip (obj=881804B mtl=167B png=1240530B)
+
+FOLDER: طالبة المدرسة بالزي السوداني الموحد  -->  10_SchoolGirl_Student.zip
+  [SELECTED] shoolkidobject_0.glb | UVs=True | Tex=True | TriOK=True | H/W=2.18 H/D=4.56 | ManifoldMain=100.0% (6916 tris)
+  [SKIPPED ] shoolkid.glb | Reason: missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 10_SchoolGirl_Student.zip (obj=763930B mtl=167B png=1242511B)
+
+FOLDER: ود الحلة (الشخصية الرئيسية  معتز)  -->  11_MainHero_Mutaz_Man.zip
+  [SELECTED] Man.glb | UVs=True | Tex=True | TriOK=True | H/W=1.80 H/D=5.45 | ManifoldMain=100.0% (5163 tris)
+  [SKIPPED ] Man_0person_0_1.glb | Reason: filename_rejected('person_0'), missing_TEXCOORD_0_UVs, corrupted_binary_mesh(ValueError)
+  [ZIP_OK=True] 11_MainHero_Mutaz_Man.zip (obj=594708B mtl=167B png=1278179B)
+
+TOTAL CHARACTERS EXPORTED & VERIFIED: 11 / 11 (STRICTLY 1 .zip per folder)
+READY MIXAMO ARCHIVES: 01_Driver_Dreiver.zip, 02_YoungWoman_Mama2.zip, 03_UniversityStudent_Girl.zip, 04_Child_Kid.zip, 05_Elder_Oldman.zip, 06_Merchant_Richman.zip, 07_SimpleMan_Homeless.zip, 08_TeaLady_Nafisa.zip, 09_NeighborhoodLady_Mama.zip, 10_SchoolGirl_Student.zip, 11_MainHero_Mutaz_Man.zip

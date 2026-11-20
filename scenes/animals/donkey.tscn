@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8azharidonkey1"]
+
+[ext_resource type="Script" path="res://scripts/animal_ai.gd" id="1_anim"]
+
+[node name="Donkey" type="Node3D"]
+script = ExtResource("1_anim")
+kind = "donkey"
+coat_color = Color(0.54, 0.48, 0.43, 1)
+wander_radius = 4.2
+move_speed = 1.0

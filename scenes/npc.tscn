@@ -1,0 +1,194 @@
+[gd_scene load_steps=18 format=3 uid="uid://c8azharinpc0001"]
+
+[ext_resource type="Script" path="res://scripts/npc_interactive.gd" id="1_npc_script"]
+[ext_resource type="Script" path="res://scripts/characters/character_animation_auto_binder.gd" id="2_anim_binder"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_npc"]
+radius = 0.34
+height = 1.78
+
+[sub_resource type="StandardMaterial3D" id="mat_skin"]
+albedo_color = Color(0.44, 0.28, 0.18, 1)
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="mat_imma"]
+albedo_color = Color(0.96, 0.95, 0.90, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="mat_eyes"]
+albedo_color = Color(0.12, 0.11, 0.11, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_sandal"]
+albedo_color = Color(0.28, 0.18, 0.12, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_robe_top"]
+size = Vector3(0.44, 0.56, 0.24)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_robe_skirt"]
+top_radius = 0.21
+bottom_radius = 0.26
+height = 0.52
+radial_segments = 12
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("mat_skin")
+radius = 0.165
+height = 0.33
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxMesh" id="BoxMesh_eyes"]
+material = SubResource("mat_eyes")
+size = Vector3(0.18, 0.045, 0.05)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_imma"]
+material = SubResource("mat_imma")
+top_radius = 0.205
+bottom_radius = 0.195
+height = 0.16
+radial_segments = 12
+
+[sub_resource type="SphereMesh" id="SphereMesh_thobe_wrap"]
+radius = 0.21
+height = 0.32
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxMesh" id="BoxMesh_arm"]
+size = Vector3(0.13, 0.44, 0.13)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hand"]
+material = SubResource("mat_skin")
+radius = 0.058
+height = 0.116
+radial_segments = 8
+rings = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_foot"]
+material = SubResource("mat_sandal")
+size = Vector3(0.14, 0.1, 0.22)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_npc"]
+properties/0/path = NodePath(".:following_peer_id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:sync_position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:sync_yaw")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:sync_speed")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:sync_seated")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="NPC" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_npc_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89, 0)
+shape = SubResource("CapsuleShape3D_npc")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Hips" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88, 0)
+
+[node name="RobeTop" type="MeshInstance3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("BoxMesh_robe_top")
+
+[node name="RobeSkirt" type="MeshInstance3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18, 0)
+mesh = SubResource("CylinderMesh_robe_skirt")
+
+[node name="HeadPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("SphereMesh_head")
+
+[node name="Eyes" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, -0.14)
+mesh = SubResource("BoxMesh_eyes")
+
+[node name="Imma" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("CylinderMesh_imma")
+
+[node name="ThobeWrap" type="MeshInstance3D" parent="Visuals/Hips/HeadPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0.03)
+visible = false
+mesh = SubResource("SphereMesh_thobe_wrap")
+
+[node name="LeftArmPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0.48, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="HandMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+mesh = SubResource("SphereMesh_hand")
+
+[node name="RightArmPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0.48, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="Visuals/Hips/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_arm")
+
+[node name="HandMesh" type="MeshInstance3D" parent="Visuals/Hips/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+mesh = SubResource("SphereMesh_hand")
+
+[node name="LeftLegPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11, -0.35, 0)
+
+[node name="FootMesh" type="MeshInstance3D" parent="Visuals/Hips/LeftLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46, -0.04)
+mesh = SubResource("BoxMesh_foot")
+
+[node name="RightLegPivot" type="Node3D" parent="Visuals/Hips"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, -0.35, 0)
+
+[node name="FootMesh" type="MeshInstance3D" parent="Visuals/Hips/RightLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46, -0.04)
+mesh = SubResource("BoxMesh_foot")
+
+[node name="NameLabel" type="Label3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
+billboard = 1
+text = "ود الحلة"
+font_size = 38
+outline_size = 8
+
+[node name="RayLeft" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.85, -0.25)
+target_position = Vector3(-0.35, 0, -1.65)
+collision_mask = 7
+
+[node name="RayRight" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.85, -0.25)
+target_position = Vector3(0.35, 0, -1.65)
+collision_mask = 7
+
+[node name="VoicePlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+volume_db = 2.0
+unit_size = 3.5
+max_distance = 18.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_npc")
+
+[node name="CharacterAnimationAutoBinder" type="Node" parent="."]
+script = ExtResource("2_anim_binder")
